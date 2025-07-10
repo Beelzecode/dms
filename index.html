@@ -7,6 +7,13 @@
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
   <style>
 
+.social-icon {
+  font-size: 50px;
+  margin: 10px;
+  color: #000;
+}
+
+
 .shipping {
   color: #007bff;
   font-size: 14px;
@@ -88,9 +95,12 @@
     .product h2 { font-size:18px; margin:15px 0 5px; }
     .product p { font-size:16px; margin-bottom:10px; }
     .product a button, .add-to-cart {
-      padding:8px 15px; background:#000; color:#ffffff;
-      border:none; border-radius:5px; font-weight:bold;
+      padding:8px 15px; background:#ffef0e; color:#000000;
+      border: black 10px; border-radius:13px; font-weight:bold;
       cursor:pointer; margin:5px 3px;
+      font-size: 18px;
+      stroke: #000 20px;
+      border: 2px solid #000000;
     }
     .product a button:hover, .add-to-cart:hover { background:#333; }
     .pagination { margin-top:40px; }
@@ -98,7 +108,7 @@
       padding:10px 20px; margin:0 5px; font-weight:bold;
       cursor:pointer; border-radius:5px; background:#000;
       color:#FFF111; border:none;
-      font-size: 30px;
+      font-size: 25px;
     }
     .pagination button:hover { background:#333; }
     #cartBtn {
@@ -122,10 +132,56 @@
     @media (max-width:600px){ .product { width:100%; } }
   </style>
 </head>
+
 <body>
 
-  <h1>DARK MASTER STORE</h1>
-  <div class="subtitle">Beauty & Gadgets for Everyday Greatness</div>
+  <!-- ✅ Add Product Button + Panel -->
+<div style="text-align: center; margin-top: 20px;">
+  <button onclick="toggleAddPanel()" style="background: black; color: yellow; padding: 12px 25px; border-radius: 8px; font-weight: bold; font-size: 16px;">
+    ➕ Add Product
+  </button>
+</div>
+
+<div id="addPanel" style="display: none; background: #fff; padding: 30px; border: 2px solid #000; border-radius: 15px; margin: 30px auto; max-width: 600px;">
+  <h3 style="text-align: center;">🛍️ Add New Product</h3>
+  
+  <label>Product Name:</label><br>
+  <input id="productName" placeholder="Name" style="width:100%; padding:10px;"><br><br>
+
+  <label>Image URL:</label><br>
+  <input id="productImage" placeholder="Image URL" style="width:100%; padding:10px;"><br><br>
+
+  <label>Price:</label><br>
+  <input id="productPrice" placeholder="Price" style="width:100%; padding:10px;"><br><br>
+
+  <label>WhatsApp Link:</label><br>
+  <input id="productWhatsapp" placeholder="WhatsApp Link" style="width:100%; padding:10px;"><br><br>
+
+  <label>Delivery Info:</label><br>
+  <input id="productDelivery" placeholder="e.g. Delivery in 2–4 days" style="width:100%; padding:10px;"><br><br>
+
+  <label>Sale Badge Text:</label><br>
+  <input id="productBadge" placeholder="e.g. SALE or NEW" style="width:100%; padding:10px;"><br><br>
+
+  <label>Star Rating (0–5):</label><br>
+  <input id="productStars" type="number" min="0" max="5" placeholder="e.g. 4" style="width:100%; padding:10px;"><br><br>
+
+  <button onclick="addProduct()" style="width:100%; background: green; color: white; padding: 15px; font-size: 16px; border: none; border-radius: 8px;">
+    ✅ Add Product
+  </button>
+</div>
+
+<script>
+  function toggleAddPanel() {
+    const panel = document.getElementById("addPanel");
+    panel.style.display = panel.style.display === "none" ? "block" : "none";
+  }
+</script>
+
+
+ <h1>DARK MASTER STORE</h1>
+
+<div class="subtitle">Beauty & Gadgets for Everyday Greatness</div>
 
   <div class="search-bar">
     <input type="text" id="searchInput" placeholder="Search products..." oninput="searchProducts()">
@@ -1577,189 +1633,6 @@
 </div>
 
 
-<!-- PAGE 82-->
-    <div class="product page-1">
-       <span class="sale-badge">New Arrival</span>
-     <a href="https://i.postimg.cc/CxPzFM6B/4aee29e1-e8f2-4850-8dd0-d48ed18325ab.webp">
-      <img src="https://i.postimg.cc/CxPzFM6B/4aee29e1-e8f2-4850-8dd0-d48ed18325ab.webp"></a>
-      <h2>intelligent air fryer for home use with large capacity and multiple functions</h2>
-      <p><span class="old-price">R8999.99</span> <span class="new-price">R5499.99</span></p>
-      <p class="rating">★★★★★★ 247.1</p>
-      <p class="shipping">
-  <i class="fas fa-truck"></i> Ships in 2-5 days</p>
-<a href="#"><button>Buy</button></a>
-<a href="https://wa.me/27818096159?text=Hi%20I'm%20interested%20in%20Wireless%20Earphones" target="_blank"><button>WhatsApp</button></a>
-<button class="add-to-cart" onclick="addToCart(intelligent air fryer for home use with large capacity and multiple functions ',', 'R5499.99')"><i class="fas fa-cart-plus"></i></button>
-</div>
-
-
-
-<!-- PAGE 83 -->
-    <div class="product page-2">
-       <span class="sale-badge">Combo Sale</span>
-     <a href="https://i.postimg.cc/DZ8LGvzH/ba593442-4f5c-4188-bb9d-2ccb63f81cc2.webp">
-      <img src="https://i.postimg.cc/DZ8LGvzH/ba593442-4f5c-4188-bb9d-2ccb63f81cc2.webp"></a>
-      <h2>4 Pcs Girls' Cartoon Pattern Print Round Neck Sweatshirt + Sweatpants Autumn And Winter Thickened Rose Red Trousers Top Two-Piece Set, for Outdoor ( Sizein AGE 6 Y - 12 Y )</h2>
-      <p><span class="old-price">R999.99</span> <span class="new-price">R899.99</span></p>
-      <p class="rating">★★★ 97.1</p>
-      <p class="shipping">
-  <i class="fas fa-truck"></i> Ships in 2-5 days</p>
-<a href="#"><button>Buy</button></a>
-<a href="https://wa.me/27818096159?text=Hi%20I'm%20interested%20in%20Wireless%20Earphones" target="_blank"><button>WhatsApp</button></a>
-<button class="add-to-cart" onclick="addToCart( Girls' Cartoon Pattern Print Round Neck Sweatshirt + Sweatpants Autumn And Winter Thickened Rose Red Trousers Top Two-Piece Set, for Outdoor',', 'R899.99')"><i class="fas fa-cart-plus"></i></button>
-</div>
-
-
-
-<!-- PAGE 84 -->
-    <div class="product page-2">
-       <span class="sale-badge">Combo Sale</span>
-     <a href="https://i.postimg.cc/NfMFfJ5C/674597bf-6569-4f67-bb19-0615e3abea4e.webp">
-      <img src="https://i.postimg.cc/NfMFfJ5C/674597bf-6569-4f67-bb19-0615e3abea4e.webp"></a>
-      <h2>2-In-1 Preppy Spring/Fall Outfit Set: Letter Embroidered Baseball Jacket And Pleated Skirt Set for - Polyester, V-Neck, Non-Stretch, Solid Color, Loose Fit, Woven (Size in Age 3 Years - 12 years )</h2>
-      <p><span class="old-price">R789.99</span> <span class="new-price">R499.99</span></p>
-      <p class="rating">★★★★ 147.1</p>
-      <p class="shipping">
-  <i class="fas fa-truck"></i> Ships in 2-5 days</p>
-<a href="#"><button>Buy</button></a>
-<a href="https://wa.me/27818096159?text=Hi%20I'm%20interested%20in%20Wireless%20Earphones" target="_blank"><button>WhatsApp</button></a>
-<button class="add-to-cart" onclick="addToCart(2-In-1 Preppy Spring/Fall Outfit Set: Letter Embroidered Baseball Jacket And Pleated Skirt Set for - Polyester, V-Neck, Non-Stretch, Solid Color, Loose Fit, Woven ',', 'R499.99')"><i class="fas fa-cart-plus"></i></button>
-</div>
-
-
-
-<!-- PAGE 85-->
-    <div class="product page-3">
-       <span class="sale-badge">Combo Sale</span>
-     <a href="https://i.postimg.cc/nLZY5fhw/2ae6f562-f0df-41a1-a050-397149a38508.webp">
-      <img src="https://i.postimg.cc/nLZY5fhw/2ae6f562-f0df-41a1-a050-397149a38508.webp"></a>
-      <h2>Youth Pink Ripped Fashion Casual Versatile Washed Denim Jacket and Skirt Set - Long Sleeve, Non-Stretch Fabric, Perfect for Spring/Summer (size in Age 6 Years - 15 Years ) </h2>
-      <p><span class="old-price">R1099.99</span> <span class="new-price">R999.99</span></p>
-      <p class="rating">★★ 27.1</p>
-      <p class="shipping">
-  <i class="fas fa-truck"></i> Ships in 2-5 days</p>
-<a href="#"><button>Buy</button></a>
-<a href="https://wa.me/27818096159?text=Hi%20I'm%20interested%20in%20Wireless%20Earphones" target="_blank"><button>WhatsApp</button></a>
-<button class="add-to-cart" onclick="addToCart(Youth Pink Ripped Fashion Casual Versatile Washed Denim Jacket and Skirt Set - Long Sleeve, Non-Stretch Fabric, Perfect for Spring/Summer ',', 'R999.99')"><i class="fas fa-cart-plus"></i></button>
-</div>
-
-
-<!-- PAGE 86 -->
-    <div class="product page-3">
-       <span class="sale-badge">New Arrival</span>
-     <a href=https://i.postimg.cc/RCs3x5Xb/fcae9364-b104-4419-9947-a2c0322cff6b.webp"">
-      <img src="https://i.postimg.cc/RCs3x5Xb/fcae9364-b104-4419-9947-a2c0322cff6b.webp"></a>
-      <h2>LUDOMI Women'S Stylish White Casual Blazer & Skirt Set - Solid Color, Lapel Collar, Long Sleeve Blazer with Button Details, High-Waisted Skirt   (size SS,S,M,L,XL)</h2>
-      <p><span class="old-price">R999.99</span> <span class="new-price">R599.99</span></p>
-      <p class="rating">★★★★★★ 147.1</p>
-      <p class="shipping">
-  <i class="fas fa-truck"></i> Ships in 2-5 days</p>
-<a href="#"><button>Buy</button></a>
-<a href="https://wa.me/27818096159?text=Hi%20I'm%20interested%20in%20Wireless%20Earphones" target="_blank"><button>WhatsApp</button></a>
-<button class="add-to-cart" onclick="addToCart(LUDOMI Women'S Stylish White Casual Blazer & Skirt Set - Solid Color, Lapel Collar, Long Sleeve Blazer with Button Details, High-Waisted Skirt ',', 'R599.99')"><i class="fas fa-cart-plus"></i></button>
-</div>
-
-
-
-<!-- PAGE 87 -->
-    <div class="product page-4">
-       <span class="sale-badge"> New Arrival</span>
-     <a href="https://i.postimg.cc/DzN2Yn2q/b6bec0a9-289a-47b8-ab0a-6fc67ec4815d.webp">
-      <img src="https://i.postimg.cc/DzN2Yn2q/b6bec0a9-289a-47b8-ab0a-6fc67ec4815d.webp"></a>
-      <h2>Women'S Casual Chic Solid Color Knit Dress with Bowknot, Long Sleeve Crew Neck Polyester Knit Fabric with Elastic, Fall/Winter Two-Piece Set with Short Jacket ( Size SS,S,M,L,XL)</h2>
-      <p><span class="old-price">R999.99</span> <span class="new-price">R659.99</span></p>
-      <p class="rating">★★★★★ 247.1</p>
-      <p class="shipping">
-  <i class="fas fa-truck"></i> Ships in 2-5 days</p>
-<a href="#"><button>Buy</button></a>
-<a href="https://wa.me/27818096159?text=Hi%20I'm%20interested%20in%20Wireless%20Earphones" target="_blank"><button>WhatsApp</button></a>
-<button class="add-to-cart" onclick="addToCart(Women'S Casual Chic Solid Color Knit Dress with Bowknot, Long Sleeve Crew Neck Polyester Knit Fabric with Elastic, Fall/Winter Two-Piece Set with Short Jacket ',', 'R659.99')"><i class="fas fa-cart-plus"></i></button>
-</div>
-
-
-
-<!-- PAGE 88 -->
-    <div class="product page-4">
-       <span class="sale-badge">Combo Sale</span>
-     <a href="https://i.postimg.cc/6QM7WkB3/fbc69d2c-4662-4de5-95b2-c248acbe702c.webp">
-      <img src="https://i.postimg.cc/6QM7WkB3/fbc69d2c-4662-4de5-95b2-c248acbe702c.webp"></a>
-      <h2>Stylish Pure White Casual Suit and Skirt Two-piece Set for Elegant Women ( Size SS,S,M,L,XL)</h2>
-      <p><span class="old-price">R999.99</span> <span class="new-price">R749.99</span></p>
-      <p class="rating">★★★★★★ 237.1</p>
-      <p class="shipping">
-  <i class="fas fa-truck"></i> Ships in 2-5 days</p>
-<a href="#"><button>Buy</button></a>
-<a href="https://wa.me/27818096159?text=Hi%20I'm%20interested%20in%20Wireless%20Earphones" target="_blank"><button>WhatsApp</button></a>
-<button class="add-to-cart" onclick="addToCart( Stylish Pure White Casual Suit and Skirt Two-piece Set for Elegant Women ( Size SS,S,M,L,XL)',', 'R749.99')"><i class="fas fa-cart-plus"></i></button>
-</div>
-
-
-
-<!-- PAGE 89 -->
-    <div class="product page-5">
-       <span class="sale-badge">Combo Sale</span>
-     <a href="https://i.postimg.cc/4dz30yBr/7c81b1f8-f93a-432d-8eeb-3cbc3ea4e13d.webp">
-      <img src="https://i.postimg.cc/4dz30yBr/7c81b1f8-f93a-432d-8eeb-3cbc3ea4e13d.webp"></a>
-      <h2>Zipper Casual Suit (Sizes S,M.L.XL)</h2>
-      <p><span class="old-price">R999.99</span> <span class="new-price">R799.99</span></p>
-      <p class="rating">★★★★★★ 347.1</p>
-      <p class="shipping">
-  <i class="fas fa-truck"></i> Ships in 2-5 days</p>
-<a href="#"><button>Buy</button></a>
-<a href="https://wa.me/27818096159?text=Hi%20I'm%20interested%20in%20Wireless%20Earphones" target="_blank"><button>WhatsApp</button></a>
-<button class="add-to-cart" onclick="addToCart(Zipper Casual Suit (Sizes S,M.L.XL) ',', 'R799.99')"><i class="fas fa-cart-plus"></i></button>
-</div>
-
-
-
-<!-- PAGE 90 -->
-    <div class="product page-5">
-       <span class="sale-badge">Combo Sale</span>
-     <a href="https://i.postimg.cc/Xvbm8vBZ/7c7a0f52-8a3f-49dd-93e0-e16d1df624e7.webp">
-      <img src="https://i.postimg.cc/Xvbm8vBZ/7c7a0f52-8a3f-49dd-93e0-e16d1df624e7.webp"></a>
-      <h2>Women's Baseball Suit Sports Suit 2pcs Set of Sweatshirt and Sports Pants 9sizes (S,M,L,XL )</h2>
-      <p><span class="old-price">R999.99</span> <span class="new-price">R799.99</span></p>
-      <p class="rating">★★★★★★ 547.1</p>
-      <p class="shipping">
-  <i class="fas fa-truck"></i> Ships in 2-5 days</p>
-<a href="#"><button>Buy</button></a>
-<a href="https://wa.me/27818096159?text=Hi%20I'm%20interested%20in%20Wireless%20Earphones" target="_blank"><button>WhatsApp</button></a>
-<button class="add-to-cart" onclick="addToCart(Women's Baseball Suit Sports Suit 2pcs Set of Sweatshirt and Sports Pants 9sizes (S,M,L,XL ) ',', 'R799.99')"><i class="fas fa-cart-plus"></i></button>
-</div>
-
-
-
-
-<!-- PAGE 91 -->
-    <div class="product page-1">
-       <span class="sale-badge">Combo Sale</span>
-     <a href="https://i.postimg.cc/gkncPxTf/d915ee56-6d42-43a2-bba4-e7def69df819.webp">
-      <img src="https://i.postimg.cc/gkncPxTf/d915ee56-6d42-43a2-bba4-e7def69df819.webp"></a>
-      <h2>2-In-1 Preppy Spring/Fall Outfit Set: Letter Embroidered Baseball Jacket And Pleated Skirt Set for - Polyester, V-Neck, Non-Stretch, Solid Color, Loose Fit, Woven (Size in Age 3 Years - 12 years )</h2>
-      <p><span class="old-price">R789.99</span> <span class="new-price">R499.99</span></p>
-      <p class="rating">★★★★ 147.1</p>
-      <p class="shipping">
-  <i class="fas fa-truck"></i> Ships in 2-5 days</p>
-<a href="#"><button>Buy</button></a>
-<a href="https://wa.me/27818096159?text=Hi%20I'm%20interested%20in%20Wireless%20Earphones" target="_blank"><button>WhatsApp</button></a>
-<button class="add-to-cart" onclick="addToCart(2-In-1 Preppy Spring/Fall Outfit Set: Letter Embroidered Baseball Jacket And Pleated Skirt Set for - Polyester, V-Neck, Non-Stretch, Solid Color, Loose Fit, Woven ',', 'R499.99')"><i class="fas fa-cart-plus"></i></button>
-</div>
-
-<!-- PAGE 92 -->
-    <div class="product page-1">
-       <span class="sale-badge">Combo Sale</span>
-     <a href="https://i.postimg.cc/L5VxC4zD/d2745f28-7564-45ad-a3bd-7efb6069f39f.webp">
-      <img src="https://i.postimg.cc/L5VxC4zD/d2745f28-7564-45ad-a3bd-7efb6069f39f.webp"></a>
-      <h2>2-In-1 Preppy Spring/Fall Outfit Set: Letter Embroidered Baseball Jacket And Pleated Skirt Set for - Polyester, V-Neck, Non-Stretch, Solid Color, Loose Fit, Woven (Size in Age 3 Years - 12 years )</h2>
-      <p><span class="old-price">R789.99</span> <span class="new-price">R499.99</span></p>
-      <p class="rating">★★★★ 117.1</p>
-      <p class="shipping">
-  <i class="fas fa-truck"></i> Ships in 2-5 days</p>
-<a href="#"><button>Buy</button></a>
-<a href="https://wa.me/27818096159?text=Hi%20I'm%20interested%20in%20Wireless%20Earphones" target="_blank"><button>WhatsApp</button></a>
-<button class="add-to-cart" onclick="addToCart(2-In-1 Preppy Spring/Fall Outfit Set: Letter Embroidered Baseball Jacket And Pleated Skirt Set for - Polyester, V-Neck, Non-Stretch, Solid Color, Loose Fit, Woven ',', 'R499.99')"><i class="fas fa-cart-plus"></i></button>
-</div>
-
 
   </div>
 
@@ -1786,64 +1659,195 @@
   </div>
 <br><br>
     <!-- Social Icons -->
-  <div style="margin-top: 50px;">
+  <div style="margin-top: 100px; gap: 30px;">
     <a href="https://wa.me/27818096159" target="_blank" style="margin: 10px; color: #000; font-size: 70px;"><i class="fab fa-whatsapp"></i></a>
     <a href="https://www.instagram.com/darkmasterstoresa/" target="_blank" style="margin: 10px; color: #000; font-size: 70px;"><i class="fab fa-instagram"></i></a>
     <a href="https://www.facebook.com/profile.php?id=61567903056378" target="_blank" style="margin: 10px; color: #000; font-size: 70px;"><i class="fab fa-facebook"></i></a>
     <a href="https://tiktok.com/@darkmasterstore" target="_blank" style="margin: 10px; color: #000; font-size: 70px;"><i class="fab fa-tiktok"></i></a>
   </div>
-
+<br>
+<br>
   <!-- Footer -->
   <footer style="margin-top:40px; font-size:14px; color:#333;">
     <p>&copy; 2025 Dark Master Store. All rights reserved.</p>
   </footer>
 
-  <!-- Scripts -->
-  <script>
-    const cart = [];
 
-    function showPage(page) {
-      document.querySelectorAll('.product')
-        .forEach(p => p.style.display = 'none');
-      document.querySelectorAll('.page-'+page)
-        .forEach(p => p.style.display = 'block');
+ <script>
+  let dynamicProducts = JSON.parse(localStorage.getItem("products") || "[]");
+
+const MAX_PRODUCTS = 10; // 👈 Change this to your limit
+
+function addProduct() {
+  if (dynamicProducts.length >= MAX_PRODUCTS) {
+    alert("You have reached your limit of allowed products!");
+    return;
+  }
+
+  const name = document.getElementById("productName").value;
+  const img = document.getElementById("productImage").value;
+  const price = document.getElementById("productPrice").value;
+  const link = document.getElementById("productWhatsapp").value;
+  const delivery = document.getElementById("productDelivery").value || "Delivery in 2–4 days";
+  const saleBadge = document.getElementById("productBadge").value || "SALE";
+  const stars = parseInt(document.getElementById("productStars").value) || 5;
+
+  const newProduct = { name, img, price, link, delivery, saleBadge, stars };
+  dynamicProducts.push(newProduct);
+  localStorage.setItem("products", JSON.stringify(dynamicProducts));
+  renderDynamicProducts();
+}
+
+
+function renderDynamicProducts() {
+  const container = document.querySelector(".products");
+
+  // Remove only dynamic (added) products before rendering again
+  container.querySelectorAll(".product.dynamic").forEach(el => el.remove());
+
+  dynamicProducts.forEach((item, index) => {
+    const div = document.createElement("div");
+    div.className = "product page-1 dynamic";
+    div.style.display = "block";
+
+    let starsHTML = '';
+    for (let i = 0; i < 5; i++) {
+      starsHTML += i < item.stars ? '<i class="fas fa-star"></i>' : '<i class="far fa-star"></i>';
     }
 
-    document.addEventListener('DOMContentLoaded', () => showPage(1));
+    div.innerHTML = `
+      <div style="position: relative;">
+        <span style="position: absolute; top: 10px; left: 10px; background: red; color: white; padding: 5px 10px; border-radius: 5px; font-size: 12px;">
+          ${item.saleBadge}
+        </span>
+        <img src="${item.img}">
+      </div>
+      <h2>${item.name}</h2>
+      <p>${item.price}</p>
+      <div style="color: gold;">${starsHTML}</div>
+      <div style="font-size: 14px; color: #333; margin-bottom: 8px;">
+        <i class="fas fa-truck"></i> ${item.delivery}
+      </div>
+      <a href="#"><button>Buy</button></a>
+      <a href="${item.link}" target="_blank"><button>WhatsApp</button></a>
+      <button class="add-to-cart" onclick="addToCart('${item.name}', '${item.price}')"><i class="fas fa-cart-plus"></i></button>
+      <br><br>
+     <button class="remove-btn" data-index="${index}" style="background:red; color:white; border:none; padding:10px; width:100%; border-radius:5px; font-weight:bold;">
+        Delete This Product
+      </button>
+    `;
+    container.appendChild(div);
+  });
 
-    function addToCart(name, price) {
-      cart.push({ name, price });
-      alert(name + ' added to cart');
-      renderCart();
-    }
+  // ✅ Proper event binding
+  document.querySelectorAll(".remove-btn").forEach(btn => {
+    btn.addEventListener("click", function () {
+      const index = parseInt(this.getAttribute("data-index"));
+      dynamicProducts.splice(index, 1);
+      localStorage.setItem("products", JSON.stringify(dynamicProducts));
+      renderDynamicProducts();
+    });
+  });
+}
 
-    function renderCart() {
-      const list = document.getElementById('cartItems');
-      list.innerHTML = '';
-      cart.forEach(item => {
-        const li = document.createElement('li');
-        li.textContent = item.name + ' – ' + item.price;
-        list.appendChild(li);
-      });
-      const msg = encodeURIComponent(
-        'Hi, I want to order:\n' +
-        cart.map(i => i.name + ' – ' + i.price).join('\n')
-      );
-      document.getElementById('checkoutBtn').href = 'https://wa.me/27818096159?text=' + msg;
-    }
+// Show products on load
+document.addEventListener("DOMContentLoaded", () => {
+  renderDynamicProducts();
+});
 
-    function toggleCart() {
-      const el = document.getElementById('cart');
-      el.style.display = el.style.display === 'block' ? 'none' : 'block';
-    }
 
-    function searchProducts() {
-      const q = document.getElementById('searchInput').value.toLowerCase();
-      document.querySelectorAll('.product').forEach(p => {
-        const title = p.querySelector('h2').textContent.toLowerCase();
-        p.style.display = title.includes(q) ? 'block' : 'none';
-      });
+
+
+  const cart = [];
+
+  function addToCart(name, price) {
+    cart.push({ name, price });
+    alert(name + ' added to cart');
+    renderCart();
+  }
+
+  function renderCart() {
+    const list = document.getElementById('cartItems');
+    list.innerHTML = '';
+    cart.forEach(item => {
+      const li = document.createElement('li');
+      li.textContent = item.name + ' – ' + item.price;
+      list.appendChild(li);
+    });
+
+    const msg = encodeURIComponent(
+      'Hi, I want to order:\n' +
+      cart.map(i => i.name + ' – ' + i.price).join('\n')
+    );
+    document.getElementById('checkoutBtn').href = 'https://wa.me/27818096159?text=' + msg;
+  }
+
+  function toggleCart() {
+    const el = document.getElementById('cart');
+    el.style.display = el.style.display === 'block' ? 'none' : 'block';
+  }
+
+  function searchProducts() {
+    const q = document.getElementById("searchInput").value.toLowerCase();
+    document.querySelectorAll('.product').forEach(p => {
+      const title = p.querySelector("h2").textContent.toLowerCase();
+      p.style.display = title.includes(q) ? 'block' : 'none';
+    });
+  }
+
+  function showPage(page) {
+    document.querySelectorAll('.product')
+      .forEach(p => p.style.display = 'none');
+    document.querySelectorAll('.page-' + page)
+      .forEach(p => p.style.display = 'block');
+  }
+
+  document.addEventListener("DOMContentLoaded", () => {
+    renderDynamicProducts();
+    showPage(1);
+  });
+
+  function toggleAddPanel() {
+  const panel = document.getElementById("addProductPanel");
+  panel.style.display = panel.style.display === "none" ? "block" : "none";
+}
+
+
+  function toggleAddPanel() {
+    const panel = document.getElementById("addPanel");
+    if (panel.style.display === "none" || panel.style.display === "") {
+      panel.style.display = "block";
+    } else {
+      panel.style.display = "none";
     }
-  </script>
+  }
+
+
+  
+  const showAdmin = prompt("Enter admin password:");
+  if (showAdmin === "Admin1") {
+    document.getElementById("adminPanel").style.display = "block";
+  }
+
+
+
+
+
+
+  const isOwner = false; // 🔐 Set to false before giving site to client
+
+  document.addEventListener('DOMContentLoaded', () => {
+    if (!isOwner) {
+      const addBtn = document.querySelector('button[onclick="toggleAddPanel()"]');
+      const panel = document.getElementById("addPanel");
+      if (addBtn) addBtn.style.display = "none";
+      if (panel) panel.style.display = "none";
+    }
+  });
+
+
+</script>
+ 
+
 </body>
 </html>
