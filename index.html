@@ -130,126 +130,214 @@
     #cartItems li { margin-bottom:5px; }
     @media (max-width:1024px){ .product { width:48%; } }
     @media (max-width:600px){ .product { width:100%; } }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+ #visitor-box {
+      display: flex;
+      align-items: center;
+      justify-content: start;
+      background: linear-gradient(45deg, #00c3ff, #ffff1c);
+      padding: 12px 20px;
+      border-radius: 5px;
+      font-family: Arial, sans-serif;
+      color: #000;
+      box-shadow: 0 4px 10px rgba(0,0,0,0.2);
+      position: fixed;
+      top: 10px;
+      left: 10px;
+      z-index: 1000;
+    }
+
+    #visitor-box img {
+      width: 34px;
+      height: 34px;
+      margin-right: 10px;
+    }
+
+    #visitor-box h3 {
+      margin: 0;
+      font-size: 16px;
+
+    }
+
+    #visitor-box span {
+      font-weight: bold;
+      font-size: 18px;
+      margin-left: 8px;
+    }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  #delivery-box {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    background: linear-gradient(to right, #00c3ff, #ffff1c);
+    color: #000;
+    display: flex;
+    align-items: center;
+    padding: 10px 20px;
+    font-family: Arial, sans-serif;
+    box-shadow: 0 -3px 10px rgba(0, 0, 0, 0.3);
+    z-index: 999;
+  }
+
+  #delivery-box img {
+    height: 60px;
+    width: auto;
+    margin-right: 15px;
+    border-radius: 10px;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.2);
+  }
+
+  #delivery-box h4 {
+    margin: 0;
+    font-size: 18px;
+  }
+
+  #delivery-box p {
+    margin: 3px 0 0;
+    font-size: 14px;
+  }
+
+
   </style>
 </head>
 
 <body>
 
-<!-- Password Prompt -->
+  
+  
+<!-- 🔐 Admin Login -->
 <div id="adminLogin">
   <input type="password" id="adminPassword" placeholder="Enter Admin Password">
   <button onclick="checkAdminPassword()">Login</button>
 </div>
 
-<!-- Admin Panel (Hidden by default) -->
-<div id="adminPanel" style="display: none; border: 1px solid black; padding: 20px; margin-top: 20px;">
+
+
+
+
+
+
+<!-- 🔐 Admin Panel -->
+<div id="adminPanel" style="display: none; border: 2px solid black; padding: 20px; margin-top: 20px;">
   <h2>👑 Admin Generator Area</h2>
 
   <!-- Add Product Button -->
-  <div style="text-align: center; margin-top: 20px;">
-    <button id="addProductBtn" onclick="toggleAddPanel()" style="background: black; color: yellow; padding: 12px 25px; border-radius: 8px; font-weight: bold; font-size: 16px; display: none;">
-      ➕ Add Product
-    </button>
-  </div>
+  <button onclick="toggleAddPanel()" id="addBtn" style="background: black; color: yellow; padding: 12px 25px; border-radius: 8px; font-weight: bold; font-size: 16px;">
+    ➕ Add Product
+  </button>
 
-  <!-- Add Product Form -->
-  <div id="addPanel" style="display: none; background: #fff; padding: 30px; border: 2px solid #000; border-radius: 15px; margin: 30px auto; max-width: 600px;">
-    <h3 style="text-align: center;">🛍️ Add New Product</h3>
+  <!-- Add Product Panel -->
+  <div id="addPanel" style="display: none; background: #fff; padding: 30px; border: 2px solid #000; border-radius: 15px; margin-top: 30px;">
+    <h3>🛍️ Add New Product</h3>
+
+    <label>Product Page:</label><br>
+    <input id="productpage" placeholder="Page" style="width:100%; padding:10px;"><br><br>
+
 
     <label>Product Name:</label><br>
     <input id="productName" placeholder="Name" style="width:100%; padding:10px;"><br><br>
 
-    <label>Product Link:</label><br>
-    <input id="productLink" placeholder="https://example.com/product" style="width:100%; padding:10px;"><br><br>
-
     <label>Image URL:</label><br>
     <input id="productImage" placeholder="Image URL" style="width:100%; padding:10px;"><br><br>
 
-    <label>Price:</label><br>
-    <input id="productPrice" placeholder="Price" style="width:100%; padding:10px;"><br><br>
+    <label>Product Link (clickable):</label><br>
+    <input id="productHref" placeholder="https://..." style="width:100%; padding:10px;"><br><br>
+
+    <label>Normal Price:</label><br>
+    <input id="productPrice" placeholder="e.g. R120" style="width:100%; padding:10px;"><br><br>
 
     <label>Discount Price:</label><br>
-    <input id="productDiscount" placeholder="e.g. R89.99" style="width:100%; padding:10px;"><br><br>
+    <input id="productDiscount" placeholder="e.g. R99" style="width:100%; padding:10px;"><br><br>
 
     <label>WhatsApp Link:</label><br>
-    <input id="productWhatsapp" placeholder="WhatsApp Link" style="width:100%; padding:10px;"><br><br>
+    <input id="productWhatsapp" placeholder="WhatsApp link" style="width:100%; padding:10px;"><br><br>
 
     <label>Delivery Info:</label><br>
-    <input id="productDelivery" placeholder="e.g. Delivery in 2–4 days" style="width:100%; padding:10px;"><br><br>
+    <input id="productDelivery" placeholder="e.g. 2–4 days" style="width:100%; padding:10px;"><br><br>
 
-    <label>Sale Badge Text:</label><br>
-    <input id="productBadge" placeholder="e.g. SALE or NEW" style="width:100%; padding:10px;"><br><br>
+    <label>Badge (e.g. SALE):</label><br>
+    <input id="productBadge" placeholder="e.g. SALE" style="width:100%; padding:10px;"><br><br>
 
     <label>Star Rating (0–5):</label><br>
-    <input id="productStars" type="number" min="0" max="5" placeholder="e.g. 4" style="width:100%; padding:10px;"><br><br>
+    <input id="productStars" type="number" min="0" max="5" style="width:100%; padding:10px;"><br><br>
 
     <button onclick="addProduct()" style="width:100%; background: green; color: white; padding: 15px; font-size: 16px; border: none; border-radius: 8px;">
       ✅ Add Product
     </button>
   </div>
-
   <!-- Generated Code Box -->
-  <div id="generatedCodeBox" style="margin-top: 20px;">
-    <h3>Generated Product HTML Code</h3>
-    <textarea id="generatedCode" style="width:100%; height:200px; font-size:14px;"></textarea>
-  </div>
+<div id="generatedCodeBox" style="margin-top: 20px;">
+  <h3>Generated Product HTML Code</h3>
+  <textarea id="generatedCode" style="width:100%; height:200px; font-size:14px;"></textarea>
 </div>
 
-<!-- SCRIPT SECTION -->
-<script>
-  function checkAdminPassword() {
-    const password = document.getElementById("adminPassword").value;
-    if (password === "Admin2") {
-      document.getElementById("adminPanel").style.display = "block";
-      document.getElementById("addProductBtn").style.display = "inline-block";
-      document.getElementById("adminLogin").style.display = "none";
-    } else {
-      alert("❌ Incorrect password!");
-    }
-  }
-
-  function toggleAddPanel() {
-    const panel = document.getElementById("addPanel");
-    panel.style.display = panel.style.display === "none" ? "block" : "none";
-  }
-
-  function addProduct() {
-    const name = document.getElementById("productName").value;
-    const link = document.getElementById("productLink").value;
-    const image = document.getElementById("productImage").value;
-    const price = document.getElementById("productPrice").value;
-    const discount = document.getElementById("productDiscount").value;
-    const whatsapp = document.getElementById("productWhatsapp").value;
-    const delivery = document.getElementById("productDelivery").value;
-    const badge = document.getElementById("productBadge").value;
-    const stars = document.getElementById("productStars").value;
-
-    const productHTML = `
-<div class="product-box">
-  <a href="${link}" target="_blank">
-    <img src="${image}" alt="${name}" class="product-image">
-  </a>
-  <span class="badge">${badge}</span>
-  <div class="product-details">
-    <h4>${name}</h4>
-    <p>⭐ ${stars} Stars</p>
-    <p><s>${price}</s> <strong>${discount}</strong></p>
-    <p>${delivery}</p>
-    <a href="${whatsapp}" target="_blank">🛒 Buy on WhatsApp</a>
-  </div>
 </div>
-`;
 
-    document.getElementById("generatedCode").value = productHTML;
-    alert("✅ Product HTML generated!");
-  }
-</script>
+
+
+
+
+<div id="delivery-box">
+  <img src="https://i.postimg.cc/FRPxm1YS/corier.webp" alt="Delivery corier guy">
+  <div>
+    <h4>FAST FREE DELIVERY  BY Courier Guy </h4>
+    <p>Get a free delivery on any purchase </p>
+  </div>
+
 
 </div>
 
 
 
  <h1>DARK MASTER STORE</h1>
+
+
+   <!-- Visitor Counter Box -->
+  <div id="visitor-box">
+    <img src="https://i.postimg.cc/76qBwpXF/OIP.webp" alt="Eye">
+    <h3>Visitors: <span id="visitor-count">0</span></h3>
+  </div>
+
 
 
 <div class="subtitle">Beauty & Gadgets for Everyday Greatness</div>
@@ -1800,6 +1888,297 @@
 
 
 
+<div class="product page-1">
+   <span class="sale-badge">New Arrival</span>
+  <a href="https://i.postimg.cc/9M7PXPrT/puma.webp" target="_blank">
+    <img src="https://i.postimg.cc/9M7PXPrT/puma.webp" alt="PUMA Unisex Mustard Yellow Sport Backpack - Durable Fabric with Multiple Compartments, Front Zipper Pocket & Side Mesh Pockets, PUMA Logo Design for Gym,, Travel, Casual Daypack" style="width:100%;">
+  </a>
+  <h3>PUMA Unisex Mustard Yellow Sport Backpack - Durable Fabric with Multiple Compartments, Front Zipper Pocket & Side Mesh Pockets, PUMA Logo Design for Gym,, Travel, Casual Daypack</h3>
+  <p><del>R600.00</del> <strong style="color: black;">R650.00</strong></p>
+<div style="color: gold;">★★★★23.4</div>
+<div style="font-size: 17px; color: blue; margin-bottom: 8px;"><i class="fas fa-truck"></i> Delivery in 2-5 Days </div>
+  <a href="https://wa.me/27818096159"><button>Buy</button></a>
+  <br><br>
+<a href="https://wa.me/27818096159" target="_blank"><button>WhatsApp</button></a>
+<button class="add-to-cart" onclick="addToCart('PUMA Unisex Mustard Yellow Sport Backpack - Durable Fabric with Multiple Compartments, Front Zipper Pocket & Side Mesh Pockets, PUMA Logo Design for Gym,, Travel, Casual Daypack', 'R600.00')"><i class="fas fa-cart-plus"></i></button>
+</div>
+
+
+
+<div class="product page-1">
+   <span class="sale-badge">New Arrival</span>
+  <a href="https://i.postimg.cc/sgMB7YRN/nike-bag.webp" target="_blank">
+    <img src="https://i.postimg.cc/sgMB7YRN/nike-bag.webp" alt="NIKE Men'S & Women'S Adjustable Crossbody Bag - Large Capacity Multi-Functional Shoulder Bag with Multiple Compartments, Zipper Closure & Logo for Running, Sports, Daily Use, Casual Accessory, Sleek Design, Secure Zipper Closure" style="width:100%;">
+  </a>
+  <h3>NIKE Men'S & Women'S Adjustable Crossbody Bag - Large Capacity Multi-Functional Shoulder Bag with Multiple Compartments, Zipper Closure & Logo for Running, Sports, Daily Use, Casual Accessory, Sleek Design, Secure Zipper Closure</h3>
+  <p><del>R890</del> <strong style="color: black;">R1000</strong></p>
+<div style="color: gold;">★★★★213</div>
+<div style="font-size: 17px; color: blue; margin-bottom: 8px;"><i class="fas fa-truck"></i> Free Delivery in 2-5 Days</div>
+  <a href="https://wa.me/27818096159"><button>Buy</button></a>
+  <br><br>
+<a href="https://wa.me/27818096159" target="_blank"><button>WhatsApp</button></a>
+<button class="add-to-cart" onclick="addToCart('NIKE Men'S & Women'S Adjustable Crossbody Bag - Large Capacity Multi-Functional Shoulder Bag with Multiple Compartments, Zipper Closure & Logo for Running, Sports, Daily Use, Casual Accessory, Sleek Design, Secure Zipper Closure', 'R890')"><i class="fas fa-cart-plus"></i></button>
+</div>
+
+
+
+
+<div class="product page-1">
+   <span class="sale-badge">New Arrival</span>
+  <a href="https://i.postimg.cc/pdThvyxK/cloth.webp" target="_blank">
+    <img src="https://i.postimg.cc/pdThvyxK/cloth.webp" alt="Men'S Classic Red & White Hijab - Lightweight, Breathable Polyester Square Scarf for Casual Attire, Hand Washable, Geometric Pattern, Soft & Durable Jacquard Weave, 2pc" style="width:100%;">
+  </a>
+  <h3>Men'S Classic Red & White Hijab - Lightweight, Breathable Polyester Square Scarf for Casual Attire, Hand Washable, Geometric Pattern, Soft & Durable Jacquard Weave, 2pc</h3>
+  <p><span class="old-price">R549.99</span> <span class="new-price">R410.00</span></p>
+<div style="color: gold;">★★★★122.21</div>
+<div style="font-size: 17px; color: blue; margin-bottom: 8px;"><i class="fas fa-truck"></i> Free Delivery in 2-5 Days</div>
+  <a href="https://wa.me/27818096159"><button>Buy</button></a>
+  <br><br>
+<a href="https://wa.me/27818096159" target="_blank"><button>WhatsApp</button></a>
+<button class="add-to-cart" onclick="addToCart('Men'S Classic Red & White Hijab - Lightweight, Breathable Polyester Square Scarf for Casual Attire, Hand Washable, Geometric Pattern, Soft & Durable Jacquard Weave, 2pc', 'R410.00')"><i class="fas fa-cart-plus"></i></button>
+</div>
+
+
+
+<div class="product page-1">
+   <span class="sale-badge">New Arrival</span>
+  <a href="https://i.postimg.cc/TYhTTs45/speaker.webp" target="_blank">
+    <img src="https://i.postimg.cc/TYhTTs45/speaker.webp" alt="Zealot Wireless Speaker, Outdoor Audio with RGB Lighting, 36-Hour Playtime" style="width:100%;">
+  </a>
+  <h3>Zealot Wireless Speaker, Outdoor Audio with RGB Lighting, 36-Hour Playtime</h3>
+  <p><span class="old-price">R2499.99</span> <span class="new-price">R2999.99</span></p>
+<div style="color: gold;">★★★★219.9</div>
+<div style="font-size: 17px; color: blue; margin-bottom: 8px;"><i class="fas fa-truck"></i> Free Delivery in 2-5 Days</div>
+  <a href="https://wa.me/27818096159"><button>Buy</button></a>
+  <br><br>
+<a href="https://wa.me/27818096159" target="_blank"><button>WhatsApp</button></a>
+<button class="add-to-cart" onclick="addToCart('Zealot Wireless Speaker, Outdoor Audio with RGB Lighting, 36-Hour Playtime', 'R2999.99')"><i class="fas fa-cart-plus"></i></button>
+</div>
+
+
+
+
+<div class="product page-1">
+   <span class="sale-badge">New Arrival</span>
+  <a href="https://i.postimg.cc/KzH3YTxn/necklace.webp" target="_blank">
+    <img src="https://i.postimg.cc/KzH3YTxn/necklace.webp" alt="3pc Exquisite Cuban Chain Bracelet Plus Necklace With Tiger Head Pendant,Hip Hop Jewelry Set For Rappers,Durable Construction And Versatile Style,Perfect Gift For Cool Friends" style="width:100%;">
+  </a>
+  <h3>3pc Exquisite Cuban Chain Bracelet Plus Necklace With Tiger Head Pendant,Hip Hop Jewelry Set For Rappers,Durable Construction And Versatile Style,Perfect Gift For Cool Friends</h3>
+  <p><span class="old-price">R2999.99</span> <span class="new-price">R599.99</span></p>
+<div style="color: gold;">★★★★299.99</div>
+<div style="font-size: 17px; color: blue; margin-bottom: 8px;"><i class="fas fa-truck"></i> Free Delivery in 2-5 Days</div>
+  <a href="https://wa.me/27818096159"><button>Buy</button></a>
+  <br><br>
+<a href="https://wa.me/27818096159" target="_blank"><button>WhatsApp</button></a>
+<button class="add-to-cart" onclick="addToCart('3pc Exquisite Cuban Chain Bracelet Plus Necklace With Tiger Head Pendant,Hip Hop Jewelry Set For Rappers,Durable Construction And Versatile Style,Perfect Gift For Cool Friends', 'R599.99')"><i class="fas fa-cart-plus"></i></button>
+</div>
+
+
+
+
+
+
+<div class="product page-1">
+   <span class="sale-badge">New Arrival</span>
+  <a href="https://i.postimg.cc/15ZwVpDH/boxing.webp" target="_blank">
+    <img src="https://i.postimg.cc/15ZwVpDH/boxing.webp" alt="Bezosmax Music Boxing Machine for Adults And Kids with Gloves, Wall-mounted Smart Boxing Training, ABS Material, 9 Speeds And Modes, Smart Counting Boxing Trainer, Suitable for Home, Office, Gym" style="width:100%;">
+  </a>
+  <h3>Bezosmax Music Boxing Machine for Adults And Kids with Gloves, Wall-mounted Smart Boxing Training, ABS Material, 9 Speeds And Modes, Smart Counting Boxing Trainer, Suitable for Home, Office, Gym</h3>
+  <p><span class="old-price">R2999.99</span> <span class="new-price">R2599.99</span></p>
+<div style="color: gold;">★★★★439.99</div>
+<div style="font-size: 17px; color: blue; margin-bottom: 8px;"><i class="fas fa-truck"></i> Free Delivery in 2-5 Days</div>
+  <a href="https://wa.me/27818096159"><button>Buy</button></a>
+  <br><br>
+<a href="https://wa.me/27818096159" target="_blank"><button>WhatsApp</button></a>
+<button class="add-to-cart" onclick="addToCart('Bezosmax Music Boxing Machine for Adults And Kids with Gloves, Wall-mounted Smart Boxing Training, ABS Material, 9 Speeds And Modes, Smart Counting Boxing Trainer, Suitable for Home, Office, Gym', 'R2599.99')"><i class="fas fa-cart-plus"></i></button>
+</div>
+
+
+
+
+<div class="product page-1">
+   <span class="sale-badge">New Arrival</span>
+  <a href="https://i.postimg.cc/Ss6QBzjS/oil.webp" target="_blank">
+    <img src="https://i.postimg.cc/Ss6QBzjS/oil.webp" alt="Aloe Vera Women'S Hair Removal Cream with Castor Oil, Moisturizing And Gentle Non-Irritating Skin Smoothness, Suitable for Daily Body Cleaning Care for Women, 200ml/6.76oOffice, Gym" style="width:100%;">
+  </a>
+  <h3>Aloe Vera Women'S Hair Removal Cream with Castor Oil, Moisturizing And Gentle Non-Irritating Skin Smoothness, Suitable for Daily Body Cleaning Care for Women, 200ml/6.76oOffice, Gym</h3>
+  <p><span class="old-price">R899.99</span> <span class="new-price">R499.99</span></p>
+<div style="color: gold;">★★★★439.99</div>
+<div style="font-size: 17px; color: blue; margin-bottom: 8px;"><i class="fas fa-truck"></i> Free Delivery in 2-5 Days</div>
+  <a href="https://wa.me/27818096159"><button>Buy</button></a>
+  <br><br>
+<a href="https://wa.me/27818096159" target="_blank"><button>WhatsApp</button></a>
+<button class="add-to-cart" onclick="addToCart('Aloe Vera Women'S Hair Removal Cream with Castor Oil, Moisturizing And Gentle Non-Irritating Skin Smoothness, Suitable for Daily Body Cleaning Care for Women, 200ml/6.76oOffice, Gym', 'R499.99')"><i class="fas fa-cart-plus"></i></button>
+</div>
+
+
+
+
+<div class="product page-1">
+   <span class="sale-badge">New Arrival</span>
+  <a href="https://i.postimg.cc/PxRKkN77/tent.webp" target="_blank">
+    <img src="https://i.postimg.cc/PxRKkN77/tent.webp" alt="[Durable Sunshade] Durable Sunshade Cloth, 118.1 inches x 76.7 inches | Outdoor Shade Fabric, Windproof Tent Side Panel for Market Stalls, Cooling Topless Cover, Frameless, One" style="width:100%;">
+  </a>
+  <h3>[Durable Sunshade] Durable Sunshade Cloth, 118.1 inches x 76.7 inches | Outdoor Shade Fabric, Windproof Tent Side Panel for Market Stalls, Cooling Topless Cover, Frameless, One</h3>
+  <p><span class="old-price">R899.99</span> <span class="new-price">R499.99</span></p>
+<div style="color: gold;">★★★★439.99</div>
+<div style="font-size: 17px; color: blue; margin-bottom: 8px;"><i class="fas fa-truck"></i> Free Delivery in 2-5 Days</div>
+  <a href="https://wa.me/27818096159"><button>Buy</button></a>
+  <br><br>
+<a href="https://wa.me/27818096159" target="_blank"><button>WhatsApp</button></a>
+<button class="add-to-cart" onclick="addToCart('[Durable Sunshade] Durable Sunshade Cloth, 118.1 inches x 76.7 inches | Outdoor Shade Fabric, Windproof Tent Side Panel for Market Stalls, Cooling Topless Cover, Frameless, One', 'R499.99')"><i class="fas fa-cart-plus"></i></button>
+</div>
+
+
+
+<div class="product page-1">
+   <span class="sale-badge">New Arrival</span>
+  <a href="https://i.postimg.cc/GpBxxbtJ/hair-stuff.webp" target="_blank">
+    <img src="https://i.postimg.cc/GpBxxbtJ/hair-stuff.webp" alt="2pcs Jamaican Black Castor Hair Cream - Pure Cold Pressed, Nourishes Scalp and Hair, Strengthens Hair, Promotes Health, Suitable for Normal Hair, Unisex, Moisturizing Castor Ingredients, 100g" style="width:100%;">
+  </a>
+  <h3>2pcs Jamaican Black Castor Hair Cream - Pure Cold Pressed, Nourishes Scalp and Hair, Strengthens Hair, Promotes Health, Suitable for Normal Hair, Unisex, Moisturizing Castor Ingredients, 100g</h3>
+  <p><span class="old-price">R699.99</span> <span class="new-price">R449.99</span></p>
+<div style="color: gold;">★★★★1232.43</div>
+<div style="font-size: 17px; color: blue; margin-bottom: 8px;"><i class="fas fa-truck"></i> Free Delivery in 2-5 Days</div>
+  <a href="https://wa.me/27818096159"><button>Buy</button></a>
+  <br><br>
+<a href="https://wa.me/27818096159" target="_blank"><button>WhatsApp</button></a>
+<button class="add-to-cart" onclick="addToCart('2pcs Jamaican Black Castor Hair Cream - Pure Cold Pressed, Nourishes Scalp and Hair, Strengthens Hair, Promotes Health, Suitable for Normal Hair, Unisex, Moisturizing Castor Ingredients, 100g', 'R449.99')"><i class="fas fa-cart-plus"></i></button>
+</div>
+
+
+
+
+
+<div class="product page-1">
+   <span class="sale-badge">New Arrival</span>
+  <a href="https://i.postimg.cc/cJXGwMK8/sound.webp" target="_blank">
+    <img src="https://i.postimg.cc/cJXGwMK8/sound.webp" alt="KTS-2000W wireless 5.1 speaker -4-inch dual speaker high-power/cool seven color RGD lighting/supports USB/TF/Type-C charging port - comes with a wired microphone/strong bass - outdoor/party/birthday gift/" style="width:100%;">
+  </a>
+  <h3>KTS-2000W wireless 5.1 speaker -4-inch dual speaker high-power/cool seven color RGD lighting/supports USB/TF/Type-C charging port - comes with a wired microphone/strong bass - outdoor/party/birthday gift/</h3>
+  <p><span class="old-price">R1699.99</span> <span class="new-price">R1399.99</span></p>
+<div style="color: gold;">★★★★1532.43</div>
+<div style="font-size: 17px; color: blue; margin-bottom: 8px;"><i class="fas fa-truck"></i> Free Delivery in 2-5 Days</div>
+  <a href="https://wa.me/27818096159"><button>Buy</button></a>
+  <br><br>
+<a href="https://wa.me/27818096159" target="_blank"><button>WhatsApp</button></a>
+<button class="add-to-cart" onclick="addToCart('KTS-2000W wireless 5.1 speaker -4-inch dual speaker high-power/cool seven color RGD lighting/supports USB/TF/Type-C charging port - comes with a wired microphone/strong bass - outdoor/party/birthday gift/', 'R1399.99')"><i class="fas fa-cart-plus"></i></button>
+</div>
+
+
+
+<div class="product page-1">
+   <span class="sale-badge">New Arrival</span>
+  <a href="https://i.postimg.cc/k4vsBfDk/cloth.webp" target="_blank">
+    <img src="https://i.postimg.cc/k4vsBfDk/cloth.webp" alt="26pcs Microfiber Dishcloth - Quick-Dry, Absorbent, Space Theme | Simple, Strong Water Absorption for Kitchen Cleaning" style="width:100%;">
+  </a>
+  <h3>26pcs Microfiber Dishcloth - Quick-Dry, Absorbent, Space Theme | Simple, Strong Water Absorption for Kitchen Cleaning</h3>
+  <p><span class="old-price">R699.99</span> <span class="new-price">R479.99</span></p>
+<div style="color: gold;">★★★★1232.43</div>
+<div style="font-size: 17px; color: blue; margin-bottom: 8px;"><i class="fas fa-truck"></i> Free Delivery in 2-5 Days</div>
+  <a href="https://wa.me/27818096159"><button>Buy</button></a>
+  <br><br>
+<a href="https://wa.me/27818096159" target="_blank"><button>WhatsApp</button></a>
+<button class="add-to-cart" onclick="addToCart('26pcs Microfiber Dishcloth - Quick-Dry, Absorbent, Space Theme | Simple, Strong Water Absorption for Kitchen Cleaning', 'R479.99')"><i class="fas fa-cart-plus"></i></button>
+</div>
+
+
+
+
+<div class="product page-1">
+   <span class="sale-badge">New Arrival</span>
+  <a href="https://i.postimg.cc/HLcsYhvk/torch.webp" target="_blank">
+    <img src="https://i.postimg.cc/HLcsYhvk/torch.webp" alt="[USB Rechargeable Flashlight] Rechargeable LED Flashlight | USB + Solar Powered COB Outdoor Camping Torch Portable Searchlight Power Bank" style="width:100%;">
+  </a>
+  <h3>[USB Rechargeable Flashlight] Rechargeable LED Flashlight | USB + Solar Powered COB Outdoor Camping Torch Portable Searchlight Power Bank</h3>
+  <p><span class="old-price">R799.99</span> <span class="new-price">R499.99</span></p>
+<div style="color: gold;">★★★★782.41</div>
+<div style="font-size: 17px; color: blue; margin-bottom: 8px;"><i class="fas fa-truck"></i> Free Delivery in 2-5 Days</div>
+  <a href="https://wa.me/27818096159"><button>Buy</button></a>
+  <br><br>
+<a href="https://wa.me/27818096159" target="_blank"><button>WhatsApp</button></a>
+<button class="add-to-cart" onclick="addToCart('[USB Rechargeable Flashlight] Rechargeable LED Flashlight | USB + Solar Powered COB Outdoor Camping Torch Portable Searchlight Power Bank', 'R499.99')"><i class="fas fa-cart-plus"></i></button>
+</div>
+
+
+
+
+<div class="product page-1">
+   <span class="sale-badge">New Arrival</span>
+  <a href="https://i.postimg.cc/X71brgCG/pool.webp" target="_blank">
+    <img src="https://i.postimg.cc/X71brgCG/pool.webp" alt="Durable Build, Extra Large Inflatable Swimming Pool - Durable Thick PVC, Foldable Design for Outdoor Garden & Courtyard, Ideal for Summer Water Parties, 3.68 meter" style="width:100%;">
+  </a>
+  <h3>Durable Build, Extra Large Inflatable Swimming Pool - Durable Thick PVC, Foldable Design for Outdoor Garden & Courtyard, Ideal for Summer Water Parties, 3.68 meter</h3>
+  <p><span class="old-price">R2499.99</span> <span class="new-price">R1999.99</span></p>
+<div style="color: gold;">★★★★1782.41</div>
+<div style="font-size: 17px; color: blue; margin-bottom: 8px;"><i class="fas fa-truck"></i> Free Delivery in 2-5 Days</div>
+  <a href="https://wa.me/27818096159"><button>Buy</button></a>
+  <br><br>
+<a href="https://wa.me/27818096159" target="_blank"><button>WhatsApp</button></a>
+<button class="add-to-cart" onclick="addToCart('Durable Build, Extra Large Inflatable Swimming Pool - Durable Thick PVC, Foldable Design for Outdoor Garden & Courtyard, Ideal for Summer Water Parties, 3.68 meter', 'R1999.99')"><i class="fas fa-cart-plus"></i></button>
+</div>
+
+
+
+
+
+
+<div class="product page-1">
+   <span class="sale-badge">New Arrival</span>
+  <a href="https://i.postimg.cc/dQWX6Vtg/tool.webp" target="_blank">
+    <img src="https://i.postimg.cc/dQWX6Vtg/tool.webp" alt="16pcs Home Tool Set with Pliers, Hammer, Wrenches, and Screwdriver Box" style="width:100%;">
+  </a>
+  <h3>16pcs Home Tool Set with Pliers, Hammer, Wrenches, and Screwdriver Box</h3>
+  <p><span class="old-price">R999.99</span> <span class="new-price">R699.99</span></p>
+<div style="color: gold;">★★★★2782.41</div>
+<div style="font-size: 17px; color: blue; margin-bottom: 8px;"><i class="fas fa-truck"></i> Free Delivery in 2-5 Days</div>
+  <a href="https://wa.me/27818096159"><button>Buy</button></a>
+  <br><br>
+<a href="https://wa.me/27818096159" target="_blank"><button>WhatsApp</button></a>
+<button class="add-to-cart" onclick="addToCart('16pcs Home Tool Set with Pliers, Hammer, Wrenches, and Screwdriver Box', 'R699.99')"><i class="fas fa-cart-plus"></i></button>
+</div>
+
+
+
+
+<div class="product page-1">
+   <span class="sale-badge">New Arrival</span>
+  <a href="https://i.postimg.cc/8krKRB9f/gold-bag.webp" target="_blank">
+    <img src="https://i.postimg.cc/8krKRB9f/gold-bag.webp" alt="Elegant Golden Beaded Clutch for Women - Sparkling Crystal & Pearl Embellished Evening Handbag with Chain Strap, Perfect for Weddings, Parties, and Formal Events, Ideal Gift for Women'S Day, Mother'S Day, and Special Occasions, Formal Evening Bag | Sparkling Embellishments | Durable Zipper Closure, Evening Handbag" style="width:100%;">
+  </a>
+  <h3>Elegant Golden Beaded Clutch for Women - Sparkling Crystal & Pearl Embellished Evening Handbag with Chain Strap, Perfect for Weddings, Parties, and Formal Events, Ideal Gift for Women'S Day, Mother'S Day, and Special Occasions, Formal Evening Bag | Sparkling Embellishments | Durable Zipper Closure, Evening Handbag</h3>
+  <p><span class="old-price">R1399.99</span> <span class="new-price">R999.99</span></p>
+<div style="color: gold;">★★★★1782.41</div>
+<div style="font-size: 17px; color: blue; margin-bottom: 8px;"><i class="fas fa-truck"></i> Free Delivery in 2-5 Days</div>
+  <a href="https://wa.me/27818096159"><button>Buy</button></a>
+  <br><br>
+<a href="https://wa.me/27818096159" target="_blank"><button>WhatsApp</button></a>
+<button class="add-to-cart" onclick="addToCart('Elegant Golden Beaded Clutch for Women - Sparkling Crystal & Pearl Embellished Evening Handbag with Chain Strap, Perfect for Weddings, Parties, and Formal Events, Ideal Gift for Women'S Day, Mother'S Day, and Special Occasions, Formal Evening Bag | Sparkling Embellishments | Durable Zipper Closure, Evening Handbag', 'R999.99')"><i class="fas fa-cart-plus"></i></button>
+</div>
+
+
+
+<div class="product page-1">
+   <span class="sale-badge">New Arrival</span>
+  <a href="https://i.postimg.cc/k5s3dFqg/meat-cutter.webp" target="_blank">
+    <img src="https://i.postimg.cc/k5s3dFqg/meat-cutter.webp" alt="[Heavy Duty Meat Grinder] Multi-Purpose Heavy Duty Manual Meat Grinder | Aluminum Alloy, Non-Electric, with Table Clamp, for Meat and Vegetable Processing" style="width:100%;">
+  </a>
+  <h3>[Heavy Duty Meat Grinder] Multi-Purpose Heavy Duty Manual Meat Grinder | Aluminum Alloy, Non-Electric, with Table Clamp, for Meat and Vegetable Processing</h3>
+  <p><span class="old-price">R2399.99</span> <span class="new-price">R1999.99</span></p>
+<div style="color: gold;">★★★★182.41</div>
+<div style="font-size: 17px; color: blue; margin-bottom: 8px;"><i class="fas fa-truck"></i> Free Delivery in 2-5 Days</div>
+  <a href="https://wa.me/27818096159"><button>Buy</button></a>
+  <br><br>
+<a href="https://wa.me/27818096159" target="_blank"><button>WhatsApp</button></a>
+<button class="add-to-cart" onclick="addToCart('[Heavy Duty Meat Grinder] Multi-Purpose Heavy Duty Manual Meat Grinder | Aluminum Alloy, Non-Electric, with Table Clamp, for Meat and Vegetable Processing', 'R1999.99')"><i class="fas fa-cart-plus"></i></button>
+</div>
+
+
+
+
+
+
+
 </div>
 
   <br><br>
@@ -1954,15 +2333,6 @@
     el.style.display = el.style.display === 'block' ? 'none' : 'block';
   }
 
-  function toggleAddPanel() {
-    const panel = document.getElementById("addPanel");
-    if (panel.style.display === "none" || panel.style.display === "") {
-      panel.style.display = "block";
-    } else {
-      panel.style.display = "none";
-    }
-  }
-
   document.addEventListener("DOMContentLoaded", () => {
     renderDynamicProducts();
     showPage(1);
@@ -1985,6 +2355,85 @@
     document.querySelectorAll('.page-' + page)
       .forEach(p => p.style.display = 'block');
   }
+
+
+
+
+
+
+
+
+
+
+ function checkAdminPassword() {
+    const password = document.getElementById("adminPassword").value;
+    if (password === "Admin2") {
+      document.getElementById("adminPanel").style.display = "block";
+      document.getElementById("addBtn").style.display = "inline-block";
+    } else {
+      alert("Wrong password");
+    }
+  }
+
+  function toggleAddPanel() {
+    const panel = document.getElementById("addPanel");
+    panel.style.display = panel.style.display === "none" ? "block" : "none";
+  }
+
+  function addProduct() {
+    const page = document.getElementById("productpage").value;
+    const name = document.getElementById("productName").value;
+    const image = document.getElementById("productImage").value;
+    const link = document.getElementById("productHref").value;
+    const price = document.getElementById("productPrice").value;
+    const discount = document.getElementById("productDiscount").value;
+    const whatsapp = document.getElementById("productWhatsapp").value;
+    const delivery = document.getElementById("productDelivery").value;
+    const badge = document.getElementById("productBadge").value;
+    const stars = document.getElementById("productStars").value;
+
+    const productHTML = `
+<div class="product page-${page}">
+   <span class="sale-badge">${badge}</span>
+  <a href="${link}" target="_blank">
+    <img src="${image}" alt="${name}" style="width:100%;">
+  </a>
+  <h3>${name}</h3>
+  <p><span class="old-price">${discount}</span> <span class="new-price">${price}</span></p>
+<div style="color: gold;">★★★★${stars}</div>
+<div style="font-size: 17px; color: blue; margin-bottom: 8px;"><i class="fas fa-truck"></i> ${delivery}</div>
+  <a href="${whatsapp}"><button>Buy</button></a>
+  <br><br>
+<a href="${whatsapp}" target="_blank"><button>WhatsApp</button></a>
+<button class="add-to-cart" onclick="addToCart('${name}', '${price}')"><i class="fas fa-cart-plus"></i></button>
+</div>
+
+`;
+
+    document.getElementById("generatedCode").value = productHTML;
+  }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   // Get or set the visitor count from localStorage
+    let count = localStorage.getItem('visitorCount') || 0;
+    count++;
+    localStorage.setItem('visitorCount', count);
+
+    document.getElementById('visitor-count').textContent = count;
+
 </script>
  
 
