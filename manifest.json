@@ -1,0 +1,21 @@
+{
+  "name": "My Awesome Website",
+  "short_name": "MySite",
+  "description": "A simple Progressive Web App made with HTML.",
+  "start_url": "./index.html",
+  "display": "standalone",
+  "background_color": "#ffffff",
+  "theme_color": "#2196f3",
+  "icons": [
+    {
+      "src": "https://i.postimg.cc/fWY9406F/IMG-20250815-WA0006.jpg",
+      "sizes": "192x192",
+      "type": "image/png"
+    },
+    {
+      "src": "https://i.postimg.cc/fWY9406F/IMG-20250815-WA0006.jpg",
+      "sizes": "512x512",
+      "type": "image/png"
+    }
+  ]
+}
