@@ -1,11 +1,11 @@
 {
-  "name": "My Awesome Website",
-  "short_name": "MySite",
-  "description": "A simple Progressive Web App made with HTML.",
+  "name": "Dark Master Store",
+  "short_name": "Dark Master Store",
+  "description": "Shop online , Free delivery for anything you buy no delivery fee",
   "start_url": "./index.html",
   "display": "standalone",
-  "background_color": "#ffffff",
-  "theme_color": "#2196f3",
+  "background_color": "#F5E427",
+  "theme_color": "#F5E427",
   "icons": [
     {
       "src": "https://i.postimg.cc/fWY9406F/IMG-20250815-WA0006.jpg",
