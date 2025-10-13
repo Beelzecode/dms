@@ -1,23 +1,31 @@
 <!DOCTYPE html>
-<html data-filename="pages/AdminDownload" data-linenumber="10" data-visual-selector-id="pages/AdminDownload10" lang="en">
-<head data-filename="pages/AdminDownload" data-linenumber="11" data-visual-selector-id="pages/AdminDownload11">
+<html data-filename="pages/AdminDownload" data-linenumber="11" data-visual-selector-id="pages/AdminDownload11" lang="en">
+<head data-filename="pages/AdminDownload" data-linenumber="12" data-visual-selector-id="pages/AdminDownload12">
 
-    <link rel="manifest" href="manifest.json">
+
+     <link rel="manifest" href="manifest.json">
      <meta name="theme-color" content="#2196f3">
 
     <link rel="icon" href="https://i.postimg.cc/gJhjVfvM/Logo-for-Dark-Master-Store.png" type="image/png">
      <link rel="stylesheet" href="style.css">
 
-    <meta data-filename="pages/AdminDownload" data-linenumber="12" data-visual-selector-id="pages/AdminDownload12" charset="UTF-8">
-    <meta data-filename="pages/AdminDownload" data-linenumber="13" data-visual-selector-id="pages/AdminDownload13" name="viewport" content="width=device-width, initial-scale=1.0">
-    <title data-filename="pages/AdminDownload" data-linenumber="14" data-visual-selector-id="pages/AdminDownload14">Dark Master Store - Professional</title>
-    <style data-filename="pages/AdminDownload" data-linenumber="15" data-visual-selector-id="pages/AdminDownload15">
+
+    <meta data-filename="pages/AdminDownload" data-linenumber="13" data-visual-selector-id="pages/AdminDownload13" charset="UTF-8">
+    <meta data-filename="pages/AdminDownload" data-linenumber="14" data-visual-selector-id="pages/AdminDownload14" name="viewport" content="width=device-width, initial-scale=1.0">
+    <title data-filename="pages/AdminDownload" data-linenumber="15" data-visual-selector-id="pages/AdminDownload15">Dark Master Store - Professional</title>
+    <style data-filename="pages/AdminDownload" data-linenumber="16" data-visual-selector-id="pages/AdminDownload16">
         * { margin: 0; padding: 0; box-sizing: border-box; }
         body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Arial, sans-serif; background: #f9fafb; }
         
         /* SVG Icons */
         .icon-svg { width: 20px; height: 20px; fill: currentColor; display: inline-block; vertical-align: middle; }
         .icon-svg-lg { width: 24px; height: 24px; }
+        
+        /* Loading Spinner */
+        .loading-overlay { display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.7); z-index: 10000; justify-content: center; align-items: center; }
+        .loading-overlay.active { display: flex; }
+        .spinner { width: 60px; height: 60px; border: 5px solid #f3f4f6; border-top-color: #fbbf24; border-radius: 50%; animation: spin 1s linear infinite; }
+        @keyframes spin { to { transform: rotate(360deg); } }
         
         /* Admin Password Popup */
         .password-overlay { display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.7); z-index: 9999; justify-content: center; align-items: center; }
@@ -92,7 +100,7 @@
         .btn-add-cart { width: 100%; background: #fbbf24; color: #000; padding: 12px; border: none; border-radius: 10px; font-weight: 700; font-size: 14px; cursor: pointer; display: flex; align-items: center; justify-content: center; gap: 8px; margin-top: 12px; transition: all 0.2s; }
         .btn-add-cart:hover { background: #f59e0b; transform: translateY(-2px); }
         
-        /* Product Detail Page */
+        /* Product Detail, Cart, Checkout, Sell, Admin - keep existing styles */
         .product-detail { background: white; }
         .detail-container { max-width: 1200px; margin: 0 auto; padding: 40px 20px; }
         .detail-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 60px; }
@@ -127,7 +135,6 @@
         .review-date { font-size: 13px; color: #888; }
         .review-text { line-height: 1.6; color: #555; }
         
-        /* Cart */
         .cart-page { max-width: 900px; margin: 40px auto; padding: 0 20px; }
         .cart-empty { text-align: center; padding: 80px 20px; }
         .cart-item { background: white; padding: 20px; margin-bottom: 20px; border-radius: 16px; display: flex; gap: 20px; align-items: center; box-shadow: 0 2px 8px rgba(0,0,0,0.06); flex-wrap: wrap; }
@@ -142,7 +149,6 @@
         .btn-checkout { width: 100%; background: #22c55e; color: white; padding: 18px; border: none; border-radius: 12px; font-weight: 700; font-size: 18px; cursor: pointer; margin-top: 20px; transition: all 0.2s; }
         .btn-checkout:hover { background: #16a34a; transform: translateY(-2px); }
         
-        /* Checkout */
         .checkout-page { max-width: 1100px; margin: 40px auto; padding: 0 20px; }
         .checkout-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 30px; }
         .checkout-card { background: white; padding: 30px; border-radius: 16px; box-shadow: 0 2px 12px rgba(0,0,0,0.08); }
@@ -166,7 +172,6 @@
         .btn-place-order { width: 100%; background: #22c55e; color: white; padding: 18px; border: none; border-radius: 12px; font-weight: 700; font-size: 18px; cursor: pointer; transition: all 0.2s; }
         .btn-place-order:hover { background: #16a34a; }
         
-        /* Sell With Us */
         .sell-page { max-width: 1000px; margin: 40px auto; padding: 0 20px; }
         .sell-hero { background: linear-gradient(135deg, #fbbf24 0%, #f59e0b 100%); padding: 50px 30px; text-align: center; border-radius: 24px; margin-bottom: 40px; color: #000; }
         .sell-hero h1 { font-size: 36px; font-weight: 900; margin-bottom: 16px; }
@@ -176,7 +181,6 @@
         .benefit-card { background: white; padding: 25px; border-radius: 16px; box-shadow: 0 2px 8px rgba(0,0,0,0.06); }
         .benefit-icon { width: 48px; height: 48px; border-radius: 12px; display: flex; align-items: center; justify-content: center; margin-bottom: 16px; }
         
-        /* Admin */
         .admin-page { max-width: 1200px; margin: 40px auto; padding: 0 20px; }
         .admin-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 40px; flex-wrap: wrap; gap: 20px; }
         .admin-card { background: white; padding: 30px; border-radius: 16px; margin-bottom: 35px; box-shadow: 0 2px 12px rgba(0,0,0,0.08); }
@@ -190,7 +194,6 @@
         .btn-secondary { background: #6b7280; color: white; padding: 14px 28px; border: none; border-radius: 10px; font-weight: 700; cursor: pointer; margin-left: 12px; font-size: 15px; }
         .btn-delete { background: #ef4444; color: white; padding: 8px 16px; border: none; border-radius: 8px; cursor: pointer; font-weight: 600; font-size: 13px; }
         
-        /* Footer */
         .footer { background: #1f2937; color: white; padding: 50px 20px 30px; margin-top: 80px; }
         .footer-content { max-width: 1200px; margin: 0 auto; display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 40px; }
         .footer-logo { display: flex; align-items: center; gap: 12px; font-size: 22px; font-weight: 900; color: #fbbf24; margin-bottom: 20px; }
@@ -212,209 +215,214 @@
         }
     </style>
 </head>
-<body data-filename="pages/AdminDownload" data-linenumber="216" data-visual-selector-id="pages/AdminDownload216">
+<body data-filename="pages/AdminDownload" data-linenumber="218" data-visual-selector-id="pages/AdminDownload218">
+    <!-- Loading Overlay -->
+    <div data-filename="pages/AdminDownload" data-linenumber="220" data-visual-selector-id="pages/AdminDownload220" class="loading-overlay" id="loadingOverlay">
+        <div data-filename="pages/AdminDownload" data-linenumber="221" data-visual-selector-id="pages/AdminDownload221" class="spinner"></div>
+    </div>
+
     <!-- Admin Password Overlay -->
-    <div data-filename="pages/AdminDownload" data-linenumber="218" data-visual-selector-id="pages/AdminDownload218" class="password-overlay" id="passwordOverlay">
-        <div data-filename="pages/AdminDownload" data-linenumber="219" data-visual-selector-id="pages/AdminDownload219" class="password-box">
-            <div data-filename="pages/AdminDownload" data-linenumber="220" data-visual-selector-id="pages/AdminDownload220" class="password-icon">
-                <svg data-filename="pages/AdminDownload" data-linenumber="221" data-visual-selector-id="pages/AdminDownload221" class="icon-svg-lg" viewBox="0 0 24 24" style="width:30px;height:30px;"><path data-filename='pages/AdminDownload' data-linenumber='221' data-visual-selector-id='pages/AdminDownload221' d="M18 8h-1V6c0-2.76-2.24-5-5-5S7 3.24 7 6v2H6c-1.1 0-2 .9-2 2v10c0 1.1.9 2 2 2h12c1.1 0 2-.9 2-2V10c0-1.1-.9-2-2-2zm-6 9c-1.1 0-2-.9-2-2s.9-2 2-2 2 .9 2 2-.9 2-2 2zm3.1-9H8.9V6c0-1.71 1.39-3.1 3.1-3.1 1.71 0 3.1 1.39 3.1 3.1v2z"/></svg>
+    <div data-filename="pages/AdminDownload" data-linenumber="225" data-visual-selector-id="pages/AdminDownload225" class="password-overlay" id="passwordOverlay">
+        <div data-filename="pages/AdminDownload" data-linenumber="226" data-visual-selector-id="pages/AdminDownload226" class="password-box">
+            <div data-filename="pages/AdminDownload" data-linenumber="227" data-visual-selector-id="pages/AdminDownload227" class="password-icon">
+                <svg data-filename="pages/AdminDownload" data-linenumber="228" data-visual-selector-id="pages/AdminDownload228" class="icon-svg-lg" viewBox="0 0 24 24" style="width:30px;height:30px;"><path data-filename='pages/AdminDownload' data-linenumber='228' data-visual-selector-id='pages/AdminDownload228' d="M18 8h-1V6c0-2.76-2.24-5-5-5S7 3.24 7 6v2H6c-1.1 0-2 .9-2 2v10c0 1.1.9 2 2 2h12c1.1 0 2-.9 2-2V10c0-1.1-.9-2-2-2zm-6 9c-1.1 0-2-.9-2-2s.9-2 2-2 2 .9 2 2-.9 2-2 2zm3.1-9H8.9V6c0-1.71 1.39-3.1 3.1-3.1 1.71 0 3.1 1.39 3.1 3.1v2z"/></svg>
             </div>
-            <h2 data-filename="pages/AdminDownload" data-linenumber="223" data-visual-selector-id="pages/AdminDownload223">Admin Login</h2>
-            <p data-filename="pages/AdminDownload" data-linenumber="224" data-visual-selector-id="pages/AdminDownload224">Enter your password to access the admin panel</p>
-            <input data-filename="pages/AdminDownload" data-linenumber="225" data-visual-selector-id="pages/AdminDownload225" type="password" class="password-input" id="adminPasswordInput" placeholder="Enter password">
-            <button data-filename="pages/AdminDownload" data-linenumber="226" data-visual-selector-id="pages/AdminDownload226" class="password-btn" onclick="checkAdminPassword()">Enter Admin Panel</button>
-            <p data-filename="pages/AdminDownload" data-linenumber="227" data-visual-selector-id="pages/AdminDownload227" class="password-error" id="passwordError">Incorrect password. Please try again.</p>
+            <h2 data-filename="pages/AdminDownload" data-linenumber="230" data-visual-selector-id="pages/AdminDownload230">Admin Login</h2>
+            <p data-filename="pages/AdminDownload" data-linenumber="231" data-visual-selector-id="pages/AdminDownload231">Enter your password to access the admin panel</p>
+            <input data-filename="pages/AdminDownload" data-linenumber="232" data-visual-selector-id="pages/AdminDownload232" type="password" class="password-input" id="adminPasswordInput" placeholder="Enter password">
+            <button data-filename="pages/AdminDownload" data-linenumber="233" data-visual-selector-id="pages/AdminDownload233" class="password-btn" onclick="checkAdminPassword()">Enter Admin Panel</button>
+            <p data-filename="pages/AdminDownload" data-linenumber="234" data-visual-selector-id="pages/AdminDownload234" class="password-error" id="passwordError">Incorrect password. Please try again.</p>
         </div>
     </div>
 
     <!-- Banner -->
-    <div data-filename="pages/AdminDownload" data-linenumber="232" data-visual-selector-id="pages/AdminDownload232" class="banner">
-        <svg data-filename="pages/AdminDownload" data-linenumber="233" data-visual-selector-id="pages/AdminDownload233" class="icon-svg" style="margin-right: 8px;" viewBox="0 0 24 24"><path data-filename='pages/AdminDownload' data-linenumber='233' data-visual-selector-id='pages/AdminDownload233' d="M3 10h11v2H3zm0-2h11V6H3zm0 8h7v-2H3zm15.01-3.13l.71-.71a.996.996 0 011.41 0l.71.71c.39.39.39 1.02 0 1.41l-.71.71-2.12-2.12zm-.71.71l-5.3 5.3V21h2.12l5.3-5.3-2.12-2.12z"/></svg>
+    <div data-filename="pages/AdminDownload" data-linenumber="239" data-visual-selector-id="pages/AdminDownload239" class="banner">
+        <svg data-filename="pages/AdminDownload" data-linenumber="240" data-visual-selector-id="pages/AdminDownload240" class="icon-svg" style="margin-right: 8px;" viewBox="0 0 24 24"><path data-filename='pages/AdminDownload' data-linenumber='240' data-visual-selector-id='pages/AdminDownload240' d="M3 10h11v2H3zm0-2h11V6H3zm0 8h7v-2H3zm15.01-3.13l.71-.71a.996.996 0 011.41 0l.71.71c.39.39.39 1.02 0 1.41l-.71.71-2.12-2.12zm-.71.71l-5.3 5.3V21h2.12l5.3-5.3-2.12-2.12z"/></svg>
         Free shipping on anything that you buy
     </div>
 
     <!-- Header -->
-    <div data-filename="pages/AdminDownload" data-linenumber="238" data-visual-selector-id="pages/AdminDownload238" class="header">
-        <div data-filename="pages/AdminDownload" data-linenumber="239" data-visual-selector-id="pages/AdminDownload239" class="nav">
-            <div data-filename="pages/AdminDownload" data-linenumber="240" data-visual-selector-id="pages/AdminDownload240" class="logo">
-                <svg data-filename="pages/AdminDownload" data-linenumber="241" data-visual-selector-id="pages/AdminDownload241" class="icon-svg-lg" viewBox="0 0 24 24"><path data-filename='pages/AdminDownload' data-linenumber='241' data-visual-selector-id='pages/AdminDownload241' d="M7 18c-1.1 0-1.99.9-1.99 2S5.9 22 7 22s2-.9 2-2-.9-2-2-2zM1 2v2h2l3.6 7.59-1.35 2.45c-.16.28-.25.61-.25.96 0 1.1.9 2 2 2h12v-2H7.42c-.14 0-.25-.11-.25-.25l.03-.12.9-1.63h7.45c.75 0 1.41-.41 1.75-1.03l3.58-6.49c.08-.14.12-.31.12-.48 0-.55-.45-1-1-1H5.21l-.94-2H1zm16 16c-1.1 0-1.99.9-1.99 2s.89 2 1.99 2 2-.9 2-2-.9-2-2-2z"/></svg>
+    <div data-filename="pages/AdminDownload" data-linenumber="245" data-visual-selector-id="pages/AdminDownload245" class="header">
+        <div data-filename="pages/AdminDownload" data-linenumber="246" data-visual-selector-id="pages/AdminDownload246" class="nav">
+            <div data-filename="pages/AdminDownload" data-linenumber="247" data-visual-selector-id="pages/AdminDownload247" class="logo">
+                <svg data-filename="pages/AdminDownload" data-linenumber="248" data-visual-selector-id="pages/AdminDownload248" class="icon-svg-lg" viewBox="0 0 24 24"><path data-filename='pages/AdminDownload' data-linenumber='248' data-visual-selector-id='pages/AdminDownload248' d="M7 18c-1.1 0-1.99.9-1.99 2S5.9 22 7 22s2-.9 2-2-.9-2-2-2zM1 2v2h2l3.6 7.59-1.35 2.45c-.16.28-.25.61-.25.96 0 1.1.9 2 2 2h12v-2H7.42c-.14 0-.25-.11-.25-.25l.03-.12.9-1.63h7.45c.75 0 1.41-.41 1.75-1.03l3.58-6.49c.08-.14.12-.31.12-.48 0-.55-.45-1-1-1H5.21l-.94-2H1zm16 16c-1.1 0-1.99.9-1.99 2s.89 2 1.99 2 2-.9 2-2-.9-2-2-2z"/></svg>
                 DARK MASTER STORE
             </div>
-            <div data-filename="pages/AdminDownload" data-linenumber="244" data-visual-selector-id="pages/AdminDownload244" class="nav-right">
-                <button data-filename="pages/AdminDownload" data-linenumber="245" data-visual-selector-id="pages/AdminDownload245" class="nav-btn" onclick="showPage('sell')">
-                    <svg data-filename="pages/AdminDownload" data-linenumber="246" data-visual-selector-id="pages/AdminDownload246" class="icon-svg" viewBox="0 0 24 24"><path data-filename='pages/AdminDownload' data-linenumber='246' data-visual-selector-id='pages/AdminDownload246' d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm0 18c-4.41 0-8-3.59-8-8s3.59-8 8-8 8 3.59 8 8-3.59 8-8 8zm-1-13h2v6h-2zm0 8h2v2h-2z"/></svg>
+            <div data-filename="pages/AdminDownload" data-linenumber="251" data-visual-selector-id="pages/AdminDownload251" class="nav-right">
+                <button data-filename="pages/AdminDownload" data-linenumber="252" data-visual-selector-id="pages/AdminDownload252" class="nav-btn" onclick="showPage('sell')">
+                    <svg data-filename="pages/AdminDownload" data-linenumber="253" data-visual-selector-id="pages/AdminDownload253" class="icon-svg" viewBox="0 0 24 24"><path data-filename='pages/AdminDownload' data-linenumber='253' data-visual-selector-id='pages/AdminDownload253' d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm0 18c-4.41 0-8-3.59-8-8s3.59-8 8-8 8 3.59 8 8-3.59 8-8 8zm-1-13h2v6h-2zm0 8h2v2h-2z"/></svg>
                     Sell With Us
                 </button>
-                <button data-filename="pages/AdminDownload" data-linenumber="249" data-visual-selector-id="pages/AdminDownload249" class="nav-btn" onclick="showAdminLogin()">
-                    <svg data-filename="pages/AdminDownload" data-linenumber="250" data-visual-selector-id="pages/AdminDownload250" class="icon-svg" viewBox="0 0 24 24"><path data-filename='pages/AdminDownload' data-linenumber='250' data-visual-selector-id='pages/AdminDownload250' d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm0 3c1.66 0 3 1.34 3 3s-1.34 3-3 3-3-1.34-3-3 1.34-3 3-3zm0 14.2c-2.5 0-4.71-1.28-6-3.22.03-1.99 4-3.08 6-3.08 1.99 0 5.97 1.09 6 3.08-1.29 1.94-3.5 3.22-6 3.22z"/></svg>
+                <button data-filename="pages/AdminDownload" data-linenumber="256" data-visual-selector-id="pages/AdminDownload256" class="nav-btn" onclick="showAdminLogin()">
+                    <svg data-filename="pages/AdminDownload" data-linenumber="257" data-visual-selector-id="pages/AdminDownload257" class="icon-svg" viewBox="0 0 24 24"><path data-filename='pages/AdminDownload' data-linenumber='257' data-visual-selector-id='pages/AdminDownload257' d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm0 3c1.66 0 3 1.34 3 3s-1.34 3-3 3-3-1.34-3-3 1.34-3 3-3zm0 14.2c-2.5 0-4.71-1.28-6-3.22.03-1.99 4-3.08 6-3.08 1.99 0 5.97 1.09 6 3.08-1.29 1.94-3.5 3.22-6 3.22z"/></svg>
                     Admin
                 </button>
-                <button data-filename="pages/AdminDownload" data-linenumber="253" data-visual-selector-id="pages/AdminDownload253" class="nav-btn" onclick="showPage('cart')">
-                    <svg data-filename="pages/AdminDownload" data-linenumber="254" data-visual-selector-id="pages/AdminDownload254" class="icon-svg" viewBox="0 0 24 24"><path data-filename='pages/AdminDownload' data-linenumber='254' data-visual-selector-id='pages/AdminDownload254' d="M7 18c-1.1 0-1.99.9-1.99 2S5.9 22 7 22s2-.9 2-2-.9-2-2-2zM1 2v2h2l3.6 7.59-1.35 2.45c-.16.28-.25.61-.25.96 0 1.1.9 2 2 2h12v-2H7.42c-.14 0-.25-.11-.25-.25l.03-.12.9-1.63h7.45c.75 0 1.41-.41 1.75-1.03l3.58-6.49c.08-.14.12-.31.12-.48 0-.55-.45-1-1-1H5.21l-.94-2H1zm16 16c-1.1 0-1.99.9-1.99 2s.89 2 1.99 2 2-.9 2-2-.9-2-2-2z"/></svg>
+                <button data-filename="pages/AdminDownload" data-linenumber="260" data-visual-selector-id="pages/AdminDownload260" class="nav-btn" onclick="showPage('cart')">
+                    <svg data-filename="pages/AdminDownload" data-linenumber="261" data-visual-selector-id="pages/AdminDownload261" class="icon-svg" viewBox="0 0 24 24"><path data-filename='pages/AdminDownload' data-linenumber='261' data-visual-selector-id='pages/AdminDownload261' d="M7 18c-1.1 0-1.99.9-1.99 2S5.9 22 7 22s2-.9 2-2-.9-2-2-2zM1 2v2h2l3.6 7.59-1.35 2.45c-.16.28-.25.61-.25.96 0 1.1.9 2 2 2h12v-2H7.42c-.14 0-.25-.11-.25-.25l.03-.12.9-1.63h7.45c.75 0 1.41-.41 1.75-1.03l3.58-6.49c.08-.14.12-.31.12-.48 0-.55-.45-1-1-1H5.21l-.94-2H1zm16 16c-1.1 0-1.99.9-1.99 2s.89 2 1.99 2 2-.9 2-2-.9-2-2-2z"/></svg>
                     Cart
-                    <span data-filename="pages/AdminDownload" data-linenumber="256" data-visual-selector-id="pages/AdminDownload256" class="cart-count" id="cartCount">0</span>
+                    <span data-filename="pages/AdminDownload" data-linenumber="263" data-visual-selector-id="pages/AdminDownload263" class="cart-count" id="cartCount">0</span>
                 </button>
             </div>
         </div>
     </div>
 
     <!-- Home Page -->
-    <div data-filename="pages/AdminDownload" data-linenumber="263" data-visual-selector-id="pages/AdminDownload263" id="homePage">
-        <div data-filename="pages/AdminDownload" data-linenumber="264" data-visual-selector-id="pages/AdminDownload264" class="hero">
-            <h1 data-filename="pages/AdminDownload" data-linenumber="265" data-visual-selector-id="pages/AdminDownload265">DARK MASTER STORE</h1>
-            <p data-filename="pages/AdminDownload" data-linenumber="266" data-visual-selector-id="pages/AdminDownload266" class="hero-subtitle">Beauty & Gadgets for Everyday Greatness</p>
-            <div data-filename="pages/AdminDownload" data-linenumber="267" data-visual-selector-id="pages/AdminDownload267" class="search-box">
-                <input data-filename="pages/AdminDownload" data-linenumber="268" data-visual-selector-id="pages/AdminDownload268" type="text" class="search-input" placeholder="Search for amazing products..." id="searchInput">
-                <button data-filename="pages/AdminDownload" data-linenumber="269" data-visual-selector-id="pages/AdminDownload269" class="search-btn" onclick="searchProducts()">
-                    <svg data-filename="pages/AdminDownload" data-linenumber="270" data-visual-selector-id="pages/AdminDownload270" class="icon-svg" viewBox="0 0 24 24"><path data-filename='pages/AdminDownload' data-linenumber='270' data-visual-selector-id='pages/AdminDownload270' d="M15.5 14h-.79l-.28-.27C15.41 12.59 16 11.11 16 9.5 16 5.91 13.09 3 9.5 3S3 5.91 3 9.5 5.91 16 9.5 16c1.61 0 3.09-.59 4.23-1.57l.27.28v.79l5 4.99L20.49 19l-4.99-5zm-6 0C7.01 14 5 11.99 5 9.5S7.01 5 9.5 5 14 7.01 14 9.5 11.99 14 9.5 14z"/></svg>
+    <div data-filename="pages/AdminDownload" data-linenumber="270" data-visual-selector-id="pages/AdminDownload270" id="homePage">
+        <div data-filename="pages/AdminDownload" data-linenumber="271" data-visual-selector-id="pages/AdminDownload271" class="hero">
+            <h1 data-filename="pages/AdminDownload" data-linenumber="272" data-visual-selector-id="pages/AdminDownload272">DARK MASTER STORE</h1>
+            <p data-filename="pages/AdminDownload" data-linenumber="273" data-visual-selector-id="pages/AdminDownload273" class="hero-subtitle">Beauty & Gadgets for Everyday Greatness</p>
+            <div data-filename="pages/AdminDownload" data-linenumber="274" data-visual-selector-id="pages/AdminDownload274" class="search-box">
+                <input data-filename="pages/AdminDownload" data-linenumber="275" data-visual-selector-id="pages/AdminDownload275" type="text" class="search-input" placeholder="Search for amazing products..." id="searchInput">
+                <button data-filename="pages/AdminDownload" data-linenumber="276" data-visual-selector-id="pages/AdminDownload276" class="search-btn" onclick="searchProducts()">
+                    <svg data-filename="pages/AdminDownload" data-linenumber="277" data-visual-selector-id="pages/AdminDownload277" class="icon-svg" viewBox="0 0 24 24"><path data-filename='pages/AdminDownload' data-linenumber='277' data-visual-selector-id='pages/AdminDownload277' d="M15.5 14h-.79l-.28-.27C15.41 12.59 16 11.11 16 9.5 16 5.91 13.09 3 9.5 3S3 5.91 3 9.5 5.91 16 9.5 16c1.61 0 3.09-.59 4.23-1.57l.27.28v.79l5 4.99L20.49 19l-4.99-5zm-6 0C7.01 14 5 11.99 5 9.5S7.01 5 9.5 5 14 7.01 14 9.5 11.99 14 9.5 14z"/></svg>
                     Search
                 </button>
             </div>
-            <div data-filename="pages/AdminDownload" data-linenumber="274" data-visual-selector-id="pages/AdminDownload274" class="hero-badges">
-                <div data-filename="pages/AdminDownload" data-linenumber="275" data-visual-selector-id="pages/AdminDownload275" class="badge badge-green">
-                    <svg data-filename="pages/AdminDownload" data-linenumber="276" data-visual-selector-id="pages/AdminDownload276" class="icon-svg" viewBox="0 0 24 24"><path data-filename='pages/AdminDownload' data-linenumber='276' data-visual-selector-id='pages/AdminDownload276' d="M20 8h-3V4H3c-1.1 0-2 .9-2 2v11h2c0 1.66 1.34 3 3 3s3-1.34 3-3h6c0 1.66 1.34 3 3 3s3-1.34 3-3h2v-5l-3-4z"/></svg>
+            <div data-filename="pages/AdminDownload" data-linenumber="281" data-visual-selector-id="pages/AdminDownload281" class="hero-badges">
+                <div data-filename="pages/AdminDownload" data-linenumber="282" data-visual-selector-id="pages/AdminDownload282" class="badge badge-green">
+                    <svg data-filename="pages/AdminDownload" data-linenumber="283" data-visual-selector-id="pages/AdminDownload283" class="icon-svg" viewBox="0 0 24 24"><path data-filename='pages/AdminDownload' data-linenumber='283' data-visual-selector-id='pages/AdminDownload283' d="M20 8h-3V4H3c-1.1 0-2 .9-2 2v11h2c0 1.66 1.34 3 3 3s3-1.34 3-3h6c0 1.66 1.34 3 3 3s3-1.34 3-3h2v-5l-3-4z"/></svg>
                     Free Shipping
                 </div>
-                <div data-filename="pages/AdminDownload" data-linenumber="279" data-visual-selector-id="pages/AdminDownload279" class="badge badge-white">
-                    <svg data-filename="pages/AdminDownload" data-linenumber="280" data-visual-selector-id="pages/AdminDownload280" class="icon-svg" viewBox="0 0 24 24"><path data-filename='pages/AdminDownload' data-linenumber='280' data-visual-selector-id='pages/AdminDownload280' d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z"/></svg>
+                <div data-filename="pages/AdminDownload" data-linenumber="286" data-visual-selector-id="pages/AdminDownload286" class="badge badge-white">
+                    <svg data-filename="pages/AdminDownload" data-linenumber="287" data-visual-selector-id="pages/AdminDownload287" class="icon-svg" viewBox="0 0 24 24"><path data-filename='pages/AdminDownload' data-linenumber='287' data-visual-selector-id='pages/AdminDownload287' d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z"/></svg>
                     5★ Rated
                 </div>
-                <div data-filename="pages/AdminDownload" data-linenumber="283" data-visual-selector-id="pages/AdminDownload283" class="badge badge-blue">
-                    <svg data-filename="pages/AdminDownload" data-linenumber="284" data-visual-selector-id="pages/AdminDownload284" class="icon-svg" viewBox="0 0 24 24"><path data-filename='pages/AdminDownload' data-linenumber='284' data-visual-selector-id='pages/AdminDownload284' d="M11.8 10.9c-2.27-.59-3-1.2-3-2.15 0-1.09 1.01-1.85 2.7-1.85 1.78 0 2.44.85 2.5 2.1h2.21c-.07-1.72-1.12-3.3-3.21-3.81V3h-3v2.16c-1.94.42-3.5 1.68-3.5 3.61 0 2.31 1.91 3.46 4.7 4.13 2.5.6 3 1.48 3 2.41 0 .69-.49 1.79-2.7 1.79-2.06 0-2.87-.92-2.98-2.1h-2.2c.12 2.19 1.76 3.42 3.68 3.83V21h3v-2.15c1.95-.37 3.5-1.5 3.5-3.55 0-2.84-2.43-3.81-4.7-4.4z"/></svg>
+                <div data-filename="pages/AdminDownload" data-linenumber="290" data-visual-selector-id="pages/AdminDownload290" class="badge badge-blue">
+                    <svg data-filename="pages/AdminDownload" data-linenumber="291" data-visual-selector-id="pages/AdminDownload291" class="icon-svg" viewBox="0 0 24 24"><path data-filename='pages/AdminDownload' data-linenumber='291' data-visual-selector-id='pages/AdminDownload291' d="M11.8 10.9c-2.27-.59-3-1.2-3-2.15 0-1.09 1.01-1.85 2.7-1.85 1.78 0 2.44.85 2.5 2.1h2.21c-.07-1.72-1.12-3.3-3.21-3.81V3h-3v2.16c-1.94.42-3.5 1.68-3.5 3.61 0 2.31 1.91 3.46 4.7 4.13 2.5.6 3 1.48 3 2.41 0 .69-.49 1.79-2.7 1.79-2.06 0-2.87-.92-2.98-2.1h-2.2c.12 2.19 1.76 3.42 3.68 3.83V21h3v-2.15c1.95-.37 3.5-1.5 3.5-3.55 0-2.84-2.43-3.81-4.7-4.4z"/></svg>
                     ZAR Currency
                 </div>
             </div>
         </div>
 
-        <div data-filename="pages/AdminDownload" data-linenumber="290" data-visual-selector-id="pages/AdminDownload290" class="section">
-            <div data-filename="pages/AdminDownload" data-linenumber="291" data-visual-selector-id="pages/AdminDownload291" class="section-header">
-                <h2 data-filename="pages/AdminDownload" data-linenumber="292" data-visual-selector-id="pages/AdminDownload292">Shop by Category</h2>
-                <p data-filename="pages/AdminDownload" data-linenumber="293" data-visual-selector-id="pages/AdminDownload293">Discover our premium product collections</p>
+        <div data-filename="pages/AdminDownload" data-linenumber="297" data-visual-selector-id="pages/AdminDownload297" class="section">
+            <div data-filename="pages/AdminDownload" data-linenumber="298" data-visual-selector-id="pages/AdminDownload298" class="section-header">
+                <h2 data-filename="pages/AdminDownload" data-linenumber="299" data-visual-selector-id="pages/AdminDownload299">Shop by Category</h2>
+                <p data-filename="pages/AdminDownload" data-linenumber="300" data-visual-selector-id="pages/AdminDownload300">Discover our premium product collections</p>
             </div>
-            <div data-filename="pages/AdminDownload" data-linenumber="295" data-visual-selector-id="pages/AdminDownload295" class="category-grid" id="categoryGrid"></div>
+            <div data-filename="pages/AdminDownload" data-linenumber="302" data-visual-selector-id="pages/AdminDownload302" class="category-grid" id="categoryGrid"></div>
         </div>
 
-        <div data-filename="pages/AdminDownload" data-linenumber="298" data-visual-selector-id="pages/AdminDownload298" class="section">
-            <div data-filename="pages/AdminDownload" data-linenumber="299" data-visual-selector-id="pages/AdminDownload299" class="section-header">
-                <h2 data-filename="pages/AdminDownload" data-linenumber="300" data-visual-selector-id="pages/AdminDownload300">Featured Products</h2>
-                <p data-filename="pages/AdminDownload" data-linenumber="301" data-visual-selector-id="pages/AdminDownload301">Hand-picked favorites just for you</p>
+        <div data-filename="pages/AdminDownload" data-linenumber="305" data-visual-selector-id="pages/AdminDownload305" class="section">
+            <div data-filename="pages/AdminDownload" data-linenumber="306" data-visual-selector-id="pages/AdminDownload306" class="section-header">
+                <h2 data-filename="pages/AdminDownload" data-linenumber="307" data-visual-selector-id="pages/AdminDownload307">Featured Products</h2>
+                <p data-filename="pages/AdminDownload" data-linenumber="308" data-visual-selector-id="pages/AdminDownload308">Hand-picked favorites just for you</p>
             </div>
-            <div data-filename="pages/AdminDownload" data-linenumber="303" data-visual-selector-id="pages/AdminDownload303" class="product-grid" id="productGrid"></div>
+            <div data-filename="pages/AdminDownload" data-linenumber="310" data-visual-selector-id="pages/AdminDownload310" class="product-grid" id="productGrid"></div>
         </div>
     </div>
 
     <!-- Product Detail Page -->
-    <div data-filename="pages/AdminDownload" data-linenumber="308" data-visual-selector-id="pages/AdminDownload308" id="productDetailPage" class="hidden product-detail">
-        <div data-filename="pages/AdminDownload" data-linenumber="309" data-visual-selector-id="pages/AdminDownload309" class="detail-container">
-            <button data-filename="pages/AdminDownload" data-linenumber="310" data-visual-selector-id="pages/AdminDownload310" onclick="showPage('home')" style="margin-bottom: 20px; background: #f3f4f6; border: none; padding: 10px 20px; border-radius: 8px; cursor: pointer; font-weight: 600;">
+    <div data-filename="pages/AdminDownload" data-linenumber="315" data-visual-selector-id="pages/AdminDownload315" id="productDetailPage" class="hidden product-detail">
+        <div data-filename="pages/AdminDownload" data-linenumber="316" data-visual-selector-id="pages/AdminDownload316" class="detail-container">
+            <button data-filename="pages/AdminDownload" data-linenumber="317" data-visual-selector-id="pages/AdminDownload317" onclick="showPage('home')" style="margin-bottom: 20px; background: #f3f4f6; border: none; padding: 10px 20px; border-radius: 8px; cursor: pointer; font-weight: 600;">
                 ← Back to Products
             </button>
-            <div data-filename="pages/AdminDownload" data-linenumber="313" data-visual-selector-id="pages/AdminDownload313" class="detail-grid">
-                <div data-filename="pages/AdminDownload" data-linenumber="314" data-visual-selector-id="pages/AdminDownload314" class="detail-images">
-                    <img data-filename="pages/AdminDownload" data-linenumber="315" data-visual-selector-id="pages/AdminDownload315" id="mainProductImage" class="main-image" src="" alt="">
-                    <div data-filename="pages/AdminDownload" data-linenumber="316" data-visual-selector-id="pages/AdminDownload316" class="image-thumbnails" id="imageThumbnails"></div>
+            <div data-filename="pages/AdminDownload" data-linenumber="320" data-visual-selector-id="pages/AdminDownload320" class="detail-grid">
+                <div data-filename="pages/AdminDownload" data-linenumber="321" data-visual-selector-id="pages/AdminDownload321" class="detail-images">
+                    <img data-filename="pages/AdminDownload" data-linenumber="322" data-visual-selector-id="pages/AdminDownload322" id="mainProductImage" class="main-image" src="" alt="">
+                    <div data-filename="pages/AdminDownload" data-linenumber="323" data-visual-selector-id="pages/AdminDownload323" class="image-thumbnails" id="imageThumbnails"></div>
                 </div>
-                <div data-filename="pages/AdminDownload" data-linenumber="318" data-visual-selector-id="pages/AdminDownload318" class="detail-info">
-                    <h1 data-filename="pages/AdminDownload" data-linenumber="319" data-visual-selector-id="pages/AdminDownload319" id="detailProductName"></h1>
-                    <div data-filename="pages/AdminDownload" data-linenumber="320" data-visual-selector-id="pages/AdminDownload320" class="detail-rating">
-                        <div data-filename="pages/AdminDownload" data-linenumber="321" data-visual-selector-id="pages/AdminDownload321" class="stars" id="detailStars"></div>
-                        <span data-filename="pages/AdminDownload" data-linenumber="322" data-visual-selector-id="pages/AdminDownload322" class="reviews-count" id="detailReviews"></span>
+                <div data-filename="pages/AdminDownload" data-linenumber="325" data-visual-selector-id="pages/AdminDownload325" class="detail-info">
+                    <h1 data-filename="pages/AdminDownload" data-linenumber="326" data-visual-selector-id="pages/AdminDownload326" id="detailProductName"></h1>
+                    <div data-filename="pages/AdminDownload" data-linenumber="327" data-visual-selector-id="pages/AdminDownload327" class="detail-rating">
+                        <div data-filename="pages/AdminDownload" data-linenumber="328" data-visual-selector-id="pages/AdminDownload328" class="stars" id="detailStars"></div>
+                        <span data-filename="pages/AdminDownload" data-linenumber="329" data-visual-selector-id="pages/AdminDownload329" class="reviews-count" id="detailReviews"></span>
                     </div>
-                    <div data-filename="pages/AdminDownload" data-linenumber="324" data-visual-selector-id="pages/AdminDownload324" class="detail-price">
-                        <span data-filename="pages/AdminDownload" data-linenumber="325" data-visual-selector-id="pages/AdminDownload325" id="detailPrice"></span>
-                        <span data-filename="pages/AdminDownload" data-linenumber="326" data-visual-selector-id="pages/AdminDownload326" class="original-price" id="detailOriginalPrice"></span>
+                    <div data-filename="pages/AdminDownload" data-linenumber="331" data-visual-selector-id="pages/AdminDownload331" class="detail-price">
+                        <span data-filename="pages/AdminDownload" data-linenumber="332" data-visual-selector-id="pages/AdminDownload332" id="detailPrice"></span>
+                        <span data-filename="pages/AdminDownload" data-linenumber="333" data-visual-selector-id="pages/AdminDownload333" class="original-price" id="detailOriginalPrice"></span>
                     </div>
-                    <p data-filename="pages/AdminDownload" data-linenumber="328" data-visual-selector-id="pages/AdminDownload328" class="detail-desc" id="detailDescription"></p>
-                    <div data-filename="pages/AdminDownload" data-linenumber="329" data-visual-selector-id="pages/AdminDownload329" class="detail-meta" id="detailMeta"></div>
-                    <div data-filename="pages/AdminDownload" data-linenumber="330" data-visual-selector-id="pages/AdminDownload330" class="size-selector" id="sizeSelector"></div>
-                    <div data-filename="pages/AdminDownload" data-linenumber="331" data-visual-selector-id="pages/AdminDownload331" class="quantity-selector">
-                        <span data-filename="pages/AdminDownload" data-linenumber="332" data-visual-selector-id="pages/AdminDownload332" class="qty-label">Quantity:</span>
-                        <div data-filename="pages/AdminDownload" data-linenumber="333" data-visual-selector-id="pages/AdminDownload333" class="qty-controls">
-                            <button data-filename="pages/AdminDownload" data-linenumber="334" data-visual-selector-id="pages/AdminDownload334" class="qty-btn" onclick="changeDetailQty(-1)">−</button>
-                            <span data-filename="pages/AdminDownload" data-linenumber="335" data-visual-selector-id="pages/AdminDownload335" class="qty-value" id="detailQty">1</span>
-                            <button data-filename="pages/AdminDownload" data-linenumber="336" data-visual-selector-id="pages/AdminDownload336" class="qty-btn" onclick="changeDetailQty(1)">+</button>
+                    <p data-filename="pages/AdminDownload" data-linenumber="335" data-visual-selector-id="pages/AdminDownload335" class="detail-desc" id="detailDescription"></p>
+                    <div data-filename="pages/AdminDownload" data-linenumber="336" data-visual-selector-id="pages/AdminDownload336" class="detail-meta" id="detailMeta"></div>
+                    <div data-filename="pages/AdminDownload" data-linenumber="337" data-visual-selector-id="pages/AdminDownload337" class="size-selector" id="sizeSelector"></div>
+                    <div data-filename="pages/AdminDownload" data-linenumber="338" data-visual-selector-id="pages/AdminDownload338" class="quantity-selector">
+                        <span data-filename="pages/AdminDownload" data-linenumber="339" data-visual-selector-id="pages/AdminDownload339" class="qty-label">Quantity:</span>
+                        <div data-filename="pages/AdminDownload" data-linenumber="340" data-visual-selector-id="pages/AdminDownload340" class="qty-controls">
+                            <button data-filename="pages/AdminDownload" data-linenumber="341" data-visual-selector-id="pages/AdminDownload341" class="qty-btn" onclick="changeDetailQty(-1)">−</button>
+                            <span data-filename="pages/AdminDownload" data-linenumber="342" data-visual-selector-id="pages/AdminDownload342" class="qty-value" id="detailQty">1</span>
+                            <button data-filename="pages/AdminDownload" data-linenumber="343" data-visual-selector-id="pages/AdminDownload343" class="qty-btn" onclick="changeDetailQty(1)">+</button>
                         </div>
                     </div>
-                    <button data-filename="pages/AdminDownload" data-linenumber="339" data-visual-selector-id="pages/AdminDownload339" class="btn-add-large" onclick="addDetailToCart()">
-                        <svg data-filename="pages/AdminDownload" data-linenumber="340" data-visual-selector-id="pages/AdminDownload340" class="icon-svg" viewBox="0 0 24 24"><path data-filename='pages/AdminDownload' data-linenumber='340' data-visual-selector-id='pages/AdminDownload340' d="M7 18c-1.1 0-1.99.9-1.99 2S5.9 22 7 22s2-.9 2-2-.9-2-2-2zM1 2v2h2l3.6 7.59-1.35 2.45c-.16.28-.25.61-.25.96 0 1.1.9 2 2 2h12v-2H7.42c-.14 0-.25-.11-.25-.25l.03-.12.9-1.63h7.45c.75 0 1.41-.41 1.75-1.03l3.58-6.49c.08-.14.12-.31.12-.48 0-.55-.45-1-1-1H5.21l-.94-2H1zm16 16c-1.1 0-1.99.9-1.99 2s.89 2 1.99 2 2-.9 2-2-.9-2-2-2z"/></svg>
+                    <button data-filename="pages/AdminDownload" data-linenumber="346" data-visual-selector-id="pages/AdminDownload346" class="btn-add-large" onclick="addDetailToCart()">
+                        <svg data-filename="pages/AdminDownload" data-linenumber="347" data-visual-selector-id="pages/AdminDownload347" class="icon-svg" viewBox="0 0 24 24"><path data-filename='pages/AdminDownload' data-linenumber='347' data-visual-selector-id='pages/AdminDownload347' d="M7 18c-1.1 0-1.99.9-1.99 2S5.9 22 7 22s2-.9 2-2-.9-2-2-2zM1 2v2h2l3.6 7.59-1.35 2.45c-.16.28-.25.61-.25.96 0 1.1.9 2 2 2h12v-2H7.42c-.14 0-.25-.11-.25-.25l.03-.12.9-1.63h7.45c.75 0 1.41-.41 1.75-1.03l3.58-6.49c.08-.14.12-.31.12-.48 0-.55-.45-1-1-1H5.21l-.94-2H1zm16 16c-1.1 0-1.99.9-1.99 2s.89 2 1.99 2 2-.9 2-2-.9-2-2-2z"/></svg>
                         Add to Cart
                     </button>
                 </div>
             </div>
-            <div data-filename="pages/AdminDownload" data-linenumber="345" data-visual-selector-id="pages/AdminDownload345" class="reviews-section" id="reviewsSection"></div>
+            <div data-filename="pages/AdminDownload" data-linenumber="352" data-visual-selector-id="pages/AdminDownload352" class="reviews-section" id="reviewsSection"></div>
         </div>
     </div>
 
     <!-- Cart Page -->
-    <div data-filename="pages/AdminDownload" data-linenumber="350" data-visual-selector-id="pages/AdminDownload350" id="cartPage" class="hidden cart-page">
-        <h1 data-filename="pages/AdminDownload" data-linenumber="351" data-visual-selector-id="pages/AdminDownload351" style="font-size: 32px; font-weight: 800; margin-bottom: 30px;">Shopping Cart</h1>
-        <div data-filename="pages/AdminDownload" data-linenumber="352" data-visual-selector-id="pages/AdminDownload352" id="cartItems"></div>
-        <div data-filename="pages/AdminDownload" data-linenumber="353" data-visual-selector-id="pages/AdminDownload353" id="cartTotal"></div>
+    <div data-filename="pages/AdminDownload" data-linenumber="357" data-visual-selector-id="pages/AdminDownload357" id="cartPage" class="hidden cart-page">
+        <h1 data-filename="pages/AdminDownload" data-linenumber="358" data-visual-selector-id="pages/AdminDownload358" style="font-size: 32px; font-weight: 800; margin-bottom: 30px;">Shopping Cart</h1>
+        <div data-filename="pages/AdminDownload" data-linenumber="359" data-visual-selector-id="pages/AdminDownload359" id="cartItems"></div>
+        <div data-filename="pages/AdminDownload" data-linenumber="360" data-visual-selector-id="pages/AdminDownload360" id="cartTotal"></div>
     </div>
 
     <!-- Checkout Page -->
-    <div data-filename="pages/AdminDownload" data-linenumber="357" data-visual-selector-id="pages/AdminDownload357" id="checkoutPage" class="hidden checkout-page">
-        <h1 data-filename="pages/AdminDownload" data-linenumber="358" data-visual-selector-id="pages/AdminDownload358" style="font-size: 32px; font-weight: 800; margin-bottom: 40px;">Checkout</h1>
-        <div data-filename="pages/AdminDownload" data-linenumber="359" data-visual-selector-id="pages/AdminDownload359" class="checkout-grid">
-            <div data-filename="pages/AdminDownload" data-linenumber="360" data-visual-selector-id="pages/AdminDownload360" class="checkout-card">
-                <h2 data-filename="pages/AdminDownload" data-linenumber="361" data-visual-selector-id="pages/AdminDownload361">Shipping Information</h2>
-                <form data-filename="pages/AdminDownload" data-linenumber="362" data-visual-selector-id="pages/AdminDownload362" id="checkoutForm">
-                    <div data-filename="pages/AdminDownload" data-linenumber="363" data-visual-selector-id="pages/AdminDownload363" class="form-group">
-                        <label data-filename="pages/AdminDownload" data-linenumber="364" data-visual-selector-id="pages/AdminDownload364" class="form-label">Full Name *</label>
-                        <input data-filename="pages/AdminDownload" data-linenumber="365" data-visual-selector-id="pages/AdminDownload365" type="text" class="form-input" id="fullName" required>
+    <div data-filename="pages/AdminDownload" data-linenumber="364" data-visual-selector-id="pages/AdminDownload364" id="checkoutPage" class="hidden checkout-page">
+        <h1 data-filename="pages/AdminDownload" data-linenumber="365" data-visual-selector-id="pages/AdminDownload365" style="font-size: 32px; font-weight: 800; margin-bottom: 40px;">Checkout</h1>
+        <div data-filename="pages/AdminDownload" data-linenumber="366" data-visual-selector-id="pages/AdminDownload366" class="checkout-grid">
+            <div data-filename="pages/AdminDownload" data-linenumber="367" data-visual-selector-id="pages/AdminDownload367" class="checkout-card">
+                <h2 data-filename="pages/AdminDownload" data-linenumber="368" data-visual-selector-id="pages/AdminDownload368">Shipping Information</h2>
+                <form data-filename="pages/AdminDownload" data-linenumber="369" data-visual-selector-id="pages/AdminDownload369" id="checkoutForm">
+                    <div data-filename="pages/AdminDownload" data-linenumber="370" data-visual-selector-id="pages/AdminDownload370" class="form-group">
+                        <label data-filename="pages/AdminDownload" data-linenumber="371" data-visual-selector-id="pages/AdminDownload371" class="form-label">Full Name *</label>
+                        <input data-filename="pages/AdminDownload" data-linenumber="372" data-visual-selector-id="pages/AdminDownload372" type="text" class="form-input" id="fullName" required>
                     </div>
-                    <div data-filename="pages/AdminDownload" data-linenumber="367" data-visual-selector-id="pages/AdminDownload367" class="form-group">
-                        <label data-filename="pages/AdminDownload" data-linenumber="368" data-visual-selector-id="pages/AdminDownload368" class="form-label">Phone Number *</label>
-                        <input data-filename="pages/AdminDownload" data-linenumber="369" data-visual-selector-id="pages/AdminDownload369" type="tel" class="form-input" id="phone" required>
+                    <div data-filename="pages/AdminDownload" data-linenumber="374" data-visual-selector-id="pages/AdminDownload374" class="form-group">
+                        <label data-filename="pages/AdminDownload" data-linenumber="375" data-visual-selector-id="pages/AdminDownload375" class="form-label">Phone Number *</label>
+                        <input data-filename="pages/AdminDownload" data-linenumber="376" data-visual-selector-id="pages/AdminDownload376" type="tel" class="form-input" id="phone" required>
                     </div>
-                    <div data-filename="pages/AdminDownload" data-linenumber="371" data-visual-selector-id="pages/AdminDownload371" class="form-group">
-                        <label data-filename="pages/AdminDownload" data-linenumber="372" data-visual-selector-id="pages/AdminDownload372" class="form-label">Email Address</label>
-                        <input data-filename="pages/AdminDownload" data-linenumber="373" data-visual-selector-id="pages/AdminDownload373" type="email" class="form-input" id="email">
+                    <div data-filename="pages/AdminDownload" data-linenumber="378" data-visual-selector-id="pages/AdminDownload378" class="form-group">
+                        <label data-filename="pages/AdminDownload" data-linenumber="379" data-visual-selector-id="pages/AdminDownload379" class="form-label">Email Address</label>
+                        <input data-filename="pages/AdminDownload" data-linenumber="380" data-visual-selector-id="pages/AdminDownload380" type="email" class="form-input" id="email">
                     </div>
-                    <div data-filename="pages/AdminDownload" data-linenumber="375" data-visual-selector-id="pages/AdminDownload375" class="form-group">
-                        <label data-filename="pages/AdminDownload" data-linenumber="376" data-visual-selector-id="pages/AdminDownload376" class="form-label">Street Address *</label>
-                        <input data-filename="pages/AdminDownload" data-linenumber="377" data-visual-selector-id="pages/AdminDownload377" type="text" class="form-input" id="address" required>
+                    <div data-filename="pages/AdminDownload" data-linenumber="382" data-visual-selector-id="pages/AdminDownload382" class="form-group">
+                        <label data-filename="pages/AdminDownload" data-linenumber="383" data-visual-selector-id="pages/AdminDownload383" class="form-label">Street Address *</label>
+                        <input data-filename="pages/AdminDownload" data-linenumber="384" data-visual-selector-id="pages/AdminDownload384" type="text" class="form-input" id="address" required>
                     </div>
-                    <div data-filename="pages/AdminDownload" data-linenumber="379" data-visual-selector-id="pages/AdminDownload379" class="form-row">
-                        <div data-filename="pages/AdminDownload" data-linenumber="380" data-visual-selector-id="pages/AdminDownload380" class="form-group">
-                            <label data-filename="pages/AdminDownload" data-linenumber="381" data-visual-selector-id="pages/AdminDownload381" class="form-label">City *</label>
-                            <input data-filename="pages/AdminDownload" data-linenumber="382" data-visual-selector-id="pages/AdminDownload382" type="text" class="form-input" id="city" required>
+                    <div data-filename="pages/AdminDownload" data-linenumber="386" data-visual-selector-id="pages/AdminDownload386" class="form-row">
+                        <div data-filename="pages/AdminDownload" data-linenumber="387" data-visual-selector-id="pages/AdminDownload387" class="form-group">
+                            <label data-filename="pages/AdminDownload" data-linenumber="388" data-visual-selector-id="pages/AdminDownload388" class="form-label">City *</label>
+                            <input data-filename="pages/AdminDownload" data-linenumber="389" data-visual-selector-id="pages/AdminDownload389" type="text" class="form-input" id="city" required>
                         </div>
-                        <div data-filename="pages/AdminDownload" data-linenumber="384" data-visual-selector-id="pages/AdminDownload384" class="form-group">
-                            <label data-filename="pages/AdminDownload" data-linenumber="385" data-visual-selector-id="pages/AdminDownload385" class="form-label">Postal Code</label>
-                            <input data-filename="pages/AdminDownload" data-linenumber="386" data-visual-selector-id="pages/AdminDownload386" type="text" class="form-input" id="postalCode">
+                        <div data-filename="pages/AdminDownload" data-linenumber="391" data-visual-selector-id="pages/AdminDownload391" class="form-group">
+                            <label data-filename="pages/AdminDownload" data-linenumber="392" data-visual-selector-id="pages/AdminDownload392" class="form-label">Postal Code</label>
+                            <input data-filename="pages/AdminDownload" data-linenumber="393" data-visual-selector-id="pages/AdminDownload393" type="text" class="form-input" id="postalCode">
                         </div>
                     </div>
                 </form>
             </div>
-            <div data-filename="pages/AdminDownload" data-linenumber="391" data-visual-selector-id="pages/AdminDownload391" class="checkout-card">
-                <h2 data-filename="pages/AdminDownload" data-linenumber="392" data-visual-selector-id="pages/AdminDownload392">Order Summary</h2>
-                <div data-filename="pages/AdminDownload" data-linenumber="393" data-visual-selector-id="pages/AdminDownload393" class="order-summary-items" id="orderSummaryItems"></div>
-                <div data-filename="pages/AdminDownload" data-linenumber="394" data-visual-selector-id="pages/AdminDownload394" id="orderSummaryTotal"></div>
+            <div data-filename="pages/AdminDownload" data-linenumber="398" data-visual-selector-id="pages/AdminDownload398" class="checkout-card">
+                <h2 data-filename="pages/AdminDownload" data-linenumber="399" data-visual-selector-id="pages/AdminDownload399">Order Summary</h2>
+                <div data-filename="pages/AdminDownload" data-linenumber="400" data-visual-selector-id="pages/AdminDownload400" class="order-summary-items" id="orderSummaryItems"></div>
+                <div data-filename="pages/AdminDownload" data-linenumber="401" data-visual-selector-id="pages/AdminDownload401" id="orderSummaryTotal"></div>
                 
-                <div data-filename="pages/AdminDownload" data-linenumber="396" data-visual-selector-id="pages/AdminDownload396" class="payment-info">
-                    <h3 data-filename="pages/AdminDownload" data-linenumber="397" data-visual-selector-id="pages/AdminDownload397">💳 Payment Details (ZAR Only)</h3>
-                    <div data-filename="pages/AdminDownload" data-linenumber="398" data-visual-selector-id="pages/AdminDownload398" class="bank-grid">
-                        <div data-filename="pages/AdminDownload" data-linenumber="399" data-visual-selector-id="pages/AdminDownload399" class="bank-card">
-                            <div data-filename="pages/AdminDownload" data-linenumber="400" data-visual-selector-id="pages/AdminDownload400" class="bank-logo bank-capitec">C</div>
-                            <div data-filename="pages/AdminDownload" data-linenumber="401" data-visual-selector-id="pages/AdminDownload401" class="bank-name">Capitec Bank</div>
-                            <div data-filename="pages/AdminDownload" data-linenumber="402" data-visual-selector-id="pages/AdminDownload402" style="font-size:12px;color:#666;margin:5px 0;">Savings Account</div>
-                            <div data-filename="pages/AdminDownload" data-linenumber="403" data-visual-selector-id="pages/AdminDownload403" class="bank-account">2037437125</div>
+                <div data-filename="pages/AdminDownload" data-linenumber="403" data-visual-selector-id="pages/AdminDownload403" class="payment-info">
+                    <h3 data-filename="pages/AdminDownload" data-linenumber="404" data-visual-selector-id="pages/AdminDownload404">💳 Payment Details (ZAR Only)</h3>
+                    <div data-filename="pages/AdminDownload" data-linenumber="405" data-visual-selector-id="pages/AdminDownload405" class="bank-grid">
+                        <div data-filename="pages/AdminDownload" data-linenumber="406" data-visual-selector-id="pages/AdminDownload406" class="bank-card">
+                            <div data-filename="pages/AdminDownload" data-linenumber="407" data-visual-selector-id="pages/AdminDownload407" class="bank-logo bank-capitec">C</div>
+                            <div data-filename="pages/AdminDownload" data-linenumber="408" data-visual-selector-id="pages/AdminDownload408" class="bank-name">Capitec Bank</div>
+                            <div data-filename="pages/AdminDownload" data-linenumber="409" data-visual-selector-id="pages/AdminDownload409" style="font-size:12px;color:#666;margin:5px 0;">Savings Account</div>
+                            <div data-filename="pages/AdminDownload" data-linenumber="410" data-visual-selector-id="pages/AdminDownload410" class="bank-account">2037437125</div>
                         </div>
-                        <div data-filename="pages/AdminDownload" data-linenumber="405" data-visual-selector-id="pages/AdminDownload405" class="bank-card">
-                            <div data-filename="pages/AdminDownload" data-linenumber="406" data-visual-selector-id="pages/AdminDownload406" class="bank-logo bank-fnb">F</div>
-                            <div data-filename="pages/AdminDownload" data-linenumber="407" data-visual-selector-id="pages/AdminDownload407" class="bank-name">FNB Bank</div>
-                            <div data-filename="pages/AdminDownload" data-linenumber="408" data-visual-selector-id="pages/AdminDownload408" style="font-size:12px;color:#666;margin:5px 0;">Savings Account</div>
-                            <div data-filename="pages/AdminDownload" data-linenumber="409" data-visual-selector-id="pages/AdminDownload409" class="bank-account">63116681461</div>
+                        <div data-filename="pages/AdminDownload" data-linenumber="412" data-visual-selector-id="pages/AdminDownload412" class="bank-card">
+                            <div data-filename="pages/AdminDownload" data-linenumber="413" data-visual-selector-id="pages/AdminDownload413" class="bank-logo bank-fnb">F</div>
+                            <div data-filename="pages/AdminDownload" data-linenumber="414" data-visual-selector-id="pages/AdminDownload414" class="bank-name">FNB Bank</div>
+                            <div data-filename="pages/AdminDownload" data-linenumber="415" data-visual-selector-id="pages/AdminDownload415" style="font-size:12px;color:#666;margin:5px 0;">Savings Account</div>
+                            <div data-filename="pages/AdminDownload" data-linenumber="416" data-visual-selector-id="pages/AdminDownload416" class="bank-account">63116681461</div>
                         </div>
                     </div>
-                    <p data-filename="pages/AdminDownload" data-linenumber="412" data-visual-selector-id="pages/AdminDownload412" style="margin-top:15px;font-size:13px;color:#92400e;">
-                        📝 After depositing, please email proof of payment to: <strong data-filename="pages/AdminDownload" data-linenumber="413" data-visual-selector-id="pages/AdminDownload413">darkmasterstore@gmail.com</strong>
+                    <p data-filename="pages/AdminDownload" data-linenumber="419" data-visual-selector-id="pages/AdminDownload419" style="margin-top:15px;font-size:13px;color:#92400e;">
+                        📝 After depositing, please email proof of payment to: <strong data-filename="pages/AdminDownload" data-linenumber="420" data-visual-selector-id="pages/AdminDownload420">darkmasterstore@gmail.com</strong>
                     </p>
                 </div>
                 
-                <button data-filename="pages/AdminDownload" data-linenumber="417" data-visual-selector-id="pages/AdminDownload417" class="btn-place-order" onclick="placeOrder()">
-                    <svg data-filename="pages/AdminDownload" data-linenumber="418" data-visual-selector-id="pages/AdminDownload418" class="icon-svg" style="margin-right: 8px;" viewBox="0 0 24 24"><path data-filename='pages/AdminDownload' data-linenumber='418' data-visual-selector-id='pages/AdminDownload418' d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z"/></svg>
+                <button data-filename="pages/AdminDownload" data-linenumber="424" data-visual-selector-id="pages/AdminDownload424" class="btn-place-order" onclick="placeOrder()">
+                    <svg data-filename="pages/AdminDownload" data-linenumber="425" data-visual-selector-id="pages/AdminDownload425" class="icon-svg" style="margin-right: 8px;" viewBox="0 0 24 24"><path data-filename='pages/AdminDownload' data-linenumber='425' data-visual-selector-id='pages/AdminDownload425' d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z"/></svg>
                     Complete Order
                 </button>
             </div>
@@ -422,249 +430,400 @@
     </div>
 
     <!-- Sell Page -->
-    <div data-filename="pages/AdminDownload" data-linenumber="426" data-visual-selector-id="pages/AdminDownload426" id="sellPage" class="hidden sell-page">
-        <div data-filename="pages/AdminDownload" data-linenumber="427" data-visual-selector-id="pages/AdminDownload427" class="sell-hero">
-            <h1 data-filename="pages/AdminDownload" data-linenumber="428" data-visual-selector-id="pages/AdminDownload428">Sell with Dark Master Store</h1>
-            <p data-filename="pages/AdminDownload" data-linenumber="429" data-visual-selector-id="pages/AdminDownload429" style="font-size: 18px; margin-top: 12px;">Join our marketplace and reach thousands of customers</p>
+    <div data-filename="pages/AdminDownload" data-linenumber="433" data-visual-selector-id="pages/AdminDownload433" id="sellPage" class="hidden sell-page">
+        <div data-filename="pages/AdminDownload" data-linenumber="434" data-visual-selector-id="pages/AdminDownload434" class="sell-hero">
+            <h1 data-filename="pages/AdminDownload" data-linenumber="435" data-visual-selector-id="pages/AdminDownload435">Sell with Dark Master Store</h1>
+            <p data-filename="pages/AdminDownload" data-linenumber="436" data-visual-selector-id="pages/AdminDownload436" style="font-size: 18px; margin-top: 12px;">Join our marketplace and reach thousands of customers</p>
         </div>
-        <div data-filename="pages/AdminDownload" data-linenumber="431" data-visual-selector-id="pages/AdminDownload431" class="fee-banner">
-            <h3 data-filename="pages/AdminDownload" data-linenumber="432" data-visual-selector-id="pages/AdminDownload432" style="color: #991b1b; font-size: 18px; font-weight: 700;">⚠️ ONE-TIME VENDOR FEE</h3>
-            <div data-filename="pages/AdminDownload" data-linenumber="433" data-visual-selector-id="pages/AdminDownload433" class="fee-amount">R1,500</div>
-            <p data-filename="pages/AdminDownload" data-linenumber="434" data-visual-selector-id="pages/AdminDownload434" style="color: #7f1d1d; font-size: 14px;">Pay once to start selling on our platform</p>
+        <div data-filename="pages/AdminDownload" data-linenumber="438" data-visual-selector-id="pages/AdminDownload438" class="fee-banner">
+            <h3 data-filename="pages/AdminDownload" data-linenumber="439" data-visual-selector-id="pages/AdminDownload439" style="color: #991b1b; font-size: 18px; font-weight: 700;">⚠️ ONE-TIME VENDOR FEE</h3>
+            <div data-filename="pages/AdminDownload" data-linenumber="440" data-visual-selector-id="pages/AdminDownload440" class="fee-amount">R1,500</div>
+            <p data-filename="pages/AdminDownload" data-linenumber="441" data-visual-selector-id="pages/AdminDownload441" style="color: #7f1d1d; font-size: 14px;">Pay once to start selling on our platform</p>
         </div>
-        <div data-filename="pages/AdminDownload" data-linenumber="436" data-visual-selector-id="pages/AdminDownload436" class="benefits-grid">
-            <div data-filename="pages/AdminDownload" data-linenumber="437" data-visual-selector-id="pages/AdminDownload437" class="benefit-card">
-                <div data-filename="pages/AdminDownload" data-linenumber="438" data-visual-selector-id="pages/AdminDownload438" class="benefit-icon" style="background: #dbeafe; color: #1e40af;">
-                    <svg data-filename="pages/AdminDownload" data-linenumber="439" data-visual-selector-id="pages/AdminDownload439" class="icon-svg-lg" viewBox="0 0 24 24"><path data-filename='pages/AdminDownload' data-linenumber='439' data-visual-selector-id='pages/AdminDownload439' d="M16 11c1.66 0 2.99-1.34 2.99-3S17.66 5 16 5c-1.66 0-3 1.34-3 3s1.34 3 3 3zm-8 0c1.66 0 2.99-1.34 2.99-3S9.66 5 8 5C6.34 5 5 6.34 5 8s1.34 3 3 3zm0 2c-2.33 0-7 1.17-7 3.5V19h14v-2.5c0-2.33-4.67-3.5-7-3.5zm8 0c-.29 0-.62.02-.97.05 1.16.84 1.97 1.97 1.97 3.45V19h6v-2.5c0-2.33-4.67-3.5-7-3.5z"/></svg>
-                </div>
-                <h3 data-filename="pages/AdminDownload" data-linenumber="441" data-visual-selector-id="pages/AdminDownload441" style="font-weight: 700; margin-bottom: 8px; font-size: 16px;">Large Customer Base</h3>
-                <p data-filename="pages/AdminDownload" data-linenumber="442" data-visual-selector-id="pages/AdminDownload442" style="color: #666; line-height: 1.6; font-size: 14px;">Access thousands of active shoppers</p>
-            </div>
+        <div data-filename="pages/AdminDownload" data-linenumber="443" data-visual-selector-id="pages/AdminDownload443" class="benefits-grid">
             <div data-filename="pages/AdminDownload" data-linenumber="444" data-visual-selector-id="pages/AdminDownload444" class="benefit-card">
-                <div data-filename="pages/AdminDownload" data-linenumber="445" data-visual-selector-id="pages/AdminDownload445" class="benefit-icon" style="background: #d1fae5; color: #065f46;">
-                    <svg data-filename="pages/AdminDownload" data-linenumber="446" data-visual-selector-id="pages/AdminDownload446" class="icon-svg-lg" viewBox="0 0 24 24"><path data-filename='pages/AdminDownload' data-linenumber='446' data-visual-selector-id='pages/AdminDownload446' d="M11.8 10.9c-2.27-.59-3-1.2-3-2.15 0-1.09 1.01-1.85 2.7-1.85 1.78 0 2.44.85 2.5 2.1h2.21c-.07-1.72-1.12-3.3-3.21-3.81V3h-3v2.16c-1.94.42-3.5 1.68-3.5 3.61 0 2.31 1.91 3.46 4.7 4.13 2.5.6 3 1.48 3 2.41 0 .69-.49 1.79-2.7 1.79-2.06 0-2.87-.92-2.98-2.1h-2.2c.12 2.19 1.76 3.42 3.68 3.83V21h3v-2.15c1.95-.37 3.5-1.5 3.5-3.55 0-2.84-2.43-3.81-4.7-4.4z"/></svg>
+                <div data-filename="pages/AdminDownload" data-linenumber="445" data-visual-selector-id="pages/AdminDownload445" class="benefit-icon" style="background: #dbeafe; color: #1e40af;">
+                    <svg data-filename="pages/AdminDownload" data-linenumber="446" data-visual-selector-id="pages/AdminDownload446" class="icon-svg-lg" viewBox="0 0 24 24"><path data-filename='pages/AdminDownload' data-linenumber='446' data-visual-selector-id='pages/AdminDownload446' d="M16 11c1.66 0 2.99-1.34 2.99-3S17.66 5 16 5c-1.66 0-3 1.34-3 3s1.34 3 3 3zm-8 0c1.66 0 2.99-1.34 2.99-3S9.66 5 8 5C6.34 5 5 6.34 5 8s1.34 3 3 3zm0 2c-2.33 0-7 1.17-7 3.5V19h14v-2.5c0-2.33-4.67-3.5-7-3.5zm8 0c-.29 0-.62.02-.97.05 1.16.84 1.97 1.97 1.97 3.45V19h6v-2.5c0-2.33-4.67-3.5-7-3.5z"/></svg>
                 </div>
-                <h3 data-filename="pages/AdminDownload" data-linenumber="448" data-visual-selector-id="pages/AdminDownload448" style="font-weight: 700; margin-bottom: 8px; font-size: 16px;">Low Commission</h3>
-                <p data-filename="pages/AdminDownload" data-linenumber="449" data-visual-selector-id="pages/AdminDownload449" style="color: #666; line-height: 1.6; font-size: 14px;">Only 10% commission on sales</p>
+                <h3 data-filename="pages/AdminDownload" data-linenumber="448" data-visual-selector-id="pages/AdminDownload448" style="font-weight: 700; margin-bottom: 8px; font-size: 16px;">Large Customer Base</h3>
+                <p data-filename="pages/AdminDownload" data-linenumber="449" data-visual-selector-id="pages/AdminDownload449" style="color: #666; line-height: 1.6; font-size: 14px;">Access thousands of active shoppers</p>
             </div>
             <div data-filename="pages/AdminDownload" data-linenumber="451" data-visual-selector-id="pages/AdminDownload451" class="benefit-card">
-                <div data-filename="pages/AdminDownload" data-linenumber="452" data-visual-selector-id="pages/AdminDownload452" class="benefit-icon" style="background: #e0e7ff; color: #3730a3;">
-                    <svg data-filename="pages/AdminDownload" data-linenumber="453" data-visual-selector-id="pages/AdminDownload453" class="icon-svg-lg" viewBox="0 0 24 24"><path data-filename='pages/AdminDownload' data-linenumber='453' data-visual-selector-id='pages/AdminDownload453' d="M20 8h-3V4H3c-1.1 0-2 .9-2 2v11h2c0 1.66 1.34 3 3 3s3-1.34 3-3h6c0 1.66 1.34 3 3 3s3-1.34 3-3h2v-5l-3-4z"/></svg>
+                <div data-filename="pages/AdminDownload" data-linenumber="452" data-visual-selector-id="pages/AdminDownload452" class="benefit-icon" style="background: #d1fae5; color: #065f46;">
+                    <svg data-filename="pages/AdminDownload" data-linenumber="453" data-visual-selector-id="pages/AdminDownload453" class="icon-svg-lg" viewBox="0 0 24 24"><path data-filename='pages/AdminDownload' data-linenumber='453' data-visual-selector-id='pages/AdminDownload453' d="M11.8 10.9c-2.27-.59-3-1.2-3-2.15 0-1.09 1.01-1.85 2.7-1.85 1.78 0 2.44.85 2.5 2.1h2.21c-.07-1.72-1.12-3.3-3.21-3.81V3h-3v2.16c-1.94.42-3.5 1.68-3.5 3.61 0 2.31 1.91 3.46 4.7 4.13 2.5.6 3 1.48 3 2.41 0 .69-.49 1.79-2.7 1.79-2.06 0-2.87-.92-2.98-2.1h-2.2c.12 2.19 1.76 3.42 3.68 3.83V21h3v-2.15c1.95-.37 3.5-1.5 3.5-3.55 0-2.84-2.43-3.81-4.7-4.4z"/></svg>
                 </div>
-                <h3 data-filename="pages/AdminDownload" data-linenumber="455" data-visual-selector-id="pages/AdminDownload455" style="font-weight: 700; margin-bottom: 8px; font-size: 16px;">Easy Fulfillment</h3>
-                <p data-filename="pages/AdminDownload" data-linenumber="456" data-visual-selector-id="pages/AdminDownload456" style="color: #666; line-height: 1.6; font-size: 14px;">Manage your own shipping</p>
+                <h3 data-filename="pages/AdminDownload" data-linenumber="455" data-visual-selector-id="pages/AdminDownload455" style="font-weight: 700; margin-bottom: 8px; font-size: 16px;">Low Commission</h3>
+                <p data-filename="pages/AdminDownload" data-linenumber="456" data-visual-selector-id="pages/AdminDownload456" style="color: #666; line-height: 1.6; font-size: 14px;">Only 10% commission on sales</p>
             </div>
             <div data-filename="pages/AdminDownload" data-linenumber="458" data-visual-selector-id="pages/AdminDownload458" class="benefit-card">
-                <div data-filename="pages/AdminDownload" data-linenumber="459" data-visual-selector-id="pages/AdminDownload459" class="benefit-icon" style="background: #fce7f3; color: #831843;">
-                    <svg data-filename="pages/AdminDownload" data-linenumber="460" data-visual-selector-id="pages/AdminDownload460" class="icon-svg-lg" viewBox="0 0 24 24"><path data-filename='pages/AdminDownload' data-linenumber='460' data-visual-selector-id='pages/AdminDownload460' d="M20 4H4c-1.11 0-1.99.89-1.99 2L2 18c0 1.11.89 2 2 2h16c1.11 0 2-.89 2-2V6c0-1.11-.89-2-2-2zm0 14H4v-6h16v6zm0-10H4V6h16v2z"/></svg>
+                <div data-filename="pages/AdminDownload" data-linenumber="459" data-visual-selector-id="pages/AdminDownload459" class="benefit-icon" style="background: #e0e7ff; color: #3730a3;">
+                    <svg data-filename="pages/AdminDownload" data-linenumber="460" data-visual-selector-id="pages/AdminDownload460" class="icon-svg-lg" viewBox="0 0 24 24"><path data-filename='pages/AdminDownload' data-linenumber='460' data-visual-selector-id='pages/AdminDownload460' d="M20 8h-3V4H3c-1.1 0-2 .9-2 2v11h2c0 1.66 1.34 3 3 3s3-1.34 3-3h6c0 1.66 1.34 3 3 3s3-1.34 3-3h2v-5l-3-4z"/></svg>
                 </div>
-                <h3 data-filename="pages/AdminDownload" data-linenumber="462" data-visual-selector-id="pages/AdminDownload462" style="font-weight: 700; margin-bottom: 8px; font-size: 16px;">Easy Setup</h3>
-                <p data-filename="pages/AdminDownload" data-linenumber="463" data-visual-selector-id="pages/AdminDownload463" style="color: #666; line-height: 1.6; font-size: 14px;">Quick application process</p>
+                <h3 data-filename="pages/AdminDownload" data-linenumber="462" data-visual-selector-id="pages/AdminDownload462" style="font-weight: 700; margin-bottom: 8px; font-size: 16px;">Easy Fulfillment</h3>
+                <p data-filename="pages/AdminDownload" data-linenumber="463" data-visual-selector-id="pages/AdminDownload463" style="color: #666; line-height: 1.6; font-size: 14px;">Manage your own shipping</p>
+            </div>
+            <div data-filename="pages/AdminDownload" data-linenumber="465" data-visual-selector-id="pages/AdminDownload465" class="benefit-card">
+                <div data-filename="pages/AdminDownload" data-linenumber="466" data-visual-selector-id="pages/AdminDownload466" class="benefit-icon" style="background: #fce7f3; color: #831843;">
+                    <svg data-filename="pages/AdminDownload" data-linenumber="467" data-visual-selector-id="pages/AdminDownload467" class="icon-svg-lg" viewBox="0 0 24 24"><path data-filename='pages/AdminDownload' data-linenumber='467' data-visual-selector-id='pages/AdminDownload467' d="M20 4H4c-1.11 0-1.99.89-1.99 2L2 18c0 1.11.89 2 2 2h16c1.11 0 2-.89 2-2V6c0-1.11-.89-2-2-2zm0 14H4v-6h16v6zm0-10H4V6h16v2z"/></svg>
+                </div>
+                <h3 data-filename="pages/AdminDownload" data-linenumber="469" data-visual-selector-id="pages/AdminDownload469" style="font-weight: 700; margin-bottom: 8px; font-size: 16px;">Easy Setup</h3>
+                <p data-filename="pages/AdminDownload" data-linenumber="470" data-visual-selector-id="pages/AdminDownload470" style="color: #666; line-height: 1.6; font-size: 14px;">Quick application process</p>
             </div>
         </div>
-        <div data-filename="pages/AdminDownload" data-linenumber="466" data-visual-selector-id="pages/AdminDownload466" class="admin-card">
-            <h2 data-filename="pages/AdminDownload" data-linenumber="467" data-visual-selector-id="pages/AdminDownload467">Vendor Application</h2>
-            <form data-filename="pages/AdminDownload" data-linenumber="468" data-visual-selector-id="pages/AdminDownload468" onsubmit="submitVendorForm(event)">
-                <div data-filename="pages/AdminDownload" data-linenumber="469" data-visual-selector-id="pages/AdminDownload469" class="form-row">
-                    <div data-filename="pages/AdminDownload" data-linenumber="470" data-visual-selector-id="pages/AdminDownload470" class="form-group">
-                        <label data-filename="pages/AdminDownload" data-linenumber="471" data-visual-selector-id="pages/AdminDownload471" class="form-label">Business Name *</label>
-                        <input data-filename="pages/AdminDownload" data-linenumber="472" data-visual-selector-id="pages/AdminDownload472" type="text" class="form-input" id="bizName" required>
+        <div data-filename="pages/AdminDownload" data-linenumber="473" data-visual-selector-id="pages/AdminDownload473" class="admin-card">
+            <h2 data-filename="pages/AdminDownload" data-linenumber="474" data-visual-selector-id="pages/AdminDownload474">Vendor Application</h2>
+            <form data-filename="pages/AdminDownload" data-linenumber="475" data-visual-selector-id="pages/AdminDownload475" onsubmit="submitVendorForm(event)">
+                <div data-filename="pages/AdminDownload" data-linenumber="476" data-visual-selector-id="pages/AdminDownload476" class="form-row">
+                    <div data-filename="pages/AdminDownload" data-linenumber="477" data-visual-selector-id="pages/AdminDownload477" class="form-group">
+                        <label data-filename="pages/AdminDownload" data-linenumber="478" data-visual-selector-id="pages/AdminDownload478" class="form-label">Business Name *</label>
+                        <input data-filename="pages/AdminDownload" data-linenumber="479" data-visual-selector-id="pages/AdminDownload479" type="text" class="form-input" id="bizName" required>
                     </div>
-                    <div data-filename="pages/AdminDownload" data-linenumber="474" data-visual-selector-id="pages/AdminDownload474" class="form-group">
-                        <label data-filename="pages/AdminDownload" data-linenumber="475" data-visual-selector-id="pages/AdminDownload475" class="form-label">Contact Person *</label>
-                        <input data-filename="pages/AdminDownload" data-linenumber="476" data-visual-selector-id="pages/AdminDownload476" type="text" class="form-input" id="contactName" required>
-                    </div>
-                </div>
-                <div data-filename="pages/AdminDownload" data-linenumber="479" data-visual-selector-id="pages/AdminDownload479" class="form-row">
-                    <div data-filename="pages/AdminDownload" data-linenumber="480" data-visual-selector-id="pages/AdminDownload480" class="form-group">
-                        <label data-filename="pages/AdminDownload" data-linenumber="481" data-visual-selector-id="pages/AdminDownload481" class="form-label">Phone Number *</label>
-                        <input data-filename="pages/AdminDownload" data-linenumber="482" data-visual-selector-id="pages/AdminDownload482" type="tel" class="form-input" id="vendorPhone" required>
-                    </div>
-                    <div data-filename="pages/AdminDownload" data-linenumber="484" data-visual-selector-id="pages/AdminDownload484" class="form-group">
-                        <label data-filename="pages/AdminDownload" data-linenumber="485" data-visual-selector-id="pages/AdminDownload485" class="form-label">Email Address</label>
-                        <input data-filename="pages/AdminDownload" data-linenumber="486" data-visual-selector-id="pages/AdminDownload486" type="email" class="form-input" id="vendorEmail">
+                    <div data-filename="pages/AdminDownload" data-linenumber="481" data-visual-selector-id="pages/AdminDownload481" class="form-group">
+                        <label data-filename="pages/AdminDownload" data-linenumber="482" data-visual-selector-id="pages/AdminDownload482" class="form-label">Contact Person *</label>
+                        <input data-filename="pages/AdminDownload" data-linenumber="483" data-visual-selector-id="pages/AdminDownload483" type="text" class="form-input" id="contactName" required>
                     </div>
                 </div>
-                <div data-filename="pages/AdminDownload" data-linenumber="489" data-visual-selector-id="pages/AdminDownload489" class="form-group">
-                    <label data-filename="pages/AdminDownload" data-linenumber="490" data-visual-selector-id="pages/AdminDownload490" class="form-label">Business Description *</label>
-                    <textarea data-filename="pages/AdminDownload" data-linenumber="491" data-visual-selector-id="pages/AdminDownload491" class="form-input" id="vendorDesc" rows="4" required style="resize: vertical;"></textarea>
+                <div data-filename="pages/AdminDownload" data-linenumber="486" data-visual-selector-id="pages/AdminDownload486" class="form-row">
+                    <div data-filename="pages/AdminDownload" data-linenumber="487" data-visual-selector-id="pages/AdminDownload487" class="form-group">
+                        <label data-filename="pages/AdminDownload" data-linenumber="488" data-visual-selector-id="pages/AdminDownload488" class="form-label">Phone Number *</label>
+                        <input data-filename="pages/AdminDownload" data-linenumber="489" data-visual-selector-id="pages/AdminDownload489" type="tel" class="form-input" id="vendorPhone" required>
+                    </div>
+                    <div data-filename="pages/AdminDownload" data-linenumber="491" data-visual-selector-id="pages/AdminDownload491" class="form-group">
+                        <label data-filename="pages/AdminDownload" data-linenumber="492" data-visual-selector-id="pages/AdminDownload492" class="form-label">Email Address</label>
+                        <input data-filename="pages/AdminDownload" data-linenumber="493" data-visual-selector-id="pages/AdminDownload493" type="email" class="form-input" id="vendorEmail">
+                    </div>
                 </div>
-                <button data-filename="pages/AdminDownload" data-linenumber="493" data-visual-selector-id="pages/AdminDownload493" type="submit" class="btn-primary">Submit Application</button>
-                <button data-filename="pages/AdminDownload" data-linenumber="494" data-visual-selector-id="pages/AdminDownload494" type="button" class="btn-secondary" onclick="showPage('home')">Back to Store</button>
+                <div data-filename="pages/AdminDownload" data-linenumber="496" data-visual-selector-id="pages/AdminDownload496" class="form-group">
+                    <label data-filename="pages/AdminDownload" data-linenumber="497" data-visual-selector-id="pages/AdminDownload497" class="form-label">Business Description *</label>
+                    <textarea data-filename="pages/AdminDownload" data-linenumber="498" data-visual-selector-id="pages/AdminDownload498" class="form-input" id="vendorDesc" rows="4" required style="resize: vertical;"></textarea>
+                </div>
+                <button data-filename="pages/AdminDownload" data-linenumber="500" data-visual-selector-id="pages/AdminDownload500" type="submit" class="btn-primary">Submit Application</button>
+                <button data-filename="pages/AdminDownload" data-linenumber="501" data-visual-selector-id="pages/AdminDownload501" type="button" class="btn-secondary" onclick="showPage('home')">Back to Store</button>
             </form>
         </div>
     </div>
 
     <!-- Admin Page -->
-    <div data-filename="pages/AdminDownload" data-linenumber="500" data-visual-selector-id="pages/AdminDownload500" id="adminPage" class="hidden admin-page">
-        <div data-filename="pages/AdminDownload" data-linenumber="501" data-visual-selector-id="pages/AdminDownload501" class="admin-header">
-            <h1 data-filename="pages/AdminDownload" data-linenumber="502" data-visual-selector-id="pages/AdminDownload502" style="font-size: 32px; font-weight: 900;">Admin Panel</h1>
-            <button data-filename="pages/AdminDownload" data-linenumber="503" data-visual-selector-id="pages/AdminDownload503" class="btn-secondary" onclick="showPage('home')">Back to Store</button>
+    <div data-filename="pages/AdminDownload" data-linenumber="507" data-visual-selector-id="pages/AdminDownload507" id="adminPage" class="hidden admin-page">
+        <div data-filename="pages/AdminDownload" data-linenumber="508" data-visual-selector-id="pages/AdminDownload508" class="admin-header">
+            <h1 data-filename="pages/AdminDownload" data-linenumber="509" data-visual-selector-id="pages/AdminDownload509" style="font-size: 32px; font-weight: 900;">Admin Panel</h1>
+            <button data-filename="pages/AdminDownload" data-linenumber="510" data-visual-selector-id="pages/AdminDownload510" class="btn-secondary" onclick="showPage('home')">Back to Store</button>
         </div>
 
-        <div data-filename="pages/AdminDownload" data-linenumber="506" data-visual-selector-id="pages/AdminDownload506" class="admin-card">
-            <h2 data-filename="pages/AdminDownload" data-linenumber="507" data-visual-selector-id="pages/AdminDownload507">Add Category</h2>
-            <form data-filename="pages/AdminDownload" data-linenumber="508" data-visual-selector-id="pages/AdminDownload508" onsubmit="saveCategory(event)">
-                <div data-filename="pages/AdminDownload" data-linenumber="509" data-visual-selector-id="pages/AdminDownload509" class="form-row">
-                    <div data-filename="pages/AdminDownload" data-linenumber="510" data-visual-selector-id="pages/AdminDownload510" class="form-group">
-                        <label data-filename="pages/AdminDownload" data-linenumber="511" data-visual-selector-id="pages/AdminDownload511" class="form-label">Category Name *</label>
-                        <input data-filename="pages/AdminDownload" data-linenumber="512" data-visual-selector-id="pages/AdminDownload512" type="text" class="form-input" id="catName" required>
+        <div data-filename="pages/AdminDownload" data-linenumber="513" data-visual-selector-id="pages/AdminDownload513" class="admin-card">
+            <h2 data-filename="pages/AdminDownload" data-linenumber="514" data-visual-selector-id="pages/AdminDownload514">Add Category</h2>
+            <form data-filename="pages/AdminDownload" data-linenumber="515" data-visual-selector-id="pages/AdminDownload515" onsubmit="saveCategory(event)">
+                <div data-filename="pages/AdminDownload" data-linenumber="516" data-visual-selector-id="pages/AdminDownload516" class="form-row">
+                    <div data-filename="pages/AdminDownload" data-linenumber="517" data-visual-selector-id="pages/AdminDownload517" class="form-group">
+                        <label data-filename="pages/AdminDownload" data-linenumber="518" data-visual-selector-id="pages/AdminDownload518" class="form-label">Category Name *</label>
+                        <input data-filename="pages/AdminDownload" data-linenumber="519" data-visual-selector-id="pages/AdminDownload519" type="text" class="form-input" id="catName" required>
                     </div>
-                    <div data-filename="pages/AdminDownload" data-linenumber="514" data-visual-selector-id="pages/AdminDownload514" class="form-group">
-                        <label data-filename="pages/AdminDownload" data-linenumber="515" data-visual-selector-id="pages/AdminDownload515" class="form-label">Description</label>
-                        <input data-filename="pages/AdminDownload" data-linenumber="516" data-visual-selector-id="pages/AdminDownload516" type="text" class="form-input" id="catDesc">
+                    <div data-filename="pages/AdminDownload" data-linenumber="521" data-visual-selector-id="pages/AdminDownload521" class="form-group">
+                        <label data-filename="pages/AdminDownload" data-linenumber="522" data-visual-selector-id="pages/AdminDownload522" class="form-label">Description</label>
+                        <input data-filename="pages/AdminDownload" data-linenumber="523" data-visual-selector-id="pages/AdminDownload523" type="text" class="form-input" id="catDesc">
                     </div>
                 </div>
-                <div data-filename="pages/AdminDownload" data-linenumber="519" data-visual-selector-id="pages/AdminDownload519" class="form-group">
-                    <label data-filename="pages/AdminDownload" data-linenumber="520" data-visual-selector-id="pages/AdminDownload520" class="form-label">Image URL</label>
-                    <input data-filename="pages/AdminDownload" data-linenumber="521" data-visual-selector-id="pages/AdminDownload521" type="text" class="form-input" id="catImage" placeholder="https://example.com/image.jpg">
+                <div data-filename="pages/AdminDownload" data-linenumber="526" data-visual-selector-id="pages/AdminDownload526" class="form-group">
+                    <label data-filename="pages/AdminDownload" data-linenumber="527" data-visual-selector-id="pages/AdminDownload527" class="form-label">Image URL</label>
+                    <input data-filename="pages/AdminDownload" data-linenumber="528" data-visual-selector-id="pages/AdminDownload528" type="text" class="form-input" id="catImage" placeholder="https://example.com/image.jpg">
                 </div>
-                <button data-filename="pages/AdminDownload" data-linenumber="523" data-visual-selector-id="pages/AdminDownload523" type="submit" class="btn-primary">Save Category</button>
+                <button data-filename="pages/AdminDownload" data-linenumber="530" data-visual-selector-id="pages/AdminDownload530" type="submit" class="btn-primary">Save Category</button>
             </form>
-            <div data-filename="pages/AdminDownload" data-linenumber="525" data-visual-selector-id="pages/AdminDownload525" class="table-container">
-                <table data-filename="pages/AdminDownload" data-linenumber="526" data-visual-selector-id="pages/AdminDownload526">
-                    <thead data-filename="pages/AdminDownload" data-linenumber="527" data-visual-selector-id="pages/AdminDownload527">
-                        <tr data-filename="pages/AdminDownload" data-linenumber="528" data-visual-selector-id="pages/AdminDownload528">
-                            <th data-filename="pages/AdminDownload" data-linenumber="529" data-visual-selector-id="pages/AdminDownload529">Name</th>
-                            <th data-filename="pages/AdminDownload" data-linenumber="530" data-visual-selector-id="pages/AdminDownload530">Description</th>
-                            <th data-filename="pages/AdminDownload" data-linenumber="531" data-visual-selector-id="pages/AdminDownload531">Actions</th>
+            <div data-filename="pages/AdminDownload" data-linenumber="532" data-visual-selector-id="pages/AdminDownload532" class="table-container">
+                <table data-filename="pages/AdminDownload" data-linenumber="533" data-visual-selector-id="pages/AdminDownload533">
+                    <thead data-filename="pages/AdminDownload" data-linenumber="534" data-visual-selector-id="pages/AdminDownload534">
+                        <tr data-filename="pages/AdminDownload" data-linenumber="535" data-visual-selector-id="pages/AdminDownload535">
+                            <th data-filename="pages/AdminDownload" data-linenumber="536" data-visual-selector-id="pages/AdminDownload536">Name</th>
+                            <th data-filename="pages/AdminDownload" data-linenumber="537" data-visual-selector-id="pages/AdminDownload537">Description</th>
+                            <th data-filename="pages/AdminDownload" data-linenumber="538" data-visual-selector-id="pages/AdminDownload538">Actions</th>
                         </tr>
                     </thead>
-                    <tbody data-filename="pages/AdminDownload" data-linenumber="534" data-visual-selector-id="pages/AdminDownload534" id="categoryTable"></tbody>
+                    <tbody data-filename="pages/AdminDownload" data-linenumber="541" data-visual-selector-id="pages/AdminDownload541" id="categoryTable"></tbody>
                 </table>
             </div>
         </div>
 
-        <div data-filename="pages/AdminDownload" data-linenumber="539" data-visual-selector-id="pages/AdminDownload539" class="admin-card">
-            <h2 data-filename="pages/AdminDownload" data-linenumber="540" data-visual-selector-id="pages/AdminDownload540">Add Product</h2>
-            <form data-filename="pages/AdminDownload" data-linenumber="541" data-visual-selector-id="pages/AdminDownload541" onsubmit="saveProduct(event)">
-                <div data-filename="pages/AdminDownload" data-linenumber="542" data-visual-selector-id="pages/AdminDownload542" class="form-row">
-                    <div data-filename="pages/AdminDownload" data-linenumber="543" data-visual-selector-id="pages/AdminDownload543" class="form-group">
-                        <label data-filename="pages/AdminDownload" data-linenumber="544" data-visual-selector-id="pages/AdminDownload544" class="form-label">Product Name *</label>
-                        <input data-filename="pages/AdminDownload" data-linenumber="545" data-visual-selector-id="pages/AdminDownload545" type="text" class="form-input" id="prodName" required>
+        <div data-filename="pages/AdminDownload" data-linenumber="546" data-visual-selector-id="pages/AdminDownload546" class="admin-card">
+            <h2 data-filename="pages/AdminDownload" data-linenumber="547" data-visual-selector-id="pages/AdminDownload547">Add Product</h2>
+            <form data-filename="pages/AdminDownload" data-linenumber="548" data-visual-selector-id="pages/AdminDownload548" onsubmit="saveProduct(event)">
+                <div data-filename="pages/AdminDownload" data-linenumber="549" data-visual-selector-id="pages/AdminDownload549" class="form-row">
+                    <div data-filename="pages/AdminDownload" data-linenumber="550" data-visual-selector-id="pages/AdminDownload550" class="form-group">
+                        <label data-filename="pages/AdminDownload" data-linenumber="551" data-visual-selector-id="pages/AdminDownload551" class="form-label">Product Name *</label>
+                        <input data-filename="pages/AdminDownload" data-linenumber="552" data-visual-selector-id="pages/AdminDownload552" type="text" class="form-input" id="prodName" required>
                     </div>
-                    <div data-filename="pages/AdminDownload" data-linenumber="547" data-visual-selector-id="pages/AdminDownload547" class="form-group">
-                        <label data-filename="pages/AdminDownload" data-linenumber="548" data-visual-selector-id="pages/AdminDownload548" class="form-label">Price (R) *</label>
-                        <input data-filename="pages/AdminDownload" data-linenumber="549" data-visual-selector-id="pages/AdminDownload549" type="number" step="0.01" class="form-input" id="prodPrice" required>
+                    <div data-filename="pages/AdminDownload" data-linenumber="554" data-visual-selector-id="pages/AdminDownload554" class="form-group">
+                        <label data-filename="pages/AdminDownload" data-linenumber="555" data-visual-selector-id="pages/AdminDownload555" class="form-label">Price (R) *</label>
+                        <input data-filename="pages/AdminDownload" data-linenumber="556" data-visual-selector-id="pages/AdminDownload556" type="number" step="0.01" class="form-input" id="prodPrice" required>
                     </div>
                 </div>
-                <div data-filename="pages/AdminDownload" data-linenumber="552" data-visual-selector-id="pages/AdminDownload552" class="form-row">
-                    <div data-filename="pages/AdminDownload" data-linenumber="553" data-visual-selector-id="pages/AdminDownload553" class="form-group">
-                        <label data-filename="pages/AdminDownload" data-linenumber="554" data-visual-selector-id="pages/AdminDownload554" class="form-label">Original Price (R)</label>
-                        <input data-filename="pages/AdminDownload" data-linenumber="555" data-visual-selector-id="pages/AdminDownload555" type="number" step="0.01" class="form-input" id="prodOriginalPrice">
+                <div data-filename="pages/AdminDownload" data-linenumber="559" data-visual-selector-id="pages/AdminDownload559" class="form-row">
+                    <div data-filename="pages/AdminDownload" data-linenumber="560" data-visual-selector-id="pages/AdminDownload560" class="form-group">
+                        <label data-filename="pages/AdminDownload" data-linenumber="561" data-visual-selector-id="pages/AdminDownload561" class="form-label">Original Price (R)</label>
+                        <input data-filename="pages/AdminDownload" data-linenumber="562" data-visual-selector-id="pages/AdminDownload562" type="number" step="0.01" class="form-input" id="prodOriginalPrice">
                     </div>
-                    <div data-filename="pages/AdminDownload" data-linenumber="557" data-visual-selector-id="pages/AdminDownload557" class="form-group">
-                        <label data-filename="pages/AdminDownload" data-linenumber="558" data-visual-selector-id="pages/AdminDownload558" class="form-label">Category *</label>
-                        <select data-filename="pages/AdminDownload" data-linenumber="559" data-visual-selector-id="pages/AdminDownload559" class="form-input" id="prodCategory" required>
-                            <option data-filename="pages/AdminDownload" data-linenumber="560" data-visual-selector-id="pages/AdminDownload560" value="">Select Category</option>
+                    <div data-filename="pages/AdminDownload" data-linenumber="564" data-visual-selector-id="pages/AdminDownload564" class="form-group">
+                        <label data-filename="pages/AdminDownload" data-linenumber="565" data-visual-selector-id="pages/AdminDownload565" class="form-label">Category *</label>
+                        <select data-filename="pages/AdminDownload" data-linenumber="566" data-visual-selector-id="pages/AdminDownload566" class="form-input" id="prodCategory" required>
+                            <option data-filename="pages/AdminDownload" data-linenumber="567" data-visual-selector-id="pages/AdminDownload567" value="">Select Category</option>
                         </select>
                     </div>
                 </div>
-                <div data-filename="pages/AdminDownload" data-linenumber="564" data-visual-selector-id="pages/AdminDownload564" class="form-row">
-                    <div data-filename="pages/AdminDownload" data-linenumber="565" data-visual-selector-id="pages/AdminDownload565" class="form-group">
-                        <label data-filename="pages/AdminDownload" data-linenumber="566" data-visual-selector-id="pages/AdminDownload566" class="form-label">Sold By</label>
-                        <input data-filename="pages/AdminDownload" data-linenumber="567" data-visual-selector-id="pages/AdminDownload567" type="text" class="form-input" id="prodSoldBy" placeholder="e.g. Dark Master Official">
+                <div data-filename="pages/AdminDownload" data-linenumber="571" data-visual-selector-id="pages/AdminDownload571" class="form-row">
+                    <div data-filename="pages/AdminDownload" data-linenumber="572" data-visual-selector-id="pages/AdminDownload572" class="form-group">
+                        <label data-filename="pages/AdminDownload" data-linenumber="573" data-visual-selector-id="pages/AdminDownload573" class="form-label">Sold By</label>
+                        <input data-filename="pages/AdminDownload" data-linenumber="574" data-visual-selector-id="pages/AdminDownload574" type="text" class="form-input" id="prodSoldBy" placeholder="e.g. Dark Master Official">
                     </div>
-                    <div data-filename="pages/AdminDownload" data-linenumber="569" data-visual-selector-id="pages/AdminDownload569" class="form-group">
-                        <label data-filename="pages/AdminDownload" data-linenumber="570" data-visual-selector-id="pages/AdminDownload570" class="form-label">Location</label>
-                        <input data-filename="pages/AdminDownload" data-linenumber="571" data-visual-selector-id="pages/AdminDownload571" type="text" class="form-input" id="prodLocation" placeholder="e.g. Johannesburg, SA">
+                    <div data-filename="pages/AdminDownload" data-linenumber="576" data-visual-selector-id="pages/AdminDownload576" class="form-group">
+                        <label data-filename="pages/AdminDownload" data-linenumber="577" data-visual-selector-id="pages/AdminDownload577" class="form-label">Location</label>
+                        <input data-filename="pages/AdminDownload" data-linenumber="578" data-visual-selector-id="pages/AdminDownload578" type="text" class="form-input" id="prodLocation" placeholder="e.g. Johannesburg, SA">
                     </div>
                 </div>
-                <div data-filename="pages/AdminDownload" data-linenumber="574" data-visual-selector-id="pages/AdminDownload574" class="form-group">
-                    <label data-filename="pages/AdminDownload" data-linenumber="575" data-visual-selector-id="pages/AdminDownload575" class="form-label">Sizes (comma separated)</label>
-                    <input data-filename="pages/AdminDownload" data-linenumber="576" data-visual-selector-id="pages/AdminDownload576" type="text" class="form-input" id="prodSizes" placeholder="S, M, L, XL">
+                <div data-filename="pages/AdminDownload" data-linenumber="581" data-visual-selector-id="pages/AdminDownload581" class="form-group">
+                    <label data-filename="pages/AdminDownload" data-linenumber="582" data-visual-selector-id="pages/AdminDownload582" class="form-label">Sizes (comma separated)</label>
+                    <input data-filename="pages/AdminDownload" data-linenumber="583" data-visual-selector-id="pages/AdminDownload583" type="text" class="form-input" id="prodSizes" placeholder="S, M, L, XL">
                 </div>
-                <div data-filename="pages/AdminDownload" data-linenumber="578" data-visual-selector-id="pages/AdminDownload578" class="form-group">
-                    <label data-filename="pages/AdminDownload" data-linenumber="579" data-visual-selector-id="pages/AdminDownload579" class="form-label">Description</label>
-                    <textarea data-filename="pages/AdminDownload" data-linenumber="580" data-visual-selector-id="pages/AdminDownload580" class="form-input" id="prodDesc" rows="3"></textarea>
+                <div data-filename="pages/AdminDownload" data-linenumber="585" data-visual-selector-id="pages/AdminDownload585" class="form-group">
+                    <label data-filename="pages/AdminDownload" data-linenumber="586" data-visual-selector-id="pages/AdminDownload586" class="form-label">Description</label>
+                    <textarea data-filename="pages/AdminDownload" data-linenumber="587" data-visual-selector-id="pages/AdminDownload587" class="form-input" id="prodDesc" rows="3"></textarea>
                 </div>
-                <div data-filename="pages/AdminDownload" data-linenumber="582" data-visual-selector-id="pages/AdminDownload582" class="form-group">
-                    <label data-filename="pages/AdminDownload" data-linenumber="583" data-visual-selector-id="pages/AdminDownload583" class="form-label">Image URLs (one per line) *</label>
-                    <textarea data-filename="pages/AdminDownload" data-linenumber="584" data-visual-selector-id="pages/AdminDownload584" class="form-input" id="prodImages" rows="4" placeholder="https://example.com/image1.jpg
+                <div data-filename="pages/AdminDownload" data-linenumber="589" data-visual-selector-id="pages/AdminDownload589" class="form-group">
+                    <label data-filename="pages/AdminDownload" data-linenumber="590" data-visual-selector-id="pages/AdminDownload590" class="form-label">Image URLs (one per line) *</label>
+                    <textarea data-filename="pages/AdminDownload" data-linenumber="591" data-visual-selector-id="pages/AdminDownload591" class="form-input" id="prodImages" rows="4" placeholder="https://example.com/image1.jpg
 https://example.com/image2.jpg" required></textarea>
                 </div>
-                <div data-filename="pages/AdminDownload" data-linenumber="587" data-visual-selector-id="pages/AdminDownload587" class="form-group" style="display: flex; gap: 30px;">
-                    <label data-filename="pages/AdminDownload" data-linenumber="588" data-visual-selector-id="pages/AdminDownload588" style="display: flex; align-items: center; gap: 8px; cursor: pointer;">
-                        <input data-filename="pages/AdminDownload" data-linenumber="589" data-visual-selector-id="pages/AdminDownload589" type="checkbox" id="prodSale" style="width: 18px; height: 18px; cursor: pointer;">
-                        <span data-filename="pages/AdminDownload" data-linenumber="590" data-visual-selector-id="pages/AdminDownload590" class="form-label" style="margin: 0;">On Sale</span>
+                <div data-filename="pages/AdminDownload" data-linenumber="594" data-visual-selector-id="pages/AdminDownload594" class="form-group" style="display: flex; gap: 30px;">
+                    <label data-filename="pages/AdminDownload" data-linenumber="595" data-visual-selector-id="pages/AdminDownload595" style="display: flex; align-items: center; gap: 8px; cursor: pointer;">
+                        <input data-filename="pages/AdminDownload" data-linenumber="596" data-visual-selector-id="pages/AdminDownload596" type="checkbox" id="prodSale" style="width: 18px; height: 18px; cursor: pointer;">
+                        <span data-filename="pages/AdminDownload" data-linenumber="597" data-visual-selector-id="pages/AdminDownload597" class="form-label" style="margin: 0;">On Sale</span>
                     </label>
-                    <label data-filename="pages/AdminDownload" data-linenumber="592" data-visual-selector-id="pages/AdminDownload592" style="display: flex; align-items: center; gap: 8px; cursor: pointer;">
-                        <input data-filename="pages/AdminDownload" data-linenumber="593" data-visual-selector-id="pages/AdminDownload593" type="checkbox" id="prodNew" style="width: 18px; height: 18px; cursor: pointer;">
-                        <span data-filename="pages/AdminDownload" data-linenumber="594" data-visual-selector-id="pages/AdminDownload594" class="form-label" style="margin: 0;">New Arrival</span>
+                    <label data-filename="pages/AdminDownload" data-linenumber="599" data-visual-selector-id="pages/AdminDownload599" style="display: flex; align-items: center; gap: 8px; cursor: pointer;">
+                        <input data-filename="pages/AdminDownload" data-linenumber="600" data-visual-selector-id="pages/AdminDownload600" type="checkbox" id="prodNew" style="width: 18px; height: 18px; cursor: pointer;">
+                        <span data-filename="pages/AdminDownload" data-linenumber="601" data-visual-selector-id="pages/AdminDownload601" class="form-label" style="margin: 0;">New Arrival</span>
                     </label>
                 </div>
-                <button data-filename="pages/AdminDownload" data-linenumber="597" data-visual-selector-id="pages/AdminDownload597" type="submit" class="btn-primary">Save Product</button>
+                <button data-filename="pages/AdminDownload" data-linenumber="604" data-visual-selector-id="pages/AdminDownload604" type="submit" class="btn-primary">Save Product</button>
             </form>
-            <div data-filename="pages/AdminDownload" data-linenumber="599" data-visual-selector-id="pages/AdminDownload599" class="table-container">
-                <table data-filename="pages/AdminDownload" data-linenumber="600" data-visual-selector-id="pages/AdminDownload600">
-                    <thead data-filename="pages/AdminDownload" data-linenumber="601" data-visual-selector-id="pages/AdminDownload601">
-                        <tr data-filename="pages/AdminDownload" data-linenumber="602" data-visual-selector-id="pages/AdminDownload602">
-                            <th data-filename="pages/AdminDownload" data-linenumber="603" data-visual-selector-id="pages/AdminDownload603">Image</th>
-                            <th data-filename="pages/AdminDownload" data-linenumber="604" data-visual-selector-id="pages/AdminDownload604">Name</th>
-                            <th data-filename="pages/AdminDownload" data-linenumber="605" data-visual-selector-id="pages/AdminDownload605">Price</th>
-                            <th data-filename="pages/AdminDownload" data-linenumber="606" data-visual-selector-id="pages/AdminDownload606">Category</th>
-                            <th data-filename="pages/AdminDownload" data-linenumber="607" data-visual-selector-id="pages/AdminDownload607">Actions</th>
+            <div data-filename="pages/AdminDownload" data-linenumber="606" data-visual-selector-id="pages/AdminDownload606" class="table-container">
+                <table data-filename="pages/AdminDownload" data-linenumber="607" data-visual-selector-id="pages/AdminDownload607">
+                    <thead data-filename="pages/AdminDownload" data-linenumber="608" data-visual-selector-id="pages/AdminDownload608">
+                        <tr data-filename="pages/AdminDownload" data-linenumber="609" data-visual-selector-id="pages/AdminDownload609">
+                            <th data-filename="pages/AdminDownload" data-linenumber="610" data-visual-selector-id="pages/AdminDownload610">Image</th>
+                            <th data-filename="pages/AdminDownload" data-linenumber="611" data-visual-selector-id="pages/AdminDownload611">Name</th>
+                            <th data-filename="pages/AdminDownload" data-linenumber="612" data-visual-selector-id="pages/AdminDownload612">Price</th>
+                            <th data-filename="pages/AdminDownload" data-linenumber="613" data-visual-selector-id="pages/AdminDownload613">Category</th>
+                            <th data-filename="pages/AdminDownload" data-linenumber="614" data-visual-selector-id="pages/AdminDownload614">Actions</th>
                         </tr>
                     </thead>
-                    <tbody data-filename="pages/AdminDownload" data-linenumber="610" data-visual-selector-id="pages/AdminDownload610" id="productTable"></tbody>
+                    <tbody data-filename="pages/AdminDownload" data-linenumber="617" data-visual-selector-id="pages/AdminDownload617" id="productTable"></tbody>
                 </table>
             </div>
         </div>
     </div>
 
     <!-- Footer -->
-    <div data-filename="pages/AdminDownload" data-linenumber="617" data-visual-selector-id="pages/AdminDownload617" class="footer">
-        <div data-filename="pages/AdminDownload" data-linenumber="618" data-visual-selector-id="pages/AdminDownload618" class="footer-content">
-            <div data-filename="pages/AdminDownload" data-linenumber="619" data-visual-selector-id="pages/AdminDownload619">
-                <div data-filename="pages/AdminDownload" data-linenumber="620" data-visual-selector-id="pages/AdminDownload620" class="footer-logo">
-                    <svg data-filename="pages/AdminDownload" data-linenumber="621" data-visual-selector-id="pages/AdminDownload621" class="icon-svg-lg" viewBox="0 0 24 24"><path data-filename='pages/AdminDownload' data-linenumber='621' data-visual-selector-id='pages/AdminDownload621' d="M7 18c-1.1 0-1.99.9-1.99 2S5.9 22 7 22s2-.9 2-2-.9-2-2-2zM1 2v2h2l3.6 7.59-1.35 2.45c-.16.28-.25.61-.25.96 0 1.1.9 2 2 2h12v-2H7.42c-.14 0-.25-.11-.25-.25l.03-.12.9-1.63h7.45c.75 0 1.41-.41 1.75-1.03l3.58-6.49c.08-.14.12-.31.12-.48 0-.55-.45-1-1-1H5.21l-.94-2H1zm16 16c-1.1 0-1.99.9-1.99 2s.89 2 1.99 2 2-.9 2-2-.9-2-2-2z"/></svg>
+    <div data-filename="pages/AdminDownload" data-linenumber="624" data-visual-selector-id="pages/AdminDownload624" class="footer">
+        <div data-filename="pages/AdminDownload" data-linenumber="625" data-visual-selector-id="pages/AdminDownload625" class="footer-content">
+            <div data-filename="pages/AdminDownload" data-linenumber="626" data-visual-selector-id="pages/AdminDownload626">
+                <div data-filename="pages/AdminDownload" data-linenumber="627" data-visual-selector-id="pages/AdminDownload627" class="footer-logo">
+                    <svg data-filename="pages/AdminDownload" data-linenumber="628" data-visual-selector-id="pages/AdminDownload628" class="icon-svg-lg" viewBox="0 0 24 24"><path data-filename='pages/AdminDownload' data-linenumber='628' data-visual-selector-id='pages/AdminDownload628' d="M7 18c-1.1 0-1.99.9-1.99 2S5.9 22 7 22s2-.9 2-2-.9-2-2-2zM1 2v2h2l3.6 7.59-1.35 2.45c-.16.28-.25.61-.25.96 0 1.1.9 2 2 2h12v-2H7.42c-.14 0-.25-.11-.25-.25l.03-.12.9-1.63h7.45c.75 0 1.41-.41 1.75-1.03l3.58-6.49c.08-.14.12-.31.12-.48 0-.55-.45-1-1-1H5.21l-.94-2H1zm16 16c-1.1 0-1.99.9-1.99 2s.89 2 1.99 2 2-.9 2-2-.9-2-2-2z"/></svg>
                     DARK MASTER STORE
                 </div>
-                <p data-filename="pages/AdminDownload" data-linenumber="624" data-visual-selector-id="pages/AdminDownload624" class="footer-desc">Beauty & Gadgets for Everyday Greatness</p>
-                <p data-filename="pages/AdminDownload" data-linenumber="625" data-visual-selector-id="pages/AdminDownload625" class="footer-desc">Your trusted destination for premium beauty products and cutting-edge gadgets. We deliver excellence to your doorstep across South Africa.</p>
-            </div>
-            <div data-filename="pages/AdminDownload" data-linenumber="627" data-visual-selector-id="pages/AdminDownload627" class="footer-section">
-                <h3 data-filename="pages/AdminDownload" data-linenumber="628" data-visual-selector-id="pages/AdminDownload628">Quick Links</h3>
-                <a data-filename="pages/AdminDownload" data-linenumber="629" data-visual-selector-id="pages/AdminDownload629" href="#" onclick="showPage('home'); return false;" class="footer-link">Home</a>
-                <a data-filename="pages/AdminDownload" data-linenumber="630" data-visual-selector-id="pages/AdminDownload630" href="#" onclick="showPage('cart'); return false;" class="footer-link">Cart</a>
-                <a data-filename="pages/AdminDownload" data-linenumber="631" data-visual-selector-id="pages/AdminDownload631" href="#" onclick="showPage('sell'); return false;" class="footer-link">Sell With Us</a>
-                <a data-filename="pages/AdminDownload" data-linenumber="632" data-visual-selector-id="pages/AdminDownload632" href="#" onclick="showAdminLogin(); return false;" class="footer-link">Admin</a>
+                <p data-filename="pages/AdminDownload" data-linenumber="631" data-visual-selector-id="pages/AdminDownload631" class="footer-desc">Beauty & Gadgets for Everyday Greatness</p>
+                <p data-filename="pages/AdminDownload" data-linenumber="632" data-visual-selector-id="pages/AdminDownload632" class="footer-desc">Your trusted destination for premium beauty products and cutting-edge gadgets. We deliver excellence to your doorstep across South Africa.</p>
             </div>
             <div data-filename="pages/AdminDownload" data-linenumber="634" data-visual-selector-id="pages/AdminDownload634" class="footer-section">
-                <h3 data-filename="pages/AdminDownload" data-linenumber="635" data-visual-selector-id="pages/AdminDownload635">Contact Us</h3>
-                <p data-filename="pages/AdminDownload" data-linenumber="636" data-visual-selector-id="pages/AdminDownload636" style="color: #d1d5db; margin-bottom: 12px;">Email: darkmasterstore@gmail.com</p>
+                <h3 data-filename="pages/AdminDownload" data-linenumber="635" data-visual-selector-id="pages/AdminDownload635">Quick Links</h3>
+                <a data-filename="pages/AdminDownload" data-linenumber="636" data-visual-selector-id="pages/AdminDownload636" href="#" onclick="showPage('home'); return false;" class="footer-link">Home</a>
+                <a data-filename="pages/AdminDownload" data-linenumber="637" data-visual-selector-id="pages/AdminDownload637" href="#" onclick="showPage('cart'); return false;" class="footer-link">Cart</a>
+                <a data-filename="pages/AdminDownload" data-linenumber="638" data-visual-selector-id="pages/AdminDownload638" href="#" onclick="showPage('sell'); return false;" class="footer-link">Sell With Us</a>
+                <a data-filename="pages/AdminDownload" data-linenumber="639" data-visual-selector-id="pages/AdminDownload639" href="#" onclick="showAdminLogin(); return false;" class="footer-link">Admin</a>
+            </div>
+            <div data-filename="pages/AdminDownload" data-linenumber="641" data-visual-selector-id="pages/AdminDownload641" class="footer-section">
+                <h3 data-filename="pages/AdminDownload" data-linenumber="642" data-visual-selector-id="pages/AdminDownload642">Contact Us</h3>
+                <p data-filename="pages/AdminDownload" data-linenumber="643" data-visual-selector-id="pages/AdminDownload643" style="color: #d1d5db; margin-bottom: 12px;">Email: darkmasterstore@gmail.com</p>
             </div>
         </div>
-        <div data-filename="pages/AdminDownload" data-linenumber="639" data-visual-selector-id="pages/AdminDownload639" class="footer-bottom">
-            <p data-filename="pages/AdminDownload" data-linenumber="640" data-visual-selector-id="pages/AdminDownload640">&copy; 2024 Dark Master Store. All rights reserved.</p>
-            <p data-filename="pages/AdminDownload" data-linenumber="641" data-visual-selector-id="pages/AdminDownload641" class="footer-powered">Powered by Beelze Code</p>
+        <div data-filename="pages/AdminDownload" data-linenumber="646" data-visual-selector-id="pages/AdminDownload646" class="footer-bottom">
+            <p data-filename="pages/AdminDownload" data-linenumber="647" data-visual-selector-id="pages/AdminDownload647">&copy; 2024 Dark Master Store. All rights reserved.</p>
+            <p data-filename="pages/AdminDownload" data-linenumber="648" data-visual-selector-id="pages/AdminDownload648" class="footer-powered">Powered by Beelze Code</p>
         </div>
     </div>
 
-    <script data-filename="pages/AdminDownload" data-linenumber="645" data-visual-selector-id="pages/AdminDownload645">
+    <!-- Firebase SDK -->
+    <script data-filename="pages/AdminDownload" data-linenumber="653" data-visual-selector-id="pages/AdminDownload653" src="https://www.gstatic.com/firebasejs/10.7.1/firebase-app-compat.js"></script>
+    <script data-filename="pages/AdminDownload" data-linenumber="654" data-visual-selector-id="pages/AdminDownload654" src="https://www.gstatic.com/firebasejs/10.7.1/firebase-firestore-compat.js"></script>
+
+    <script data-filename="pages/AdminDownload" data-linenumber="656" data-visual-selector-id="pages/AdminDownload656">
+        // Firebase Configuration
+        const firebaseConfig = {
+            apiKey: "AIzaSyC1ucCwM7ebqN-gWHT2NmkqYdK3KZBWv5o",
+            authDomain: "dark-master-store.firebaseapp.com",
+            projectId: "dark-master-store",
+            storageBucket: "dark-master-store.firebasestorage.app",
+            messagingSenderId: "245130963951",
+            appId: "1:245130963951:web:50cdae51f5c59fa8ad641a",
+            measurementId: "G-SZ9JXD2QCB"
+        };
+
+        // Initialize Firebase
+        let db = null;
+        let useFirebase = false;
+        
+        try {
+            firebase.initializeApp(firebaseConfig);
+            db = firebase.firestore();
+            useFirebase = true;
+            console.log('✅ Firebase connected successfully!');
+        } catch (error) {
+            console.error('⚠️ Firebase not available, using localStorage:', error);
+            useFirebase = false;
+        }
+
         const ADMIN_PASSWORD = 'VNAXXTTM';
-        let categories = JSON.parse(localStorage.getItem('dm_categories')) || [
-            {id:1, name:"Beauty Products", desc:"Premium skincare, makeup and beauty essentials", image:"https://images.unsplash.com/photo-1596462502278-27bfdc403348?w=600&h=600&fit=crop"},
-            {id:2, name:"Tech Gadgets", desc:"Latest smartphones, accessories and electronics", image:"https://images.unsplash.com/photo-1498049794561-7780e7231661?w=600&h=600&fit=crop"},
-            {id:3, name:"Phone Accessories", desc:"Cases, chargers, earphones and phone essentials", image:"https://images.unsplash.com/photo-1601784551446-20c9e07cdbdb?w=600&h=600&fit=crop"}
-        ];
-        let products = JSON.parse(localStorage.getItem('dm_products')) || [
-            {id:1, name:"Three-Piece Collagen Night Mask Set", price:358, originalPrice:499, catId:1, soldBy:"Dark Master Official", location:"Johannesburg", description:"Three-Piece Collagen Night Mask Set, enriched with niacinamide and hyaluronic acid, collagen-infused night mask, paraben-free. Hydrates the Light Beige for improved texture and a smoother feel upon continuous use. Perfect for pre-sleep application or as a holiday gift", images:["https://images.unsplash.com/photo-1556228578-0d85b1a4d571?w=600&h=600&fit=crop","https://images.unsplash.com/photo-1571781926291-c477ebfd024b?w=600&h=600&fit=crop","https://images.unsplash.com/photo-1512496015851-a90fb38ba796?w=600&h=600&fit=crop"], tags:['sale'], sizes:[], reviews:[{name:"Thando M.", date:"2 days ago", rating:5, text:"Amazing product! My skin feels so smooth and hydrated. Highly recommend!"},{name:"Sipho K.", date:"1 week ago", rating:5, text:"Best night mask I've ever used. Worth every cent!"}]},
-            {id:2, name:"Wireless Earbuds Pro", price:299, catId:2, soldBy:"Tech World SA", location:"Cape Town", description:"Premium wireless earbuds with active noise cancellation, 30-hour battery life, and crystal-clear sound quality. Perfect for music lovers and professionals.", images:["https://images.unsplash.com/photo-1590658268037-6bf12165a8df?w=600&h=600&fit=crop","https://images.unsplash.com/photo-1606841837239-c5a1a4a07af7?w=600&h=600&fit=crop"], tags:['new'], sizes:[], reviews:[{name:"John D.", date:"3 days ago", rating:5, text:"Sound quality is incredible! Best purchase this year."}]},
-            {id:3, name:"Premium Phone Case", price:149, originalPrice:249, catId:3, soldBy:"Case Masters", location:"Pretoria", description:"Military-grade protection with sleek design. Compatible with wireless charging. Available in multiple colors.", images:["https://images.unsplash.com/photo-1601784551446-20c9e07cdbdb?w=600&h=600&fit=crop"], tags:['sale'], sizes:[], reviews:[]},
-            {id:4, name:"LED Ring Light Kit", price:449, catId:2, soldBy:"Studio Pro SA", location:"Durban", description:"Professional 18-inch ring light with adjustable brightness and color temperature. Perfect for content creators, makeup artists, and photographers.", images:["https://images.unsplash.com/photo-1513151233558-d860c5398176?w=600&h=600&fit=crop"], tags:['new'], sizes:[], reviews:[]},
-            {id:5, name:"Hydrating Face Serum", price:279, catId:1, soldBy:"Glow Beauty", location:"Sandton", description:"Vitamin C enriched serum that brightens and hydrates. Reduces dark spots and evens skin tone. Suitable for all skin types.", images:["https://images.unsplash.com/photo-1620916566398-39f1143ab7be?w=600&h=600&fit=crop"], tags:[], sizes:[], reviews:[]}
-        ];
+        let categories = [];
+        let products = [];
         let cart = JSON.parse(localStorage.getItem('dm_cart')) || [];
         let currentDetailProduct = null;
         let selectedSize = null;
         let detailQty = 1;
 
-        function save() {
-            localStorage.setItem('dm_categories', JSON.stringify(categories));
-            localStorage.setItem('dm_products', JSON.stringify(products));
-            localStorage.setItem('dm_cart', JSON.stringify(cart));
-            updateCartCount();
+        // Show/Hide Loading
+        function showLoading() {
+            document.getElementById('loadingOverlay').classList.add('active');
+        }
+
+        function hideLoading() {
+            document.getElementById('loadingOverlay').classList.remove('active');
+        }
+
+        // Initialize app
+        async function initializeApp() {
+            showLoading();
+            try {
+                if (useFirebase) {
+                    await loadCategoriesFromFirebase();
+                    await loadProductsFromFirebase();
+                } else {
+                    loadCategoriesFromLocalStorage();
+                    loadProductsFromLocalStorage();
+                }
+                renderHome();
+                updateCartCount();
+            } catch (error) {
+                console.error('Error initializing app:', error);
+                // Fallback to localStorage if any step failed
+                loadCategoriesFromLocalStorage();
+                loadProductsFromLocalStorage();
+                renderHome();
+                updateCartCount();
+            } finally {
+                hideLoading();
+            }
+        }
+
+        // Load Categories from Firebase
+        async function loadCategoriesFromFirebase() {
+            try {
+                const snapshot = await db.collection('categories').orderBy('order').get();
+                categories = snapshot.docs.map(doc => ({ id: doc.id, ...doc.data() }));
+                
+                // Save to localStorage as backup
+                localStorage.setItem('dm_categories', JSON.stringify(categories));
+                
+                // If no categories in Firebase, add default ones and save to Firebase
+                if (categories.length === 0) {
+                    console.log("Firebase categories empty, adding defaults.");
+                    const defaultCategories = [
+                        {name:"Beauty Products", desc:"Premium skincare, makeup and beauty essentials", image:"https://images.unsplash.com/photo-1596462502278-27bfdc403348?w=600&h=600&fit=crop", order: 1},
+                        {name:"Tech Gadgets", desc:"Latest smartphones, accessories and electronics", image:"https://images.unsplash.com/photo-1498049794561-7780e7231661?w=600&h=600&fit=crop", order: 2},
+                        {name:"Phone Accessories", desc:"Cases, chargers, earphones and phone essentials", image:"https://images.unsplash.com/photo-1601784551446-20c9e07cdbdb?w=600&h=600&fit=crop", order: 3}
+                    ];
+                    categories = []; // Clear local categories before populating
+                    for (const cat of defaultCategories) {
+                        const docRef = await db.collection('categories').add(cat);
+                        categories.push({ id: docRef.id, ...cat });
+                    }
+                    localStorage.setItem('dm_categories', JSON.stringify(categories)); // Update backup after adding defaults
+                }
+            } catch (error) {
+                console.error('Firebase error loading categories, falling back to localStorage:', error);
+                useFirebase = false; // Disable Firebase for subsequent operations
+                loadCategoriesFromLocalStorage();
+            }
+        }
+
+        // Load Products from Firebase
+        async function loadProductsFromFirebase() {
+            try {
+                const snapshot = await db.collection('products').get();
+                products = snapshot.docs.map(doc => ({ id: doc.id, ...doc.data() }));
+                
+                // Save to localStorage as backup
+                localStorage.setItem('dm_products', JSON.stringify(products));
+                
+                // If no products in Firebase, add default ones and save to Firebase
+                if (products.length === 0 && categories.length > 0) { // Ensure categories are loaded for catId
+                    console.log("Firebase products empty, adding defaults.");
+                    const defaultProducts = [
+                        {name:"Three-Piece Collagen Night Mask Set", price:358, originalPrice:499, catId:categories[0].id, soldBy:"Dark Master Official", location:"Johannesburg", description:"Three-Piece Collagen Night Mask Set, enriched with niacinamide and hyaluronic acid, collagen-infused night mask, paraben-free. Hydrates the Light Beige for improved texture and a smoother feel upon continuous use. Perfect for pre-sleep application or as a holiday gift", images:["https://images.unsplash.com/photo-1556228578-0d85b1a4d571?w=600&h=600&fit=crop","https://images.unsplash.com/photo-1571781926291-c477ebfd024b?w=600&h=600&fit=crop","https://images.unsplash.com/photo-1512496015851-a90fb38ba796?w=600&h=600&fit=crop"], tags:['sale'], sizes:[], reviews:[{name:"Thando M.", date:"2 days ago", rating:5, text:"Amazing product! My skin feels so smooth and hydrated. Highly recommend!"},{name:"Sipho K.", date:"1 week ago", rating:5, text:"Best night mask I've ever used. Worth every cent!"}]},
+                        {name:"Wireless Earbuds Pro", price:299, catId:categories[1].id, soldBy:"Tech World SA", location:"Cape Town", description:"Premium wireless earbuds with active noise cancellation, 30-hour battery life, and crystal-clear sound quality. Perfect for music lovers and professionals.", images:["https://images.unsplash.com/photo-1590658268037-6bf12165a8df?w=600&h=600&fit=crop","https://images.unsplash.com/photo-1606841837239-c5a1a4a07af7?w=600&h=600&fit=crop"], tags:['new'], sizes:[], reviews:[{name:"John D.", date:"3 days ago", rating:5, text:"Sound quality is incredible! Best purchase this year."}]},
+                        {name:"Premium Phone Case", price:149, originalPrice:249, catId:categories[2].id, soldBy:"Case Masters", location:"Pretoria", description:"Military-grade protection with sleek design. Compatible with wireless charging. Available in multiple colors.", images:["https://images.unsplash.com/photo-1601784551446-20c9e07cdbdb?w=600&h=600&fit=crop"], tags:['sale'], sizes:[], reviews:[]}
+                    ];
+                    products = []; // Clear local products before populating
+                    for (const prod of defaultProducts) {
+                        const docRef = await db.collection('products').add(prod);
+                        products.push({ id: docRef.id, ...prod });
+                    }
+                    localStorage.setItem('dm_products', JSON.stringify(products)); // Update backup after adding defaults
+                }
+            } catch (error) {
+                console.error('Firebase error loading products, falling back to localStorage:', error);
+                useFirebase = false; // Disable Firebase for subsequent operations
+                loadProductsFromLocalStorage();
+            }
+        }
+
+        // LocalStorage fallback functions
+        function loadCategoriesFromLocalStorage() {
+            const saved = localStorage.getItem('dm_categories');
+            if (saved && JSON.parse(saved).length > 0) {
+                categories = JSON.parse(saved);
+                console.log('Loaded categories from localStorage.');
+            } else {
+                // Default categories if nothing in localStorage
+                categories = [
+                    {id:"cat1", name:"Beauty Products", desc:"Premium skincare, makeup and beauty essentials", image:"https://images.unsplash.com/photo-1596462502278-27bfdc403348?w=600&h=600&fit=crop", order: 1},
+                    {id:"cat2", name:"Tech Gadgets", desc:"Latest smartphones, accessories and electronics", image:"https://images.unsplash.com/photo-1498049794561-7780e7231661?w=600&h=600&fit=crop", order: 2},
+                    {id:"cat3", name:"Phone Accessories", desc:"Cases, chargers, earphones and phone essentials", image:"https://images.unsplash.com/photo-1601784551446-20c9e07cdbdb?w=600&h=600&fit=crop", order: 3}
+                ];
+                localStorage.setItem('dm_categories', JSON.stringify(categories));
+                console.log('No categories in localStorage, used default ones.');
+            }
+        }
+
+        function loadProductsFromLocalStorage() {
+            const saved = localStorage.getItem('dm_products');
+            if (saved && JSON.parse(saved).length > 0) {
+                products = JSON.parse(saved);
+                console.log('Loaded products from localStorage.');
+            } else {
+                // Default products if nothing in localStorage
+                // Ensure catIds refer to the default category IDs generated above or existing ones
+                if (categories.length === 0) {
+                    loadCategoriesFromLocalStorage(); // Ensure categories are loaded first
+                }
+                const cat1Id = categories.find(c => c.name === "Beauty Products")?.id || "cat1";
+                const cat2Id = categories.find(c => c.name === "Tech Gadgets")?.id || "cat2";
+                const cat3Id = categories.find(c => c.name === "Phone Accessories")?.id || "cat3";
+
+                products = [
+                    {id:"prod1", name:"Three-Piece Collagen Night Mask Set", price:358, originalPrice:499, catId:cat1Id, soldBy:"Dark Master Official", location:"Johannesburg", description:"Three-Piece Collagen Night Mask Set, enriched with niacinamide and hyaluronic acid, collagen-infused night mask, paraben-free. Hydrates the Light Beige for improved texture and a smoother feel upon continuous use. Perfect for pre-sleep application or as a holiday gift", images:["https://images.unsplash.com/photo-1556228578-0d85b1a4d571?w=600&h=600&fit=crop","https://images.unsplash.com/photo-1571781926291-c477ebfd024b?w=600&h=600&fit=crop","https://images.unsplash.com/photo-1512496015851-a90fb38ba796?w=600&h=600&fit=crop"], tags:['sale'], sizes:[], reviews:[{name:"Thando M.", date:"2 days ago", rating:5, text:"Amazing product! My skin feels so smooth and hydrated. Highly recommend!"},{name:"Sipho K.", date:"1 week ago", rating:5, text:"Best night mask I've ever used. Worth every cent!"}]},
+                    {id:"prod2", name:"Wireless Earbuds Pro", price:299, catId:cat2Id, soldBy:"Tech World SA", location:"Cape Town", description:"Premium wireless earbuds with active noise cancellation, 30-hour battery life, and crystal-clear sound quality. Perfect for music lovers and professionals.", images:["https://images.unsplash.com/photo-1590658268037-6bf12165a8df?w=600&h=600&fit=crop","https://images.unsplash.com/photo-1606841837239-c5a1a4a07af7?w=600&h=600&fit=crop"], tags:['new'], sizes:[], reviews:[{name:"John D.", date:"3 days ago", rating:5, text:"Sound quality is incredible! Best purchase this year."}]},
+                    {id:"prod3", name:"Premium Phone Case", price:149, originalPrice:249, catId:cat3Id, soldBy:"Case Masters", location:"Pretoria", description:"Military-grade protection with sleek design. Compatible with wireless charging. Available in multiple colors.", images:["https://images.unsplash.com/photo-1601784551446-20c9e07cdbdb?w=600&h=600&fit=crop"], tags:['sale'], sizes:[], reviews:[]}
+                ];
+                localStorage.setItem('dm_products', JSON.stringify(products));
+                console.log('No products in localStorage, used default ones.');
+            }
         }
 
         function updateCartCount() {
@@ -786,38 +945,38 @@ https://example.com/image2.jpg" required></textarea>
 
         function renderHome() {
             document.getElementById('categoryGrid').innerHTML = categories.map(c => 
-                `<div data-filename="pages/AdminDownload" data-linenumber="790" data-visual-selector-id="pages/AdminDownload790" class="category-card" onclick="filterCategory(${c.id})">
-                    <img data-filename="pages/AdminDownload" data-linenumber="791" data-visual-selector-id="pages/AdminDownload791" src="${c.image}" class="category-img">
-                    <div data-filename="pages/AdminDownload" data-linenumber="792" data-visual-selector-id="pages/AdminDownload792" class="category-overlay">
-                        <div data-filename="pages/AdminDownload" data-linenumber="793" data-visual-selector-id="pages/AdminDownload793" class="category-name">${c.name}</div>
-                        <div data-filename="pages/AdminDownload" data-linenumber="794" data-visual-selector-id="pages/AdminDownload794" class="category-desc">${c.desc||''}</div>
+                `<div data-filename="pages/AdminDownload" data-linenumber="948" data-visual-selector-id="pages/AdminDownload948" class="category-card" onclick="filterCategory('${c.id}')">
+                    <img data-filename="pages/AdminDownload" data-linenumber="949" data-visual-selector-id="pages/AdminDownload949" src="${c.image}" class="category-img">
+                    <div data-filename="pages/AdminDownload" data-linenumber="950" data-visual-selector-id="pages/AdminDownload950" class="category-overlay">
+                        <div data-filename="pages/AdminDownload" data-linenumber="951" data-visual-selector-id="pages/AdminDownload951" class="category-name">${c.name}</div>
+                        <div data-filename="pages/AdminDownload" data-linenumber="952" data-visual-selector-id="pages/AdminDownload952" class="category-desc">${c.desc||''}</div>
                     </div>
                 </div>`
             ).join('');
             
             document.getElementById('productGrid').innerHTML = products.map(p => 
-                `<div data-filename="pages/AdminDownload" data-linenumber="800" data-visual-selector-id="pages/AdminDownload800" class="product-card">
-                    <div data-filename="pages/AdminDownload" data-linenumber="801" data-visual-selector-id="pages/AdminDownload801" class="product-img-container" onclick="showProductDetail(${p.id})">
-                        <img data-filename="pages/AdminDownload" data-linenumber="802" data-visual-selector-id="pages/AdminDownload802" src="${p.images[0]}" class="product-img">
-                        <div data-filename="pages/AdminDownload" data-linenumber="803" data-visual-selector-id="pages/AdminDownload803" class="product-badge">
-                            ${p.tags.includes('sale') ? '<span data-filename="pages/AdminDownload" data-linenumber="804" data-visual-selector-id="pages/AdminDownload804" class="badge-sale">SALE</span>' : ''}
-                            ${p.tags.includes('new') ? '<span data-filename="pages/AdminDownload" data-linenumber="805" data-visual-selector-id="pages/AdminDownload805" class="badge-new">NEW</span>' : ''}
+                `<div data-filename="pages/AdminDownload" data-linenumber="958" data-visual-selector-id="pages/AdminDownload958" class="product-card">
+                    <div data-filename="pages/AdminDownload" data-linenumber="959" data-visual-selector-id="pages/AdminDownload959" class="product-img-container" onclick="showProductDetail('${p.id}')">
+                        <img data-filename="pages/AdminDownload" data-linenumber="960" data-visual-selector-id="pages/AdminDownload960" src="${p.images[0]}" class="product-img">
+                        <div data-filename="pages/AdminDownload" data-linenumber="961" data-visual-selector-id="pages/AdminDownload961" class="product-badge">
+                            ${p.tags?.includes('sale') ? '<span data-filename="pages/AdminDownload" data-linenumber="962" data-visual-selector-id="pages/AdminDownload962" class="badge-sale">SALE</span>' : ''}
+                            ${p.tags?.includes('new') ? '<span data-filename="pages/AdminDownload" data-linenumber="963" data-visual-selector-id="pages/AdminDownload963" class="badge-new">NEW</span>' : ''}
                         </div>
                     </div>
-                    <button data-filename="pages/AdminDownload" data-linenumber="808" data-visual-selector-id="pages/AdminDownload808" class="download-product-btn" onclick="event.stopPropagation(); downloadProductImage(${JSON.stringify(p).replace(/"/g, '&quot;')})">
-                        <svg data-filename="pages/AdminDownload" data-linenumber="809" data-visual-selector-id="pages/AdminDownload809" class="icon-svg" viewBox="0 0 24 24"><path data-filename='pages/AdminDownload' data-linenumber='809' data-visual-selector-id='pages/AdminDownload809' d="M19 9h-4V3H9v6H5l7 7 7-7zM5 18v2h14v-2H5z"/></svg>
+                    <button data-filename="pages/AdminDownload" data-linenumber="966" data-visual-selector-id="pages/AdminDownload966" class="download-product-btn" onclick="event.stopPropagation(); downloadProductImage(${JSON.stringify(p).replace(/"/g, '&quot;')})">
+                        <svg data-filename="pages/AdminDownload" data-linenumber="967" data-visual-selector-id="pages/AdminDownload967" class="icon-svg" viewBox="0 0 24 24"><path data-filename='pages/AdminDownload' data-linenumber='967' data-visual-selector-id='pages/AdminDownload967' d="M19 9h-4V3H9v6H5l7 7 7-7zM5 18v2h14v-2H5z"/></svg>
                     </button>
-                    <div data-filename="pages/AdminDownload" data-linenumber="811" data-visual-selector-id="pages/AdminDownload811" class="product-info" onclick="showProductDetail(${p.id})">
-                        <div data-filename="pages/AdminDownload" data-linenumber="812" data-visual-selector-id="pages/AdminDownload812" class="product-name">${p.name}</div>
-                        <div data-filename="pages/AdminDownload" data-linenumber="813" data-visual-selector-id="pages/AdminDownload813" class="product-rating">
-                            <div data-filename="pages/AdminDownload" data-linenumber="814" data-visual-selector-id="pages/AdminDownload814" class="stars">${'★'.repeat(5)}</div>
-                            <span data-filename="pages/AdminDownload" data-linenumber="815" data-visual-selector-id="pages/AdminDownload815" class="reviews-count">(${p.reviews?.length || 0} reviews)</span>
+                    <div data-filename="pages/AdminDownload" data-linenumber="969" data-visual-selector-id="pages/AdminDownload969" class="product-info" onclick="showProductDetail('${p.id}')">
+                        <div data-filename="pages/AdminDownload" data-linenumber="970" data-visual-selector-id="pages/AdminDownload970" class="product-name">${p.name}</div>
+                        <div data-filename="pages/AdminDownload" data-linenumber="971" data-visual-selector-id="pages/AdminDownload971" class="product-rating">
+                            <div data-filename="pages/AdminDownload" data-linenumber="972" data-visual-selector-id="pages/AdminDownload972" class="stars">${'★'.repeat(5)}</div>
+                            <span data-filename="pages/AdminDownload" data-linenumber="973" data-visual-selector-id="pages/AdminDownload973" class="reviews-count">(${p.reviews?.length || 0} reviews)</span>
                         </div>
-                        <div data-filename="pages/AdminDownload" data-linenumber="817" data-visual-selector-id="pages/AdminDownload817" class="product-price">R${p.price.toFixed(2)}</div>
-                        ${p.soldBy ? '<div data-filename="pages/AdminDownload" data-linenumber="818" data-visual-selector-id="pages/AdminDownload818" class="product-meta">Sold by: '+p.soldBy+'</div>' : ''}
-                        ${p.location ? '<div data-filename="pages/AdminDownload" data-linenumber="819" data-visual-selector-id="pages/AdminDownload819" class="product-meta">📍 '+p.location+'</div>' : ''}
-                        <button data-filename="pages/AdminDownload" data-linenumber="820" data-visual-selector-id="pages/AdminDownload820" class="btn-add-cart" onclick="event.stopPropagation(); quickAddToCart(${p.id})">
-                            <svg data-filename="pages/AdminDownload" data-linenumber="821" data-visual-selector-id="pages/AdminDownload821" class="icon-svg" viewBox="0 0 24 24"><path data-filename='pages/AdminDownload' data-linenumber='821' data-visual-selector-id='pages/AdminDownload821' d="M7 18c-1.1 0-1.99.9-1.99 2S5.9 22 7 22s2-.9 2-2-.9-2-2-2zM1 2v2h2l3.6 7.59-1.35 2.45c-.16.28-.25.61-.25.96 0 1.1.9 2 2 2h12v-2H7.42c-.14 0-.25-.11-.25-.25l.03-.12.9-1.63h7.45c.75 0 1.41-.41 1.75-1.03l3.58-6.49c.08-.14.12-.31.12-.48 0-.55-.45-1-1-1H5.21l-.94-2H1zm16 16c-1.1 0-1.99.9-1.99 2s.89 2 1.99 2 2-.9 2-2-.9-2-2-2z"/></svg>
+                        <div data-filename="pages/AdminDownload" data-linenumber="975" data-visual-selector-id="pages/AdminDownload975" class="product-price">R${p.price.toFixed(2)}</div>
+                        ${p.soldBy ? '<div data-filename="pages/AdminDownload" data-linenumber="976" data-visual-selector-id="pages/AdminDownload976" class="product-meta">Sold by: '+p.soldBy+'</div>' : ''}
+                        ${p.location ? '<div data-filename="pages/AdminDownload" data-linenumber="977" data-visual-selector-id="pages/AdminDownload977" class="product-meta">📍 '+p.location+'</div>' : ''}
+                        <button data-filename="pages/AdminDownload" data-linenumber="978" data-visual-selector-id="pages/AdminDownload978" class="btn-add-cart" onclick="event.stopPropagation(); quickAddToCart('${p.id}')">
+                            <svg data-filename="pages/AdminDownload" data-linenumber="979" data-visual-selector-id="pages/AdminDownload979" class="icon-svg" viewBox="0 0 24 24"><path data-filename='pages/AdminDownload' data-linenumber='979' data-visual-selector-id='pages/AdminDownload979' d="M7 18c-1.1 0-1.99.9-1.99 2S5.9 22 7 22s2-.9 2-2-.9-2-2-2zM1 2v2h2l3.6 7.59-1.35 2.45c-.16.28-.25.61-.25.96 0 1.1.9 2 2 2h12v-2H7.42c-.14 0-.25-.11-.25-.25l.03-.12.9-1.63h7.45c.75 0 1.41-.41 1.75-1.03l3.58-6.49c.08-.14.12-.31.12-.48 0-.55-.45-1-1-1H5.21l-.94-2H1zm16 16c-1.1 0-1.99.9-1.99 2s.89 2 1.99 2 2-.9 2-2-.9-2-2-2z"/></svg>
                             Add to Cart
                         </button>
                     </div>
@@ -842,23 +1001,24 @@ https://example.com/image2.jpg" required></textarea>
                     size: null
                 });
             }
-            save();
+            localStorage.setItem('dm_cart', JSON.stringify(cart));
+            updateCartCount();
             alert(product.name + ' added to cart!');
         }
 
         function filterCategory(catId) {
             const filtered = products.filter(p => p.catId === catId);
             document.getElementById('productGrid').innerHTML = filtered.map(p => 
-                `<div data-filename="pages/AdminDownload" data-linenumber="853" data-visual-selector-id="pages/AdminDownload853" class="product-card">
-                    <div data-filename="pages/AdminDownload" data-linenumber="854" data-visual-selector-id="pages/AdminDownload854" class="product-img-container" onclick="showProductDetail(${p.id})">
-                        <img data-filename="pages/AdminDownload" data-linenumber="855" data-visual-selector-id="pages/AdminDownload855" src="${p.images[0]}" class="product-img">
+                `<div data-filename="pages/AdminDownload" data-linenumber="1012" data-visual-selector-id="pages/AdminDownload1012" class="product-card">
+                    <div data-filename="pages/AdminDownload" data-linenumber="1013" data-visual-selector-id="pages/AdminDownload1013" class="product-img-container" onclick="showProductDetail('${p.id}')">
+                        <img data-filename="pages/AdminDownload" data-linenumber="1014" data-visual-selector-id="pages/AdminDownload1014" src="${p.images[0]}" class="product-img">
                     </div>
-                    <button data-filename="pages/AdminDownload" data-linenumber="857" data-visual-selector-id="pages/AdminDownload857" class="download-product-btn" onclick="event.stopPropagation(); downloadProductImage(${JSON.stringify(p).replace(/"/g, '&quot;')})">
-                        <svg data-filename="pages/AdminDownload" data-linenumber="858" data-visual-selector-id="pages/AdminDownload858" class="icon-svg" viewBox="0 0 24 24"><path data-filename='pages/AdminDownload' data-linenumber='858' data-visual-selector-id='pages/AdminDownload858' d="M19 9h-4V3H9v6H5l7 7 7-7zM5 18v2h14v-2H5z"/></svg>
+                    <button data-filename="pages/AdminDownload" data-linenumber="1016" data-visual-selector-id="pages/AdminDownload1016" class="download-product-btn" onclick="event.stopPropagation(); downloadProductImage(${JSON.stringify(p).replace(/"/g, '&quot;')})">
+                        <svg data-filename="pages/AdminDownload" data-linenumber="1017" data-visual-selector-id="pages/AdminDownload1017" class="icon-svg" viewBox="0 0 24 24"><path data-filename='pages/AdminDownload' data-linenumber='1017' data-visual-selector-id='pages/AdminDownload1017' d="M19 9h-4V3H9v6H5l7 7 7-7zM5 18v2h14v-2H5z"/></svg>
                     </button>
-                    <div data-filename="pages/AdminDownload" data-linenumber="860" data-visual-selector-id="pages/AdminDownload860" class="product-info" onclick="showProductDetail(${p.id})">
-                        <div data-filename="pages/AdminDownload" data-linenumber="861" data-visual-selector-id="pages/AdminDownload861" class="product-name">${p.name}</div>
-                        <div data-filename="pages/AdminDownload" data-linenumber="862" data-visual-selector-id="pages/AdminDownload862" class="product-price">R${p.price.toFixed(2)}</div>
+                    <div data-filename="pages/AdminDownload" data-linenumber="1019" data-visual-selector-id="pages/AdminDownload1019" class="product-info" onclick="showProductDetail('${p.id}')">
+                        <div data-filename="pages/AdminDownload" data-linenumber="1020" data-visual-selector-id="pages/AdminDownload1020" class="product-name">${p.name}</div>
+                        <div data-filename="pages/AdminDownload" data-linenumber="1021" data-visual-selector-id="pages/AdminDownload1021" class="product-price">R${p.price.toFixed(2)}</div>
                     </div>
                 </div>`
             ).join('');
@@ -873,7 +1033,7 @@ https://example.com/image2.jpg" required></textarea>
             
             document.getElementById('mainProductImage').src = product.images[0];
             document.getElementById('imageThumbnails').innerHTML = product.images.map((img, idx) => 
-                `<img data-filename="pages/AdminDownload" data-linenumber="877" data-visual-selector-id="pages/AdminDownload877" src="${img}" class="thumbnail ${idx===0?'active':''}" onclick="changeMainImage('${img}', ${idx})">`
+                `<img data-filename="pages/AdminDownload" data-linenumber="1036" data-visual-selector-id="pages/AdminDownload1036" src="${img}" class="thumbnail ${idx===0?'active':''}" onclick="changeMainImage('${img}', ${idx})">`
             ).join('');
             
             document.getElementById('detailProductName').textContent = product.name;
@@ -884,16 +1044,16 @@ https://example.com/image2.jpg" required></textarea>
             document.getElementById('detailDescription').textContent = product.description || 'No description available.';
             
             let metaHtml = '';
-            if (product.soldBy) metaHtml += `<div data-filename="pages/AdminDownload" data-linenumber="888" data-visual-selector-id="pages/AdminDownload888" class="meta-item"><svg data-filename='pages/AdminDownload' data-linenumber='888' data-visual-selector-id='pages/AdminDownload888' class="icon-svg" viewBox="0 0 24 24"><path data-filename='pages/AdminDownload' data-linenumber='888' data-visual-selector-id='pages/AdminDownload888' d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm0 3c1.66 0 3 1.34 3 3s-1.34 3-3 3-3-1.34-3-3 1.34-3 3-3zm0 14.2c-2.5 0-4.71-1.28-6-3.22.03-1.99 4-3.08 6-3.08 1.99 0 5.97 1.09 6 3.08-1.29 1.94-3.5 3.22-6 3.22z"/></svg> Sold by: ${product.soldBy}</div>`;
-            if (product.location) metaHtml += `<div data-filename="pages/AdminDownload" data-linenumber="889" data-visual-selector-id="pages/AdminDownload889" class="meta-item"><svg data-filename='pages/AdminDownload' data-linenumber='889' data-visual-selector-id='pages/AdminDownload889' class="icon-svg" viewBox="0 0 24 24"><path data-filename='pages/AdminDownload' data-linenumber='889' data-visual-selector-id='pages/AdminDownload889' d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5s1.12-2.5 2.5-2.5 2.5 1.12 2.5 2.5-1.12 2.5-2.5 2.5z"/></svg> ${product.location}</div>`;
-            metaHtml += `<div data-filename="pages/AdminDownload" data-linenumber="890" data-visual-selector-id="pages/AdminDownload890" class="meta-item"><svg data-filename='pages/AdminDownload' data-linenumber='890' data-visual-selector-id='pages/AdminDownload890' class="icon-svg" viewBox="0 0 24 24"><path data-filename='pages/AdminDownload' data-linenumber='890' data-visual-selector-id='pages/AdminDownload890' d="M20 8h-3V4H3c-1.1 0-2 .9-2 2v11h2c0 1.66 1.34 3 3 3s3-1.34 3-3h6c0 1.66 1.34 3 3 3s3-1.34 3-3h2v-5l-3-4z"/></svg> Free Shipping</div>`;
+            if (product.soldBy) metaHtml += `<div data-filename="pages/AdminDownload" data-linenumber="1047" data-visual-selector-id="pages/AdminDownload1047" class="meta-item"><svg data-filename='pages/AdminDownload' data-linenumber='1047' data-visual-selector-id='pages/AdminDownload1047' class="icon-svg" viewBox="0 0 24 24"><path data-filename='pages/AdminDownload' data-linenumber='1047' data-visual-selector-id='pages/AdminDownload1047' d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm0 3c1.66 0 3 1.34 3 3s-1.34 3-3 3-3-1.34-3-3 1.34-3 3-3zm0 14.2c-2.5 0-4.71-1.28-6-3.22.03-1.99 4-3.08 6-3.08 1.99 0 5.97 1.09 6 3.08-1.29 1.94-3.5 3.22-6 3.22z"/></svg> Sold by: ${product.soldBy}</div>`;
+            if (product.location) metaHtml += `<div data-filename="pages/AdminDownload" data-linenumber="1048" data-visual-selector-id="pages/AdminDownload1048" class="meta-item"><svg data-filename='pages/AdminDownload' data-linenumber='1048' data-visual-selector-id='pages/AdminDownload1048' class="icon-svg" viewBox="0 0 24 24"><path data-filename='pages/AdminDownload' data-linenumber='1048' data-visual-selector-id='pages/AdminDownload1048' d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5s1.12-2.5 2.5-2.5 2.5 1.12 2.5 2.5-1.12 2.5-2.5 2.5z"/></svg> ${product.location}</div>`;
+            metaHtml += `<div data-filename="pages/AdminDownload" data-linenumber="1049" data-visual-selector-id="pages/AdminDownload1049" class="meta-item"><svg data-filename='pages/AdminDownload' data-linenumber='1049' data-visual-selector-id='pages/AdminDownload1049' class="icon-svg" viewBox="0 0 24 24"><path data-filename='pages/AdminDownload' data-linenumber='1049' data-visual-selector-id='pages/AdminDownload1049' d="M20 8h-3V4H3c-1.1 0-2 .9-2 2v11h2c0 1.66 1.34 3 3 3s3-1.34 3-3h6c0 1.66 1.34 3 3 3s3-1.34 3-3h2v-5l-3-4z"/></svg> Free Shipping</div>`;
             document.getElementById('detailMeta').innerHTML = metaHtml;
             
             if (product.sizes && product.sizes.length > 0) {
                 document.getElementById('sizeSelector').innerHTML = `
-                    <label data-filename="pages/AdminDownload" data-linenumber="895" data-visual-selector-id="pages/AdminDownload895">Select Size:</label>
-                    <div data-filename="pages/AdminDownload" data-linenumber="896" data-visual-selector-id="pages/AdminDownload896" class="size-options">
-                        ${product.sizes.map(size => `<div data-filename="pages/AdminDownload" data-linenumber="897" data-visual-selector-id="pages/AdminDownload897" class="size-option ${size===selectedSize?'active':''}" onclick="selectSize('${size}')">${size}</div>`).join('')}
+                    <label data-filename="pages/AdminDownload" data-linenumber="1054" data-visual-selector-id="pages/AdminDownload1054">Select Size:</label>
+                    <div data-filename="pages/AdminDownload" data-linenumber="1055" data-visual-selector-id="pages/AdminDownload1055" class="size-options">
+                        ${product.sizes.map(size => `<div data-filename="pages/AdminDownload" data-linenumber="1056" data-visual-selector-id="pages/AdminDownload1056" class="size-option ${size===selectedSize?'active':''}" onclick="selectSize('${size}')">${size}</div>`).join('')}
                     </div>
                 `;
                 document.getElementById('sizeSelector').style.display = 'block';
@@ -905,15 +1065,15 @@ https://example.com/image2.jpg" required></textarea>
             
             if (product.reviews && product.reviews.length > 0) {
                 document.getElementById('reviewsSection').innerHTML = `
-                    <h2 data-filename="pages/AdminDownload" data-linenumber="909" data-visual-selector-id="pages/AdminDownload909" style="font-size: 26px; font-weight: 800; margin-bottom: 30px;">Customer Reviews</h2>
+                    <h2 data-filename="pages/AdminDownload" data-linenumber="1068" data-visual-selector-id="pages/AdminDownload1068" style="font-size: 26px; font-weight: 800; margin-bottom: 30px;">Customer Reviews</h2>
                     ${product.reviews.map(r => `
-                        <div data-filename="pages/AdminDownload" data-linenumber="911" data-visual-selector-id="pages/AdminDownload911" class="review-item">
-                            <div data-filename="pages/AdminDownload" data-linenumber="912" data-visual-selector-id="pages/AdminDownload912" class="review-header">
-                                <div data-filename="pages/AdminDownload" data-linenumber="913" data-visual-selector-id="pages/AdminDownload913" class="reviewer-name">${r.name}</div>
-                                <div data-filename="pages/AdminDownload" data-linenumber="914" data-visual-selector-id="pages/AdminDownload914" class="review-date">${r.date}</div>
+                        <div data-filename="pages/AdminDownload" data-linenumber="1070" data-visual-selector-id="pages/AdminDownload1070" class="review-item">
+                            <div data-filename="pages/AdminDownload" data-linenumber="1071" data-visual-selector-id="pages/AdminDownload1071" class="review-header">
+                                <div data-filename="pages/AdminDownload" data-linenumber="1072" data-visual-selector-id="pages/AdminDownload1072" class="reviewer-name">${r.name}</div>
+                                <div data-filename="pages/AdminDownload" data-linenumber="1073" data-visual-selector-id="pages/AdminDownload1073" class="review-date">${r.date}</div>
                             </div>
-                            <div data-filename="pages/AdminDownload" data-linenumber="916" data-visual-selector-id="pages/AdminDownload916" class="stars" style="color: #fbbf24; margin-bottom: 8px;">${'★'.repeat(r.rating)}${'☆'.repeat(5-r.rating)}</div>
-                            <div data-filename="pages/AdminDownload" data-linenumber="917" data-visual-selector-id="pages/AdminDownload917" class="review-text">${r.text}</div>
+                            <div data-filename="pages/AdminDownload" data-linenumber="1075" data-visual-selector-id="pages/AdminDownload1075" class="stars" style="color: #fbbf24; margin-bottom: 8px;">${'★'.repeat(r.rating)}${'☆'.repeat(5-r.rating)}</div>
+                            <div data-filename="pages/AdminDownload" data-linenumber="1076" data-visual-selector-id="pages/AdminDownload1076" class="review-text">${r.text}</div>
                         </div>
                     `).join('')}
                 `;
@@ -958,7 +1118,8 @@ https://example.com/image2.jpg" required></textarea>
                     size: selectedSize
                 });
             }
-            save();
+            localStorage.setItem('dm_cart', JSON.stringify(cart));
+            updateCartCount();
             alert(currentDetailProduct.name + ' added to cart!');
             showPage('cart');
         }
@@ -966,11 +1127,11 @@ https://example.com/image2.jpg" required></textarea>
         function renderCart() {
             if (cart.length === 0) {
                 document.getElementById('cartItems').innerHTML = `
-                    <div data-filename="pages/AdminDownload" data-linenumber="970" data-visual-selector-id="pages/AdminDownload970" class="cart-empty">
-                        <svg data-filename="pages/AdminDownload" data-linenumber="971" data-visual-selector-id="pages/AdminDownload971" style="width: 80px; height: 80px; margin-bottom: 20px; opacity: 0.3;" viewBox="0 0 24 24"><path data-filename='pages/AdminDownload' data-linenumber='971' data-visual-selector-id='pages/AdminDownload971' d="M7 18c-1.1 0-1.99.9-1.99 2S5.9 22 7 22s2-.9 2-2-.9-2-2-2zM1 2v2h2l3.6 7.59-1.35 2.45c-.16.28-.25.61-.25.96 0 1.1.9 2 2 2h12v-2H7.42c-.14 0-.25-.11-.25-.25l.03-.12.9-1.63h7.45c.75 0 1.41-.41 1.75-1.03l3.58-6.49c.08-.14.12-.31.12-.48 0-.55-.45-1-1-1H5.21l-.94-2H1zm16 16c-1.1 0-1.99.9-1.99 2s.89 2 1.99 2 2-.9 2-2-.9-2-2-2z"/></svg>
-                        <h2 data-filename="pages/AdminDownload" data-linenumber="972" data-visual-selector-id="pages/AdminDownload972" style="font-size: 26px; font-weight: 700; margin-bottom: 12px;">Your cart is empty</h2>
-                        <p data-filename="pages/AdminDownload" data-linenumber="973" data-visual-selector-id="pages/AdminDownload973" style="color: #666; margin-bottom: 30px;">Discover amazing products and add them to your cart!</p>
-                        <button data-filename="pages/AdminDownload" data-linenumber="974" data-visual-selector-id="pages/AdminDownload974" class="btn-primary" onclick="showPage('home')">Start Shopping</button>
+                    <div data-filename="pages/AdminDownload" data-linenumber="1130" data-visual-selector-id="pages/AdminDownload1130" class="cart-empty">
+                        <svg data-filename="pages/AdminDownload" data-linenumber="1131" data-visual-selector-id="pages/AdminDownload1131" style="width: 80px; height: 80px; margin-bottom: 20px; opacity: 0.3;" viewBox="0 0 24 24"><path data-filename='pages/AdminDownload' data-linenumber='1131' data-visual-selector-id='pages/AdminDownload1131' d="M7 18c-1.1 0-1.99.9-1.99 2S5.9 22 7 22s2-.9 2-2-.9-2-2-2zM1 2v2h2l3.6 7.59-1.35 2.45c-.16.28-.25.61-.25.96 0 1.1.9 2 2 2h12v-2H7.42c-.14 0-.25-.11-.25-.25l.03-.12.9-1.63h7.45c.75 0 1.41-.41 1.75-1.03l3.58-6.49c.08-.14.12-.31.12-.48 0-.55-.45-1-1-1H5.21l-.94-2H1zm16 16c-1.1 0-1.99.9-1.99 2s.89 2 1.99 2 2-.9 2-2-.9-2-2-2z"/></svg>
+                        <h2 data-filename="pages/AdminDownload" data-linenumber="1132" data-visual-selector-id="pages/AdminDownload1132" style="font-size: 26px; font-weight: 700; margin-bottom: 12px;">Your cart is empty</h2>
+                        <p data-filename="pages/AdminDownload" data-linenumber="1133" data-visual-selector-id="pages/AdminDownload1133" style="color: #666; margin-bottom: 30px;">Discover amazing products and add them to your cart!</p>
+                        <button data-filename="pages/AdminDownload" data-linenumber="1134" data-visual-selector-id="pages/AdminDownload1134" class="btn-primary" onclick="showPage('home')">Start Shopping</button>
                     </div>
                 `;
                 document.getElementById('cartTotal').innerHTML = '';
@@ -978,22 +1139,22 @@ https://example.com/image2.jpg" required></textarea>
             }
             
             document.getElementById('cartItems').innerHTML = cart.map(item => 
-                `<div data-filename="pages/AdminDownload" data-linenumber="982" data-visual-selector-id="pages/AdminDownload982" class="cart-item">
-                    <img data-filename="pages/AdminDownload" data-linenumber="983" data-visual-selector-id="pages/AdminDownload983" src="${item.image}" class="cart-item-img">
-                    <div data-filename="pages/AdminDownload" data-linenumber="984" data-visual-selector-id="pages/AdminDownload984" class="cart-item-info">
-                        <div data-filename="pages/AdminDownload" data-linenumber="985" data-visual-selector-id="pages/AdminDownload985" class="cart-item-name">${item.name}</div>
-                        <div data-filename="pages/AdminDownload" data-linenumber="986" data-visual-selector-id="pages/AdminDownload986" class="cart-item-price">R${item.price.toFixed(2)}</div>
-                        ${item.size ? '<div data-filename="pages/AdminDownload" data-linenumber="987" data-visual-selector-id="pages/AdminDownload987" style="font-size:12px;color:#888;margin-top:4px;">Size: '+item.size+'</div>' : ''}
+                `<div data-filename="pages/AdminDownload" data-linenumber="1142" data-visual-selector-id="pages/AdminDownload1142" class="cart-item">
+                    <img data-filename="pages/AdminDownload" data-linenumber="1143" data-visual-selector-id="pages/AdminDownload1143" src="${item.image}" class="cart-item-img">
+                    <div data-filename="pages/AdminDownload" data-linenumber="1144" data-visual-selector-id="pages/AdminDownload1144" class="cart-item-info">
+                        <div data-filename="pages/AdminDownload" data-linenumber="1145" data-visual-selector-id="pages/AdminDownload1145" class="cart-item-name">${item.name}</div>
+                        <div data-filename="pages/AdminDownload" data-linenumber="1146" data-visual-selector-id="pages/AdminDownload1146" class="cart-item-price">R${item.price.toFixed(2)}</div>
+                        ${item.size ? '<div data-filename="pages/AdminDownload" data-linenumber="1147" data-visual-selector-id="pages/AdminDownload1147" style="font-size:12px;color:#888;margin-top:4px;">Size: '+item.size+'</div>' : ''}
                     </div>
-                    <div data-filename="pages/AdminDownload" data-linenumber="989" data-visual-selector-id="pages/AdminDownload989" class="cart-item-controls">
-                        <div data-filename="pages/AdminDownload" data-linenumber="990" data-visual-selector-id="pages/AdminDownload990" class="qty-controls">
-                            <button data-filename="pages/AdminDownload" data-linenumber="991" data-visual-selector-id="pages/AdminDownload991" class="qty-btn" onclick="updateQty(${item.id}, '${item.size||''}', -1)">−</button>
-                            <span data-filename="pages/AdminDownload" data-linenumber="992" data-visual-selector-id="pages/AdminDownload992" class="qty-value">${item.qty}</span>
-                            <button data-filename="pages/AdminDownload" data-linenumber="993" data-visual-selector-id="pages/AdminDownload993" class="qty-btn" onclick="updateQty(${item.id}, '${item.size||''}', 1)">+</button>
+                    <div data-filename="pages/AdminDownload" data-linenumber="1149" data-visual-selector-id="pages/AdminDownload1149" class="cart-item-controls">
+                        <div data-filename="pages/AdminDownload" data-linenumber="1150" data-visual-selector-id="pages/AdminDownload1150" class="qty-controls">
+                            <button data-filename="pages/AdminDownload" data-linenumber="1151" data-visual-selector-id="pages/AdminDownload1151" class="qty-btn" onclick="updateQty('${item.id}', '${item.size||''}', -1)">−</button>
+                            <span data-filename="pages/AdminDownload" data-linenumber="1152" data-visual-selector-id="pages/AdminDownload1152" class="qty-value">${item.qty}</span>
+                            <button data-filename="pages/AdminDownload" data-linenumber="1153" data-visual-selector-id="pages/AdminDownload1153" class="qty-btn" onclick="updateQty('${item.id}', '${item.size||''}', 1)">+</button>
                         </div>
-                        <div data-filename="pages/AdminDownload" data-linenumber="995" data-visual-selector-id="pages/AdminDownload995" style="text-align:right;">
-                            <div data-filename="pages/AdminDownload" data-linenumber="996" data-visual-selector-id="pages/AdminDownload996" style="font-weight:800;font-size:18px;margin-bottom:8px;">R${(item.price*item.qty).toFixed(2)}</div>
-                            <button data-filename="pages/AdminDownload" data-linenumber="997" data-visual-selector-id="pages/AdminDownload997" class="btn-delete" onclick="removeFromCart(${item.id}, '${item.size||''}')">Remove</button>
+                        <div data-filename="pages/AdminDownload" data-linenumber="1155" data-visual-selector-id="pages/AdminDownload1155" style="text-align:right;">
+                            <div data-filename="pages/AdminDownload" data-linenumber="1156" data-visual-selector-id="pages/AdminDownload1156" style="font-weight:800;font-size:18px;margin-bottom:8px;">R${(item.price*item.qty).toFixed(2)}</div>
+                            <button data-filename="pages/AdminDownload" data-linenumber="1157" data-visual-selector-id="pages/AdminDownload1157" class="btn-delete" onclick="removeFromCart('${item.id}', '${item.size||''}')">Remove</button>
                         </div>
                     </div>
                 </div>`
@@ -1001,17 +1162,17 @@ https://example.com/image2.jpg" required></textarea>
             
             const total = cart.reduce((sum,item) => sum + (item.price*item.qty), 0);
             document.getElementById('cartTotal').innerHTML = `
-                <div data-filename="pages/AdminDownload" data-linenumber="1005" data-visual-selector-id="pages/AdminDownload1005" class="cart-total">
-                    <div data-filename="pages/AdminDownload" data-linenumber="1006" data-visual-selector-id="pages/AdminDownload1006" class="total-row">
-                        <span data-filename="pages/AdminDownload" data-linenumber="1007" data-visual-selector-id="pages/AdminDownload1007">Subtotal</span><span data-filename="pages/AdminDownload" data-linenumber="1007" data-visual-selector-id="pages/AdminDownload1007">R${total.toFixed(2)}</span>
+                <div data-filename="pages/AdminDownload" data-linenumber="1165" data-visual-selector-id="pages/AdminDownload1165" class="cart-total">
+                    <div data-filename="pages/AdminDownload" data-linenumber="1166" data-visual-selector-id="pages/AdminDownload1166" class="total-row">
+                        <span data-filename="pages/AdminDownload" data-linenumber="1167" data-visual-selector-id="pages/AdminDownload1167">Subtotal</span><span data-filename="pages/AdminDownload" data-linenumber="1167" data-visual-selector-id="pages/AdminDownload1167">R${total.toFixed(2)}</span>
                     </div>
-                    <div data-filename="pages/AdminDownload" data-linenumber="1009" data-visual-selector-id="pages/AdminDownload1009" class="total-row">
-                        <span data-filename="pages/AdminDownload" data-linenumber="1010" data-visual-selector-id="pages/AdminDownload1010">Shipping</span><span data-filename="pages/AdminDownload" data-linenumber="1010" data-visual-selector-id="pages/AdminDownload1010" style="color:#22c55e;font-weight:700;">FREE</span>
+                    <div data-filename="pages/AdminDownload" data-linenumber="1169" data-visual-selector-id="pages/AdminDownload1169" class="total-row">
+                        <span data-filename="pages/AdminDownload" data-linenumber="1170" data-visual-selector-id="pages/AdminDownload1170">Shipping</span><span data-filename="pages/AdminDownload" data-linenumber="1170" data-visual-selector-id="pages/AdminDownload1170" style="color:#22c55e;font-weight:700;">FREE</span>
                     </div>
-                    <div data-filename="pages/AdminDownload" data-linenumber="1012" data-visual-selector-id="pages/AdminDownload1012" class="total-row grand">
-                        <span data-filename="pages/AdminDownload" data-linenumber="1013" data-visual-selector-id="pages/AdminDownload1013">Total</span><span data-filename="pages/AdminDownload" data-linenumber="1013" data-visual-selector-id="pages/AdminDownload1013">R${total.toFixed(2)}</span>
+                    <div data-filename="pages/AdminDownload" data-linenumber="1172" data-visual-selector-id="pages/AdminDownload1172" class="total-row grand">
+                        <span data-filename="pages/AdminDownload" data-linenumber="1173" data-visual-selector-id="pages/AdminDownload1173">Total</span><span data-filename="pages/AdminDownload" data-linenumber="1173" data-visual-selector-id="pages/AdminDownload1173">R${total.toFixed(2)}</span>
                     </div>
-                    <button data-filename="pages/AdminDownload" data-linenumber="1015" data-visual-selector-id="pages/AdminDownload1015" class="btn-checkout" onclick="showPage('checkout')">Proceed to Checkout</button>
+                    <button data-filename="pages/AdminDownload" data-linenumber="1175" data-visual-selector-id="pages/AdminDownload1175" class="btn-checkout" onclick="showPage('checkout')">Proceed to Checkout</button>
                 </div>
             `;
         }
@@ -1021,37 +1182,42 @@ https://example.com/image2.jpg" required></textarea>
             if (!item) return;
             item.qty += change;
             if (item.qty <= 0) removeFromCart(id, size);
-            else { save(); renderCart(); }
+            else { 
+                localStorage.setItem('dm_cart', JSON.stringify(cart));
+                renderCart(); 
+                updateCartCount();
+            }
         }
 
         function removeFromCart(id, size) {
             cart = cart.filter(c => !(c.id === id && c.size === size));
-            save();
+            localStorage.setItem('dm_cart', JSON.stringify(cart));
             renderCart();
+            updateCartCount();
         }
 
         function renderCheckout() {
             const total = cart.reduce((sum,item) => sum + (item.price*item.qty), 0);
             
             document.getElementById('orderSummaryItems').innerHTML = cart.map(item =>
-                `<div data-filename="pages/AdminDownload" data-linenumber="1038" data-visual-selector-id="pages/AdminDownload1038" class="summary-item">
-                    <div data-filename="pages/AdminDownload" data-linenumber="1039" data-visual-selector-id="pages/AdminDownload1039">
-                        <div data-filename="pages/AdminDownload" data-linenumber="1040" data-visual-selector-id="pages/AdminDownload1040" style="font-weight:600;font-size:14px;">${item.name}</div>
-                        <div data-filename="pages/AdminDownload" data-linenumber="1041" data-visual-selector-id="pages/AdminDownload1041" style="font-size:12px;color:#666;">Qty: ${item.qty}${item.size?' • Size: '+item.size:''}</div>
+                `<div data-filename="pages/AdminDownload" data-linenumber="1203" data-visual-selector-id="pages/AdminDownload1203" class="summary-item">
+                    <div data-filename="pages/AdminDownload" data-linenumber="1204" data-visual-selector-id="pages/AdminDownload1204">
+                        <div data-filename="pages/AdminDownload" data-linenumber="1205" data-visual-selector-id="pages/AdminDownload1205" style="font-weight:600;font-size:14px;">${item.name}</div>
+                        <div data-filename="pages/AdminDownload" data-linenumber="1206" data-visual-selector-id="pages/AdminDownload1206" style="font-size:12px;color:#666;">Qty: ${item.qty}${item.size?' • Size: '+item.size:''}</div>
                     </div>
-                    <div data-filename="pages/AdminDownload" data-linenumber="1043" data-visual-selector-id="pages/AdminDownload1043" style="font-weight:700;">R${(item.price*item.qty).toFixed(2)}</div>
+                    <div data-filename="pages/AdminDownload" data-linenumber="1208" data-visual-selector-id="pages/AdminDownload1208" style="font-weight:700;">R${(item.price*item.qty).toFixed(2)}</div>
                 </div>`
             ).join('');
             
             document.getElementById('orderSummaryTotal').innerHTML = `
-                <div data-filename="pages/AdminDownload" data-linenumber="1048" data-visual-selector-id="pages/AdminDownload1048" class="total-row" style="margin-top: 20px;">
-                    <span data-filename="pages/AdminDownload" data-linenumber="1049" data-visual-selector-id="pages/AdminDownload1049">Subtotal</span><span data-filename="pages/AdminDownload" data-linenumber="1049" data-visual-selector-id="pages/AdminDownload1049">R${total.toFixed(2)}</span>
+                <div data-filename="pages/AdminDownload" data-linenumber="1213" data-visual-selector-id="pages/AdminDownload1213" class="total-row" style="margin-top: 20px;">
+                    <span data-filename="pages/AdminDownload" data-linenumber="1214" data-visual-selector-id="pages/AdminDownload1214">Subtotal</span><span data-filename="pages/AdminDownload" data-linenumber="1214" data-visual-selector-id="pages/AdminDownload1214">R${total.toFixed(2)}</span>
                 </div>
-                <div data-filename="pages/AdminDownload" data-linenumber="1051" data-visual-selector-id="pages/AdminDownload1051" class="total-row">
-                    <span data-filename="pages/AdminDownload" data-linenumber="1052" data-visual-selector-id="pages/AdminDownload1052">Shipping</span><span data-filename="pages/AdminDownload" data-linenumber="1052" data-visual-selector-id="pages/AdminDownload1052" style="color:#22c55e;font-weight:700;">FREE</span>
+                <div data-filename="pages/AdminDownload" data-linenumber="1216" data-visual-selector-id="pages/AdminDownload1216" class="total-row">
+                    <span data-filename="pages/AdminDownload" data-linenumber="1217" data-visual-selector-id="pages/AdminDownload1217">Shipping</span><span data-filename="pages/AdminDownload" data-linenumber="1217" data-visual-selector-id="pages/AdminDownload1217" style="color:#22c55e;font-weight:700;">FREE</span>
                 </div>
-                <div data-filename="pages/AdminDownload" data-linenumber="1054" data-visual-selector-id="pages/AdminDownload1054" class="total-row grand">
-                    <span data-filename="pages/AdminDownload" data-linenumber="1055" data-visual-selector-id="pages/AdminDownload1055">Total</span><span data-filename="pages/AdminDownload" data-linenumber="1055" data-visual-selector-id="pages/AdminDownload1055">R${total.toFixed(2)}</span>
+                <div data-filename="pages/AdminDownload" data-linenumber="1219" data-visual-selector-id="pages/AdminDownload1219" class="total-row grand">
+                    <span data-filename="pages/AdminDownload" data-linenumber="1220" data-visual-selector-id="pages/AdminDownload1220">Total</span><span data-filename="pages/AdminDownload" data-linenumber="1220" data-visual-selector-id="pages/AdminDownload1220">R${total.toFixed(2)}</span>
                 </div>
             `;
         }
@@ -1085,8 +1251,9 @@ https://example.com/image2.jpg" required></textarea>
             
             alert('Order email opened! Please send the email and then transfer the payment to one of our bank accounts. After payment, email proof of payment to darkmasterstore@gmail.com');
             cart = [];
-            save();
+            localStorage.setItem('dm_cart', JSON.stringify(cart));
             showPage('home');
+            updateCartCount();
         }
 
         function searchProducts() {
@@ -1100,16 +1267,16 @@ https://example.com/image2.jpg" required></textarea>
                 (p.description && p.description.toLowerCase().includes(query))
             );
             document.getElementById('productGrid').innerHTML = filtered.map(p => 
-                `<div data-filename="pages/AdminDownload" data-linenumber="1104" data-visual-selector-id="pages/AdminDownload1104" class="product-card">
-                    <div data-filename="pages/AdminDownload" data-linenumber="1105" data-visual-selector-id="pages/AdminDownload1105" class="product-img-container" onclick="showProductDetail(${p.id})">
-                        <img data-filename="pages/AdminDownload" data-linenumber="1106" data-visual-selector-id="pages/AdminDownload1106" src="${p.images[0]}" class="product-img">
+                `<div data-filename="pages/AdminDownload" data-linenumber="1270" data-visual-selector-id="pages/AdminDownload1270" class="product-card">
+                    <div data-filename="pages/AdminDownload" data-linenumber="1271" data-visual-selector-id="pages/AdminDownload1271" class="product-img-container" onclick="showProductDetail('${p.id}')">
+                        <img data-filename="pages/AdminDownload" data-linenumber="1272" data-visual-selector-id="pages/AdminDownload1272" src="${p.images[0]}" class="product-img">
                     </div>
-                    <button data-filename="pages/AdminDownload" data-linenumber="1108" data-visual-selector-id="pages/AdminDownload1108" class="download-product-btn" onclick="event.stopPropagation(); downloadProductImage(${JSON.stringify(p).replace(/"/g, '&quot;')})">
-                        <svg data-filename="pages/AdminDownload" data-linenumber="1109" data-visual-selector-id="pages/AdminDownload1109" class="icon-svg" viewBox="0 0 24 24"><path data-filename='pages/AdminDownload' data-linenumber='1109' data-visual-selector-id='pages/AdminDownload1109' d="M19 9h-4V3H9v6H5l7 7 7-7zM5 18v2h14v-2H5z"/></svg>
+                    <button data-filename="pages/AdminDownload" data-linenumber="1274" data-visual-selector-id="pages/AdminDownload1274" class="download-product-btn" onclick="event.stopPropagation(); downloadProductImage(${JSON.stringify(p).replace(/"/g, '&quot;')})">
+                        <svg data-filename="pages/AdminDownload" data-linenumber="1275" data-visual-selector-id="pages/AdminDownload1275" class="icon-svg" viewBox="0 0 24 24"><path data-filename='pages/AdminDownload' data-linenumber='1275' data-visual-selector-id='pages/AdminDownload1275' d="M19 9h-4V3H9v6H5l7 7 7-7zM5 18v2h14v-2H5z"/></svg>
                     </button>
-                    <div data-filename="pages/AdminDownload" data-linenumber="1111" data-visual-selector-id="pages/AdminDownload1111" class="product-info" onclick="showProductDetail(${p.id})">
-                        <div data-filename="pages/AdminDownload" data-linenumber="1112" data-visual-selector-id="pages/AdminDownload1112" class="product-name">${p.name}</div>
-                        <div data-filename="pages/AdminDownload" data-linenumber="1113" data-visual-selector-id="pages/AdminDownload1113" class="product-price">R${p.price.toFixed(2)}</div>
+                    <div data-filename="pages/AdminDownload" data-linenumber="1277" data-visual-selector-id="pages/AdminDownload1277" class="product-info" onclick="showProductDetail('${p.id}')">
+                        <div data-filename="pages/AdminDownload" data-linenumber="1278" data-visual-selector-id="pages/AdminDownload1278" class="product-name">${p.name}</div>
+                        <div data-filename="pages/AdminDownload" data-linenumber="1279" data-visual-selector-id="pages/AdminDownload1279" class="product-price">R${p.price.toFixed(2)}</div>
                     </div>
                 </div>`
             ).join('');
@@ -1131,30 +1298,38 @@ https://example.com/image2.jpg" required></textarea>
             showPage('home');
         }
 
-        function renderAdmin() {
+        async function renderAdmin() {
+            if (useFirebase) {
+                await loadCategoriesFromFirebase();
+                await loadProductsFromFirebase();
+            } else {
+                loadCategoriesFromLocalStorage();
+                loadProductsFromLocalStorage();
+            }
             updateCategoryDropdown();
+            
             document.getElementById('categoryTable').innerHTML = categories.map(c => 
-                `<tr data-filename="pages/AdminDownload" data-linenumber="1138" data-visual-selector-id="pages/AdminDownload1138">
-                    <td data-filename="pages/AdminDownload" data-linenumber="1139" data-visual-selector-id="pages/AdminDownload1139">${c.name}</td>
-                    <td data-filename="pages/AdminDownload" data-linenumber="1140" data-visual-selector-id="pages/AdminDownload1140">${c.desc||'-'}</td>
-                    <td data-filename="pages/AdminDownload" data-linenumber="1141" data-visual-selector-id="pages/AdminDownload1141"><button data-filename="pages/AdminDownload" data-linenumber="1141" data-visual-selector-id="pages/AdminDownload1141" class="btn-delete" onclick="deleteCategory(${c.id})">Delete</button></td>
+                `<tr data-filename="pages/AdminDownload" data-linenumber="1312" data-visual-selector-id="pages/AdminDownload1312">
+                    <td data-filename="pages/AdminDownload" data-linenumber="1313" data-visual-selector-id="pages/AdminDownload1313">${c.name}</td>
+                    <td data-filename="pages/AdminDownload" data-linenumber="1314" data-visual-selector-id="pages/AdminDownload1314">${c.desc||'-'}</td>
+                    <td data-filename="pages/AdminDownload" data-linenumber="1315" data-visual-selector-id="pages/AdminDownload1315"><button data-filename="pages/AdminDownload" data-linenumber="1315" data-visual-selector-id="pages/AdminDownload1315" class="btn-delete" onclick="deleteCategory('${c.id}')">Delete</button></td>
                 </tr>`
             ).join('');
             
             document.getElementById('productTable').innerHTML = products.map(p => 
-                `<tr data-filename="pages/AdminDownload" data-linenumber="1146" data-visual-selector-id="pages/AdminDownload1146">
-                    <td data-filename="pages/AdminDownload" data-linenumber="1147" data-visual-selector-id="pages/AdminDownload1147"><img data-filename="pages/AdminDownload" data-linenumber="1147" data-visual-selector-id="pages/AdminDownload1147" src="${p.images[0]}" style="width:50px;height:50px;border-radius:8px;object-fit:cover;"></td>
-                    <td data-filename="pages/AdminDownload" data-linenumber="1148" data-visual-selector-id="pages/AdminDownload1148">${p.name}</td>
-                    <td data-filename="pages/AdminDownload" data-linenumber="1149" data-visual-selector-id="pages/AdminDownload1149">R${p.price}</td>
-                    <td data-filename="pages/AdminDownload" data-linenumber="1150" data-visual-selector-id="pages/AdminDownload1150">${getCatName(p.catId)}</td>
-                    <td data-filename="pages/AdminDownload" data-linenumber="1151" data-visual-selector-id="pages/AdminDownload1151"><button data-filename="pages/AdminDownload" data-linenumber="1151" data-visual-selector-id="pages/AdminDownload1151" class="btn-delete" onclick="deleteProduct(${p.id})">Delete</button></td>
+                `<tr data-filename="pages/AdminDownload" data-linenumber="1320" data-visual-selector-id="pages/AdminDownload1320">
+                    <td data-filename="pages/AdminDownload" data-linenumber="1321" data-visual-selector-id="pages/AdminDownload1321"><img data-filename="pages/AdminDownload" data-linenumber="1321" data-visual-selector-id="pages/AdminDownload1321" src="${p.images[0]}" style="width:50px;height:50px;border-radius:8px;object-fit:cover;"></td>
+                    <td data-filename="pages/AdminDownload" data-linenumber="1322" data-visual-selector-id="pages/AdminDownload1322">${p.name}</td>
+                    <td data-filename="pages/AdminDownload" data-linenumber="1323" data-visual-selector-id="pages/AdminDownload1323">R${p.price}</td>
+                    <td data-filename="pages/AdminDownload" data-linenumber="1324" data-visual-selector-id="pages/AdminDownload1324">${getCatName(p.catId)}</td>
+                    <td data-filename="pages/AdminDownload" data-linenumber="1325" data-visual-selector-id="pages/AdminDownload1325"><button data-filename="pages/AdminDownload" data-linenumber="1325" data-visual-selector-id="pages/AdminDownload1325" class="btn-delete" onclick="deleteProduct('${p.id}')">Delete</button></td>
                 </tr>`
             ).join('');
         }
 
         function updateCategoryDropdown() {
-            document.getElementById('prodCategory').innerHTML = '<option data-filename="pages/AdminDownload" data-linenumber="1157" data-visual-selector-id="pages/AdminDownload1157" value="">Select Category</option>' + 
-                categories.map(c => `<option data-filename="pages/AdminDownload" data-linenumber="1158" data-visual-selector-id="pages/AdminDownload1158" value="${c.id}">${c.name}</option>`).join('');
+            document.getElementById('prodCategory').innerHTML = '<option data-filename="pages/AdminDownload" data-linenumber="1331" data-visual-selector-id="pages/AdminDownload1331" value="">Select Category</option>' + 
+                categories.map(c => `<option data-filename="pages/AdminDownload" data-linenumber="1332" data-visual-selector-id="pages/AdminDownload1332" value="${c.id}">${c.name}</option>`).join('');
         }
 
         function getCatName(id) {
@@ -1162,37 +1337,78 @@ https://example.com/image2.jpg" required></textarea>
             return cat ? cat.name : 'N/A';
         }
 
-        function saveCategory(e) {
+        async function saveCategory(e) {
             e.preventDefault();
+            showLoading();
             const cat = {
-                id: Date.now(),
                 name: document.getElementById('catName').value,
                 desc: document.getElementById('catDesc').value,
-                image: document.getElementById('catImage').value || 'https://images.unsplash.com/photo-1441986300917-64674bd600d8?w=600&h=600&fit=crop'
+                image: document.getElementById('catImage').value || 'https://images.unsplash.com/photo-1441986300917-64674bd600d8?w=600&h=600&fit=crop',
+                order: categories.length + 1
             };
-            categories.push(cat);
-            save();
-            renderAdmin();
-            e.target.reset();
-            alert('Category added!');
-        }
-
-        function deleteCategory(id) {
-            if (confirm('Delete this category?')) {
-                categories = categories.filter(c => c.id !== id);
-                save();
-                renderAdmin();
+            
+            try {
+                if (useFirebase) {
+                    const docRef = await db.collection('categories').add(cat);
+                    cat.id = docRef.id;
+                    alert('Category added to Firebase!');
+                } else {
+                    cat.id = 'cat_' + Date.now(); // Generate unique ID for localStorage
+                    alert('Category added to localStorage!');
+                }
+                categories.push(cat);
+                localStorage.setItem('dm_categories', JSON.stringify(categories));
+                await renderAdmin();
+                e.target.reset();
+            } catch (error) {
+                console.error('Error saving category:', error);
+                alert('Error saving category: ' + error.message + '\n\nFalling back to localStorage.');
+                // Explicitly set useFirebase to false if this save failed, to prevent further Firebase attempts
+                useFirebase = false; 
+                cat.id = 'cat_' + Date.now();
+                categories.push(cat);
+                localStorage.setItem('dm_categories', JSON.stringify(categories));
+                await renderAdmin();
+                e.target.reset();
+            } finally {
+                hideLoading();
             }
         }
 
-        function saveProduct(e) {
+        async function deleteCategory(id) {
+            if (confirm('Delete this category?')) {
+                showLoading();
+                try {
+                    if (useFirebase) {
+                        await db.collection('categories').doc(id).delete();
+                        alert('Category deleted from Firebase!');
+                    } else {
+                        alert('Category deleted from localStorage!');
+                    }
+                    categories = categories.filter(c => c.id !== id);
+                    localStorage.setItem('dm_categories', JSON.stringify(categories));
+                    await renderAdmin();
+                } catch (error) {
+                    console.error('Error deleting category:', error);
+                    alert('Error deleting category: ' + error.message + '\n\nFalling back to localStorage.');
+                    useFirebase = false; // Explicitly set false if this path is taken
+                    categories = categories.filter(c => c.id !== id);
+                    localStorage.setItem('dm_categories', JSON.stringify(categories));
+                    await renderAdmin();
+                } finally {
+                    hideLoading();
+                }
+            }
+        }
+
+        async function saveProduct(e) {
             e.preventDefault();
+            showLoading();
             const prod = {
-                id: Date.now(),
                 name: document.getElementById('prodName').value,
                 price: parseFloat(document.getElementById('prodPrice').value),
                 originalPrice: parseFloat(document.getElementById('prodOriginalPrice').value) || null,
-                catId: parseInt(document.getElementById('prodCategory').value),
+                catId: document.getElementById('prodCategory').value,
                 soldBy: document.getElementById('prodSoldBy').value,
                 location: document.getElementById('prodLocation').value,
                 sizes: document.getElementById('prodSizes').value.split(',').map(s => s.trim()).filter(Boolean),
@@ -1203,23 +1419,62 @@ https://example.com/image2.jpg" required></textarea>
             };
             if (document.getElementById('prodSale').checked) prod.tags.push('sale');
             if (document.getElementById('prodNew').checked) prod.tags.push('new');
-            products.push(prod);
-            save();
-            renderAdmin();
-            e.target.reset();
-            alert('Product added!');
-        }
-
-        function deleteProduct(id) {
-            if (confirm('Delete this product?')) {
-                products = products.filter(p => p.id !== id);
-                save();
-                renderAdmin();
+            
+            try {
+                if (useFirebase) {
+                    const docRef = await db.collection('products').add(prod);
+                    prod.id = docRef.id;
+                    alert('Product added to Firebase!');
+                } else {
+                    prod.id = 'prod_' + Date.now(); // Generate unique ID for localStorage
+                    alert('Product added to localStorage!');
+                }
+                products.push(prod);
+                localStorage.setItem('dm_products', JSON.stringify(products));
+                await renderAdmin();
+                e.target.reset();
+            } catch (error) {
+                console.error('Error saving product:', error);
+                alert('Error saving product: ' + error.message + '\n\nFalling back to localStorage.');
+                useFirebase = false; // Explicitly set false if this path is taken
+                prod.id = 'prod_' + Date.now();
+                products.push(prod);
+                localStorage.setItem('dm_products', JSON.stringify(products));
+                await renderAdmin();
+                e.target.reset();
+            } finally {
+                hideLoading();
             }
         }
 
-        renderHome();
-        updateCartCount();
+        async function deleteProduct(id) {
+            if (confirm('Delete this product?')) {
+                showLoading();
+                try {
+                    if (useFirebase) {
+                        await db.collection('products').doc(id).delete();
+                        alert('Product deleted from Firebase!');
+                    } else {
+                        alert('Product deleted from localStorage!');
+                    }
+                    products = products.filter(p => p.id !== id);
+                    localStorage.setItem('dm_products', JSON.stringify(products));
+                    await renderAdmin();
+                } catch (error) {
+                    console.error('Error deleting product:', error);
+                    alert('Error deleting product: ' + error.message + '\n\nFalling back to localStorage.');
+                    useFirebase = false; // Explicitly set false if this path is taken
+                    products = products.filter(p => p.id !== id);
+                    localStorage.setItem('dm_products', JSON.stringify(products));
+                    await renderAdmin();
+                } finally {
+                    hideLoading();
+                }
+            }
+        }
+
+        // Initialize app when page loads
+        initializeApp();
     </script>
 </body>
 </html>
