@@ -1,32 +1,26 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-
-
-
-
- <link rel="manifest" href="manifest.json">
-     <meta name="theme-color" content="#2196f3">
-
-    <link rel="icon" href="https://i.postimg.cc/gJhjVfvM/Logo-for-Dark-Master-Store.png" type="image/png">
-     <link rel="stylesheet" href="style.css">
-
-
-
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Dark Master Store - Complete Platform</title>
-    <script src="https://cdn.tailwindcss.com"></script>
+    <title>Dark Master Store - Premium Shopping</title>
+    <link rel="manifest" href__="manifest.json">
+    <meta name="theme-color" content="#fbbf24">
+    <link rel="icon" href__="https://i.postimg.cc/gJhjVfvM/Logo-for-Dark-Master-Store.png" type="image/png">
+    
+   <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://www.paypal.com/sdk/js?client-id=AZklnsqcDPchhxRGQp4Xs6o3UEkYwQARJe12w5SYrOE2g2Cfagu-h-P7Gd3VaJt-RXDHftuxhdu5oNxi"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    
     <style>
         * { margin: 0; padding: 0; box-sizing: border-box; }
         body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', sans-serif; }
         
-        .product-card { transition: all 0.3s; }
+        .product-card { transition: all 0.3s; cursor: pointer; }
         .product-card:hover { transform: translateY(-8px); box-shadow: 0 20px 40px rgba(0,0,0,0.15); }
-        .category-card { transition: all 0.3s; }
+        .category-card { transition: all 0.3s; cursor: pointer; }
         .category-card:hover { transform: translateY(-8px); box-shadow: 0 20px 40px rgba(0,0,0,0.15); }
         
-        /* COMBO IMAGE GRID - 2x2 */
         .combo-image-grid {
             display: grid;
             grid-template-columns: 1fr 1fr;
@@ -35,40 +29,39 @@
             width: 100%;
             height: 100%;
         }
-        .combo-image-grid img {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-        }
+        .combo-image-grid img { width: 100%; height: 100%; object-fit: cover; }
         
         .image-preview-grid { 
             display: grid; 
-            grid-template-columns: repeat(auto-fill, minmax(120px, 1fr)); 
-            gap: 16px; 
-            margin-top: 16px; 
+            grid-template-columns: repeat(auto-fill, minmax(100px, 1fr)); 
+            gap: 12px; 
+            margin-top: 12px; 
         }
         .image-preview-item { 
             position: relative; 
             aspect-ratio: 1; 
-            border-radius: 16px; 
+            border-radius: 12px; 
             overflow: hidden; 
-            border: 3px solid #fbbf24; 
+            border: 2px solid #fbbf24; 
             box-shadow: 0 4px 12px rgba(0,0,0,0.15); 
         }
         .image-preview-img { width: 100%; height: 100%; object-fit: cover; }
         .image-preview-remove { 
             position: absolute; 
-            top: 6px; 
-            right: 6px; 
+            top: 4px; 
+            right: 4px; 
             background: #ef4444; 
             color: white; 
             border: none; 
             border-radius: 50%; 
-            width: 32px; 
-            height: 32px; 
+            width: 28px; 
+            height: 28px; 
             cursor: pointer; 
-            font-size: 20px; 
+            font-size: 16px; 
             font-weight: bold; 
+            display: flex;
+            align-items: center;
+            justify-content: center;
         }
         .image-preview-remove:hover { background: #dc2626; }
         
@@ -110,149 +103,212 @@
         }
         .btn-primary:disabled { opacity: 0.6; cursor: not-allowed; }
         
-        .upload-btn-wrapper {
-            position: relative;
-            overflow: hidden;
-            display: block;
-            width: 100%;
-        }
-        .upload-btn {
-            background: linear-gradient(135deg, #3b82f6 0%, #2563eb 100%);
-            color: white;
-            font-weight: 700;
-            padding: 24px;
-            border-radius: 12px;
+        .upload-zone {
             border: 3px dashed #60a5fa;
-            cursor: pointer;
+            background: linear-gradient(135deg, #eff6ff 0%, #dbeafe 100%);
+            border-radius: 16px;
+            padding: 32px;
             text-align: center;
+            cursor: pointer;
             transition: all 0.3s;
-            width: 100%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            gap: 12px;
         }
-        .upload-btn:hover {
-            background: linear-gradient(135deg, #2563eb 0%, #1d4ed8 100%);
+        .upload-zone:hover {
+            background: linear-gradient(135deg, #dbeafe 0%, #bfdbfe 100%);
+            border-color: #3b82f6;
             transform: translateY(-2px);
-            box-shadow: 0 8px 20px rgba(59, 130, 246, 0.4);
         }
-        .upload-btn-wrapper input[type=file] {
-            position: absolute;
-            left: 0;
-            top: 0;
-            opacity: 0;
-            cursor: pointer;
-            width: 100%;
-            height: 100%;
-        }
-        
-        .toggle-switch {
-            position: relative;
-            width: 60px;
-            height: 30px;
-            background: #ccc;
-            border-radius: 30px;
-            cursor: pointer;
-            transition: all 0.3s;
-        }
-        .toggle-switch.active {
-            background: #fbbf24;
-        }
-        .toggle-switch::after {
-            content: '';
-            position: absolute;
-            top: 3px;
-            left: 3px;
-            width: 24px;
-            height: 24px;
-            background: white;
-            border-radius: 50%;
-            transition: all 0.3s;
-        }
-        .toggle-switch.active::after {
-            left: 33px;
-        }
-        
-        .bank-image-preview { 
-            width: 100%; 
-            max-width: 200px; 
-            height: 200px; 
-            object-fit: contain; 
-            border-radius: 12px; 
-            border: 2px solid #e5e7eb; 
-            padding: 8px; 
-            background: white; 
-        }
+        .upload-zone input[type=file] { display: none; }
         
         .products-table { width: 100%; border-collapse: collapse; }
-        .products-table th { background: #f9fafb; padding: 16px; text-align: left; font-weight: 700; border-bottom: 2px solid #e5e7eb; }
-        .products-table td { padding: 16px; border-bottom: 1px solid #e5e7eb; vertical-align: middle; }
+        .products-table th { 
+            background: #f9fafb; 
+            padding: 16px; 
+            text-align: left; 
+            font-weight: 700; 
+            border-bottom: 2px solid #e5e7eb; 
+        }
+        .products-table td { 
+            padding: 16px; 
+            border-bottom: 1px solid #e5e7eb; 
+            vertical-align: middle; 
+        }
         .products-table tr:hover { background: #f9fafb; }
+        
+        .banner-slide { animation: bannerFade 0.5s ease-in-out; }
+        @keyframes bannerFade {
+            from { opacity: 0; transform: translateY(-10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        
+        .order-status-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            padding: 6px 12px;
+            border-radius: 20px;
+            font-size: 14px;
+            font-weight: 600;
+        }
+        .status-pending { background: #fef3c7; color: #92400e; }
+        .status-processing { background: #dbeafe; color: #1e40af; }
+        .status-shipped { background: #e0e7ff; color: #4338ca; }
+        .status-delivered { background: #d1fae5; color: #065f46; }
+        .status-cancelled { background: #fee2e2; color: #991b1b; }
+        
+        .modal-overlay {
+            position: fixed;
+            inset: 0;
+            background: rgba(0,0,0,0.7);
+            z-index: 9999;
+            display: none;
+            align-items: center;
+            justify-content: center;
+            padding: 20px;
+        }
+        .modal-overlay.active { display: flex; }
+        .modal-content {
+            background: white;
+            border-radius: 24px;
+            max-width: 800px;
+            width: 100%;
+            max-height: 90vh;
+            overflow-y: auto;
+            box-shadow: 0 25px 50px rgba(0,0,0,0.3);
+        }
+        
+        .code-block {
+            background: #1e293b;
+            color: #e2e8f0;
+            padding: 20px;
+            border-radius: 12px;
+            font-family: 'Courier New', monospace;
+            font-size: 13px;
+            overflow-x: auto;
+            position: relative;
+        }
+        .copy-code-btn {
+            position: absolute;
+            top: 12px;
+            right: 12px;
+            background: #fbbf24;
+            color: black;
+            border: none;
+            padding: 8px 16px;
+            border-radius: 6px;
+            cursor: pointer;
+            font-weight: 600;
+            font-size: 12px;
+        }
+        .copy-code-btn:hover { background: #f59e0b; }
+        
+        .lucide-icon { width: 20px; height: 20px; stroke-width: 2; }
+        
+        .size-badge {
+            display: inline-block;
+            padding: 4px 10px;
+            background: #f3f4f6;
+            border: 1px solid #d1d5db;
+            border-radius: 6px;
+            font-size: 12px;
+            font-weight: 600;
+            margin: 2px;
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+        .size-badge:hover { background: #e5e7eb; }
+        .size-badge.selected { background: #fbbf24; border-color: #f59e0b; }
     </style>
 </head>
 <body class="bg-gray-50">
     
-    <!-- LOADING OVERLAY -->
-    <div id="loadingOverlay" class="loading-overlay">
+    <div id="loadingOverlay" class="loading-overlay hidden">
         <div class="spinner"></div>
-        <p class="text-black text-2xl font-bold mt-6">Loading Products...</p>
-        <p class="text-black text-sm mt-2">Please wait</p>
+        <p class="text-black text-2xl font-bold mt-6">Loading Dark Master Store...</p>
     </div>
 
-    <!-- ADMIN LOGIN POPUP -->
-    <div id="adminLoginPopup" class="hidden fixed inset-0 bg-yellow-400 z-50 flex items-center justify-center">
-        <div class="bg-white rounded-3xl shadow-2xl p-12 w-full max-w-md mx-4 text-center">
-            <div class="w-20 h-20 bg-yellow-400 rounded-full flex items-center justify-center mx-auto mb-6">
-                <svg class="w-10 h-10 text-black" fill="currentColor" viewBox="0 0 20 20">
-                    <path fill-rule="evenodd" d="M5 9V7a5 5 0 0110 0v2a2 2 0 012 2v5a2 2 0 01-2 2H5a2 2 0 01-2-2v-5a2 2 0 012-2zm8-2v2H7V7a3 3 0 016 0z"/>
-                </svg>
+    <div id="authModal" class="modal-overlay">
+        <div class="modal-content">
+            <div class="p-8">
+                <div class="flex items-center justify-between mb-6">
+                    <h2 class="text-2xl font-bold" id="authModalTitle">Sign In</h2>
+                    <button onclick="closeAuthModal()" class="p-2 hover:bg-gray-100 rounded-full">
+                        <svg class="lucide-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12"/>
+                        </svg>
+                    </button>
+                </div>
+                
+                <div id="authFormContainer">
+                    <form id="loginForm" class="space-y-4">
+                        <div>
+                            <label class="block text-sm font-medium mb-2">Email</label>
+                            <input type="email" required name="email" class="w-full px-4 py-3 border rounded-lg" placeholder="your@email.com" />
+                        </div>
+                        <div>
+                            <label class="block text-sm font-medium mb-2">Password</label>
+                            <input type="password" required name="password" class="w-full px-4 py-3 border rounded-lg" placeholder="Enter password" />
+                        </div>
+                        <p id="authError" class="hidden text-red-500 text-sm bg-red-50 p-3 rounded-lg"></p>
+                        <button type="submit" class="w-full bg-yellow-400 text-black font-bold py-3 rounded-lg hover:bg-yellow-500">Sign In</button>
+                    </form>
+                    
+                    <form id="registerForm" class="space-y-4 hidden">
+                        <div>
+                            <label class="block text-sm font-medium mb-2">Full Name</label>
+                            <input type="text" required name="fullName" class="w-full px-4 py-3 border rounded-lg" placeholder="Your full name" />
+                        </div>
+                        <div>
+                            <label class="block text-sm font-medium mb-2">Email</label>
+                            <input type="email" required name="email" class="w-full px-4 py-3 border rounded-lg" placeholder="your@email.com" />
+                        </div>
+                        <div>
+                            <label class="block text-sm font-medium mb-2">Password</label>
+                            <input type="password" required name="password" class="w-full px-4 py-3 border rounded-lg" placeholder="Create password (min 6 chars)" minlength="6" />
+                        </div>
+                        <p id="registerError" class="hidden text-red-500 text-sm bg-red-50 p-3 rounded-lg"></p>
+                        <button type="submit" class="w-full bg-yellow-400 text-black font-bold py-3 rounded-lg hover:bg-yellow-500">Create Account</button>
+                    </form>
+                </div>
+                
+                <div class="mt-6 text-center">
+                    <p class="text-sm text-gray-600">
+                        <span id="authSwitchText">Don't have an account?</span>
+                        <button onclick="toggleAuthMode()" class="text-yellow-600 font-semibold hover:text-yellow-700" id="authSwitchBtn">Sign Up</button>
+                    </p>
+                </div>
             </div>
-            <h2 class="text-3xl font-bold mb-3">Admin Login</h2>
-            <p class="text-gray-600 mb-8">Enter your password to access the dashboard</p>
-            
-            <div class="relative mb-6">
-                <svg class="absolute left-4 top-4 w-5 h-5 text-gray-400" fill="currentColor" viewBox="0 0 20 20">
-                    <path fill-rule="evenodd" d="M5 9V7a5 5 0 0110 0v2a2 2 0 012 2v5a2 2 0 01-2 2H5a2 2 0 01-2-2v-5a2 2 0 012-2zm8-2v2H7V7a3 3 0 016 0z"/>
-                </svg>
-                <input 
-                    type="password"
-                    id="adminPasswordInput"
-                    placeholder="Password"
-                    class="w-full pl-12 pr-12 py-4 border-2 border-gray-300 rounded-xl text-lg focus:outline-none focus:border-yellow-400"
-                    onkeypress="if(event.key==='Enter') attemptAdminLogin()"
-                />
-                <button type="button" onclick="togglePasswordVisibility()" class="absolute right-4 top-4">
-                    <svg id="eyeIcon" class="w-5 h-5 text-gray-400" fill="currentColor" viewBox="0 0 20 20">
-                        <path d="M10 12a2 2 0 100-4 2 2 0 000 4z"/>
-                        <path fill-rule="evenodd" d="M.458 10C1.732 5.943 5.522 3 10 3s8.268 2.943 9.542 7c-1.274 4.057-5.064 7-9.542 7S1.732 14.057.458 10zM14 10a4 4 0 11-8 0 4 4 0 018 0z"/>
-                    </svg>
-                </button>
-            </div>
-            
-            <p id="adminLoginError" class="hidden text-red-500 text-sm mb-4 bg-red-50 p-3 rounded-lg"></p>
-            
-            <button 
-                onclick="attemptAdminLogin()"
-                class="w-full bg-black text-white font-bold py-4 rounded-xl text-lg hover:bg-gray-800 transition"
-            >
-                Login
-            </button>
-            
-            <p class="text-gray-500 text-sm mt-6">Secure admin access for Dark Master Store</p>
         </div>
     </div>
 
-    <!-- MAIN STORE -->
-    <div id="mainStore" class="hidden">
-        <!-- Header -->
-        <div class="bg-red-500 text-white text-center py-2 px-4 text-sm font-bold">
-            🔥 Free delivery on anything that you buy
+    <div id="adminLoginPopup" class="modal-overlay">
+        <div class="modal-content">
+            <div class="p-12 text-center">
+                <div class="w-20 h-20 bg-yellow-400 rounded-full flex items-center justify-center mx-auto mb-6">
+                    <svg class="w-10 h-10 text-black" fill="currentColor" viewBox="0 0 20 20">
+                        <path fill-rule="evenodd" d="M5 9V7a5 5 0 0110 0v2a2 2 0 012 2v5a2 2 0 01-2 2H5a2 2 0 01-2-2v-5a2 2 0 012-2zm8-2v2H7V7a3 3 0 016 0z"/>
+                    </svg>
+                </div>
+                <h2 class="text-3xl font-bold mb-3">Admin Login</h2>
+                <p class="text-gray-600 mb-8">Enter your password to access the dashboard</p>
+                <input type="password" id="adminPasswordInput" placeholder="Admin Password" class="w-full px-4 py-4 border-2 border-gray-300 rounded-xl text-lg focus:outline-none focus:border-yellow-400 mb-6" onkeypress="if(event.key==='Enter') attemptAdminLogin()" />
+                <p id="adminLoginError" class="hidden text-red-500 text-sm mb-4 bg-red-50 p-3 rounded-lg"></p>
+                <button onclick="attemptAdminLogin()" class="w-full bg-black text-white font-bold py-4 rounded-xl text-lg hover:bg-gray-800 transition">Login</button>
+                <button onclick="closeAdminLogin()" class="w-full mt-3 bg-gray-200 text-gray-700 font-bold py-3 rounded-xl hover:bg-gray-300 transition">Cancel</button>
+            </div>
+        </div>
+    </div>
+
+    <div id="mainStore">
+        <div class="bg-gradient-to-r from-red-500 to-orange-500 text-white text-center py-2 px-4 text-sm font-bold">
+            <svg class="w-4 h-4 inline mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"/>
+            </svg>
+            Free delivery on all orders
         </div>
         
-        <div class="bg-yellow-400 px-4 py-4 sticky top-0 z-40">
+        <div class="bg-yellow-400 px-4 py-4 sticky top-0 z-40 shadow-md">
             <div class="flex items-center justify-between max-w-7xl mx-auto">
-                <div class="flex items-center gap-3">
+                <div class="flex items-center gap-3 cursor-pointer" onclick="showPage('home')">
                     <svg class="w-8 h-8 text-black" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 3h2l.4 2M7 13h10l4-8H5.4M7 13L5.4 5M7 13l-2.293 2.293c-.63.63-.184 1.707.707 1.707H17m0 0a2 2 0 100 4 2 2 0 000-4zm-8 2a2 2 0 11-4 0 2 2 0 014 0z"/>
                     </svg>
@@ -260,55 +316,76 @@
                 </div>
                 
                 <div class="flex items-center gap-3">
-                    <button onclick="showPage('cart')" class="relative p-2">
+                    <button id="userProfileBtn" onclick="toggleUserMenu()" class="relative p-2 hover:bg-yellow-500 rounded-lg transition hidden">
+                        <svg class="w-7 h-7 text-black" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z"/>
+                        </svg>
+                    </button>
+                    
+                    <button onclick="showPage('cart')" class="relative p-2 hover:bg-yellow-500 rounded-lg transition">
                         <svg class="w-7 h-7 text-black" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 3h2l.4 2M7 13h10l4-8H5.4M7 13L5.4 5M7 13l-2.293 2.293c-.63.63-.184 1.707.707 1.707H17m0 0a2 2 0 100 4 2 2 0 000-4zm-8 2a2 2 0 11-4 0 2 2 0 014 0z"/>
                         </svg>
-                        <span id="cartCount" class="absolute -top-1 -right-1 bg-red-500 text-white text-xs rounded-full w-5 h-5 flex items-center justify-center font-bold"></span>
+                        <span id="cartCount" class="absolute -top-1 -right-1 bg-red-500 text-white text-xs rounded-full w-5 h-5 flex items-center justify-center font-bold hidden"></span>
                     </button>
                     
-                    <button onclick="showAdminLogin()" class="p-2">
+                    <button id="signInBtn" onclick="openAuthModal('login')" class="p-2 hover:bg-yellow-500 rounded-lg transition">
+                        <svg class="w-7 h-7 text-black" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M11 16l-4-4m0 0l4-4m-4 4h14m-5 4v1a3 3 0 01-3 3H6a3 3 0 01-3-3V7a3 3 0 013-3h7a3 3 0 013 3v1"/>
+                        </svg>
+                    </button>
+                    
+                    <button onclick="showAdminLogin()" class="p-2 hover:bg-yellow-500 rounded-lg transition">
                         <svg class="w-7 h-7 text-black" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z"/>
                         </svg>
                     </button>
                     
-                    <button onclick="toggleMobileMenu()" class="p-2">
+                    <button onclick="toggleMobileMenu()" class="p-2 hover:bg-yellow-500 rounded-lg transition">
                         <svg class="w-7 h-7 text-black" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"/>
                         </svg>
                     </button>
                 </div>
             </div>
+            
+            <div id="userDropdownMenu" class="hidden absolute right-4 top-16 bg-white rounded-xl shadow-2xl p-4 w-64 z-50">
+                <div class="border-b pb-3 mb-3">
+                    <p class="font-semibold text-sm text-gray-700">Signed in as</p>
+                    <p id="userEmailDisplay" class="text-sm text-gray-900 font-medium"></p>
+                </div>
+                <button onclick="showPage('myOrders')" class="w-full text-left px-3 py-2 hover:bg-gray-100 rounded-lg flex items-center gap-2">
+                    <svg class="lucide-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2"/>
+                    </svg>
+                    My Orders
+                </button>
+                <button onclick="userLogout()" class="w-full text-left px-3 py-2 hover:bg-red-50 text-red-600 rounded-lg flex items-center gap-2 mt-2">
+                    <svg class="lucide-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" d="M17 16l4-4m0 0l-4-4m4 4H7m6 4v1a3 3 0 01-3 3H6a3 3 0 01-3-3V7a3 3 0 013-3h4a3 3 0 013 3v1"/>
+                    </svg>
+                    Logout
+                </button>
+            </div>
         </div>
 
-        <!-- Mobile Menu -->
         <div id="mobileMenu" class="hidden bg-white shadow-lg">
             <div class="px-4 py-2 space-y-2">
                 <button onclick="showPage('home')" class="block w-full text-left py-2 px-2 hover:bg-gray-100 rounded">Home</button>
                 <button onclick="showPage('products')" class="block w-full text-left py-2 px-2 hover:bg-gray-100 rounded">Products</button>
-                <button onclick="showPage('sellWithUs')" class="block w-full text-left py-2 px-2 hover:bg-gray-100 rounded">Sell With Us</button>
             </div>
         </div>
 
-        <!-- HOME PAGE -->
         <div id="homePage" class="page">
-            <!-- Hero Section -->
-            <div class="bg-yellow-400 py-16">
+            <div class="bg-gradient-to-br from-yellow-400 via-yellow-500 to-orange-400 py-16">
                 <div class="max-w-4xl mx-auto px-4 text-center">
                     <h1 class="text-4xl md:text-5xl font-bold text-black mb-4">DARK MASTER STORE</h1>
                     <p class="text-xl text-gray-800 mb-8">Beauty & Gadgets for Everyday Greatness</p>
                     
                     <div class="max-w-md mx-auto mb-12">
                         <div class="flex gap-2">
-                            <input
-                                id="searchInput"
-                                type="text"
-                                placeholder="Search for amazing products..."
-                                class="flex-1 px-4 py-3 rounded-lg text-lg"
-                                onkeypress="if(event.key==='Enter') searchProducts()"
-                            />
-                            <button onclick="searchProducts()" class="bg-black text-yellow-400 px-6 py-3 rounded-lg font-bold hover:bg-gray-800">
+                            <input id="searchInput" type="text" placeholder="Search for amazing products..." class="flex-1 px-4 py-3 rounded-lg text-lg border-2 border-gray-200 focus:border-yellow-600 focus:outline-none" onkeypress="if(event.key==='Enter') searchProducts()" />
+                            <button onclick="searchProducts()" class="bg-black text-yellow-400 px-6 py-3 rounded-lg font-bold hover:bg-gray-800 transition">
                                 <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"/>
                                 </svg>
@@ -319,8 +396,7 @@
                     <div class="grid grid-cols-1 md:grid-cols-3 gap-6 max-w-3xl mx-auto">
                         <div class="bg-green-500 text-white rounded-full px-6 py-3 flex items-center justify-center gap-2">
                             <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                <path d="M9 17a2 2 0 11-4 0 2 2 0 014 0zM19 17a2 2 0 11-4 0 2 2 0 014 0z"/>
-                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 16V6a1 1 0 00-1-1H4a1 1 0 00-1 1v10a1 1 0 001 1h1m8-1a1 1 0 01-1 1H9m4-1V8a1 1 0 011-1h2.586a1 1 0 01.707.293l3.414 3.414a1 1 0 01.293.707V16a1 1 0 01-1 1h-1m-6-1a1 1 0 001 1h1M5 17a2 2 0 104 0m-4 0a2 2 0 114 0m6 0a2 2 0 104 0m-4 0a2 2 0 114 0"/>
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"/>
                             </svg>
                             <span class="font-semibold">Free Delivery</span>
                         </div>
@@ -331,14 +407,17 @@
                             <span class="font-semibold">5★ Rated</span>
                         </div>
                         <div class="bg-blue-500 text-white rounded-full px-6 py-3 flex items-center justify-center gap-2">
-                            <span class="text-2xl font-bold">R</span>
-                            <span class="font-semibold">ZAR Currency</span>
+                            <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8c1.11 0 2.08.402 2.599 1M12 8V7m0 1v8m0 0v1m0-1c-1.11 0-2.08-.402-2.599-1M21 12a9 9 0 11-18 0 9 9 0 0118 0z"/>
+                            </svg>
+                            <span class="font-semibold">Secure Payment</span>
                         </div>
                     </div>
                 </div>
             </div>
 
-            <!-- Categories -->
+            <div id="bannerSection" class="py-8 bg-white"></div>
+
             <div class="py-16 bg-white">
                 <div class="max-w-7xl mx-auto px-4">
                     <h2 class="text-3xl font-bold text-center mb-12">Shop by Category</h2>
@@ -346,7 +425,6 @@
                 </div>
             </div>
 
-            <!-- Featured Products -->
             <div class="py-16 bg-gray-50">
                 <div class="max-w-7xl mx-auto px-4">
                     <div class="flex justify-between items-center mb-8">
@@ -354,28 +432,27 @@
                             <h2 class="text-3xl font-bold mb-2">Featured Products</h2>
                             <p class="text-gray-600">Hand-picked favorites just for you</p>
                         </div>
-                        <button onclick="showPage('products')" class="bg-yellow-400 text-black px-6 py-3 rounded-lg font-bold hover:bg-yellow-500">
-                            View All Products →
+                        <button onclick="showPage('products')" class="bg-yellow-400 text-black px-6 py-3 rounded-lg font-bold hover:bg-yellow-500 transition">
+                            View All
+                            <svg class="w-4 h-4 inline ml-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"/>
+                            </svg>
                         </button>
                     </div>
                     <div id="featuredProducts" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6"></div>
                 </div>
             </div>
 
-            <!-- More Products -->
             <div class="py-16 bg-white">
                 <div class="max-w-7xl mx-auto px-4">
                     <h2 class="text-3xl font-bold text-center mb-12">Discover More</h2>
                     <div id="moreProducts" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6"></div>
                     <div class="text-center mt-12">
-                        <button onclick="showPage('products')" class="bg-yellow-400 text-black px-8 py-3 rounded-lg font-bold hover:bg-yellow-500 text-lg">
-                            View All Products
-                        </button>
+                        <button onclick="showPage('products')" class="bg-yellow-400 text-black px-8 py-3 rounded-lg font-bold hover:bg-yellow-500 text-lg transition">View All Products</button>
                     </div>
                 </div>
             </div>
 
-            <!-- Footer -->
             <div class="bg-gray-800 text-white py-12">
                 <div class="max-w-7xl mx-auto px-4 grid md:grid-cols-2 gap-8">
                     <div>
@@ -405,37 +482,27 @@
             </div>
         </div>
 
-        <!-- PRODUCTS PAGE -->
         <div id="productsPage" class="page hidden min-h-screen">
             <div class="max-w-7xl mx-auto px-4 py-8">
                 <h1 class="text-3xl font-bold mb-6">All Products</h1>
-                
                 <div class="flex flex-col md:flex-row gap-4 mb-6">
-                    <input
-                        id="productsSearchInput"
-                        type="text"
-                        placeholder="Search products..."
-                        class="flex-1 px-4 py-3 border rounded-lg"
-                        onkeyup="filterProducts()"
-                    />
+                    <input id="productsSearchInput" type="text" placeholder="Search products..." class="flex-1 px-4 py-3 border rounded-lg" onkeyup="filterProducts()" />
                     <select id="categoryFilter" class="px-4 py-3 border rounded-lg" onchange="filterProducts()">
                         <option value="">All Categories</option>
                     </select>
                     <select id="sortFilter" class="px-4 py-3 border rounded-lg" onchange="filterProducts()">
-                        <option value="newest">Newest First</option>
+                        <option value="default">Default Order</option>
                         <option value="price-low">Price: Low to High</option>
                         <option value="price-high">Price: High to Low</option>
                     </select>
                 </div>
-
                 <div id="allProductsGrid" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6"></div>
             </div>
         </div>
 
-        <!-- PRODUCT DETAIL PAGE -->
         <div id="productDetailPage" class="page hidden min-h-screen">
             <div class="max-w-7xl mx-auto px-4 py-8">
-                <button onclick="showPage('products')" class="mb-6 flex items-center gap-2 text-gray-600 hover:text-black">
+                <button onclick="showPage('products')" class="mb-6 flex items-center gap-2 text-gray-600 hover:text-black transition">
                     <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"/>
                     </svg>
@@ -445,7 +512,6 @@
             </div>
         </div>
 
-        <!-- CART PAGE -->
         <div id="cartPage" class="page hidden min-h-screen">
             <div class="max-w-4xl mx-auto px-4 py-8">
                 <h1 class="text-3xl font-bold mb-8">Shopping Cart</h1>
@@ -453,10 +519,9 @@
             </div>
         </div>
 
-        <!-- CHECKOUT PAGE -->
         <div id="checkoutPage" class="page hidden min-h-screen">
             <div class="max-w-4xl mx-auto px-4 py-8">
-                <button onclick="showPage('cart')" class="mb-6 flex items-center gap-2 text-gray-600 hover:text-black">
+                <button onclick="showPage('cart')" class="mb-6 flex items-center gap-2 text-gray-600 hover:text-black transition">
                     <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"/>
                     </svg>
@@ -467,109 +532,15 @@
             </div>
         </div>
 
-        <!-- SELL WITH US PAGE -->
-        <div id="sellWithUsPage" class="page hidden min-h-screen">
-            <div class="max-w-4xl mx-auto px-4 py-12">
-                <h1 class="text-4xl font-bold text-center mb-8">Sell with Dark Master Store</h1>
-                <p class="text-xl text-gray-600 text-center max-w-2xl mx-auto mb-12">
-                    Join our marketplace and reach thousands of customers across South Africa.
-                </p>
-                
-                <div class="grid md:grid-cols-4 gap-6 mb-12">
-                    <div class="text-center">
-                        <div class="w-16 h-16 bg-yellow-400 rounded-full flex items-center justify-center mx-auto mb-4">
-                            <svg class="w-8 h-8 text-black" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z"/>
-                            </svg>
-                        </div>
-                        <h3 class="font-bold mb-2">Large Customer Base</h3>
-                        <p class="text-sm text-gray-600">Thousands of active shoppers</p>
-                    </div>
-                    <div class="text-center">
-                        <div class="w-16 h-16 bg-green-500 rounded-full flex items-center justify-center mx-auto mb-4">
-                            <span class="text-3xl font-bold text-white">R</span>
-                        </div>
-                        <h3 class="font-bold mb-2">Low Commission</h3>
-                        <p class="text-sm text-gray-600">Only 10% on sales</p>
-                    </div>
-                    <div class="text-center">
-                        <div class="w-16 h-16 bg-blue-500 rounded-full flex items-center justify-center mx-auto mb-4">
-                            <svg class="w-8 h-8 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                <path d="M9 17a2 2 0 11-4 0 2 2 0 014 0zM19 17a2 2 0 11-4 0 2 2 0 014 0z"/>
-                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 16V6a1 1 0 00-1-1H4a1 1 0 00-1 1v10a1 1 0 001 1h1m8-1a1 1 0 01-1 1H9m4-1V8a1 1 0 011-1h2.586a1 1 0 01.707.293l3.414 3.414a1 1 0 01.293.707V16a1 1 0 01-1 1h-1m-6-1a1 1 0 001 1h1M5 17a2 2 0 104 0m-4 0a2 2 0 114 0m6 0a2 2 0 104 0m-4 0a2 2 0 114 0"/>
-                            </svg>
-                        </div>
-                        <h3 class="font-bold mb-2">Easy Fulfillment</h3>
-                        <p class="text-sm text-gray-600">Manage your own shipping</p>
-                    </div>
-                    <div class="text-center">
-                        <div class="w-16 h-16 bg-purple-500 rounded-full flex items-center justify-center mx-auto mb-4">
-                            <svg class="w-8 h-8 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"/>
-                            </svg>
-                        </div>
-                        <h3 class="font-bold mb-2">Easy Setup</h3>
-                        <p class="text-sm text-gray-600">Quick application process</p>
-                    </div>
-                </div>
-
-                <div class="bg-white rounded-2xl shadow-lg p-8">
-                    <h2 class="text-2xl font-bold text-center mb-6">Vendor Application</h2>
-                    <form id="vendorForm" class="space-y-6">
-                        <div class="grid md:grid-cols-2 gap-4">
-                            <div>
-                                <label class="block text-sm font-medium mb-2">Business Name *</label>
-                                <input required name="business_name" class="w-full px-4 py-3 border rounded-lg" placeholder="Your business name" />
-                            </div>
-                            <div>
-                                <label class="block text-sm font-medium mb-2">Contact Person *</label>
-                                <input required name="contact_person" class="w-full px-4 py-3 border rounded-lg" placeholder="Your full name" />
-                            </div>
-                        </div>
-                        <div class="grid md:grid-cols-2 gap-4">
-                            <div>
-                                <label class="block text-sm font-medium mb-2">Phone Number *</label>
-                                <input required name="phone" class="w-full px-4 py-3 border rounded-lg" placeholder="+27 XX XXX XXXX" />
-                            </div>
-                            <div>
-                                <label class="block text-sm font-medium mb-2">WhatsApp Number</label>
-                                <input name="whatsapp" class="w-full px-4 py-3 border rounded-lg" placeholder="+27 XX XXX XXXX" />
-                            </div>
-                        </div>
-                        <div>
-                            <label class="block text-sm font-medium mb-2">Email Address</label>
-                            <input type="email" name="email" class="w-full px-4 py-3 border rounded-lg" placeholder="your@email.com" />
-                        </div>
-                        <div>
-                            <label class="block text-sm font-medium mb-2">Business Description *</label>
-                            <textarea required name="description" rows="4" class="w-full px-4 py-3 border rounded-lg" placeholder="Tell us about your business..."></textarea>
-                        </div>
-                        <div class="bg-yellow-50 p-4 rounded-lg">
-                            <h3 class="font-semibold mb-2">Commission Structure:</h3>
-                            <p class="text-sm text-gray-700">
-                                • 10% commission on all sales<br/>
-                                • You keep 90% of the sale price<br/>
-                                • Monthly payouts via bank transfer<br/>
-                                • No upfront fees
-                            </p>
-                        </div>
-                        <button type="submit" class="w-full bg-yellow-400 text-black font-bold py-4 rounded-lg hover:bg-yellow-500 text-lg">
-                            Submit Application
-                        </button>
-                    </form>
-                </div>
-
-                <div class="text-center mt-12">
-                    <p class="text-gray-600 mb-2">Questions about becoming a vendor?</p>
-                    <p class="font-semibold">WhatsApp: +27 81 809 6159</p>
-                </div>
+        <div id="myOrdersPage" class="page hidden min-h-screen">
+            <div class="max-w-6xl mx-auto px-4 py-8">
+                <h1 class="text-3xl font-bold mb-8">My Orders</h1>
+                <div id="myOrdersContent"></div>
             </div>
         </div>
     </div>
 
-    <!-- ADMIN PANEL -->
-    <div id="adminPanel" class="hidden min-h-screen">
-        <!-- Admin Header -->
+    <div id="adminPanel" class="hidden min-h-screen bg-gray-50">
         <div class="bg-white border-b px-4 py-4 flex items-center justify-between sticky top-0 z-40">
             <button onclick="toggleAdminSidebar()" class="p-2 hover:bg-gray-100 rounded-lg">
                 <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -580,7 +551,6 @@
             <div class="w-10"></div>
         </div>
 
-        <!-- Admin Sidebar -->
         <div id="adminSidebar" class="fixed inset-0 bg-black bg-opacity-50 z-50 hidden" onclick="event.target===this && toggleAdminSidebar()">
             <div class="w-72 h-full bg-gray-900 text-white flex flex-col">
                 <div class="p-6 border-b border-gray-700 flex items-center justify-between">
@@ -600,13 +570,7 @@
                         <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 5a1 1 0 011-1h4a1 1 0 011 1v7a1 1 0 01-1 1H5a1 1 0 01-1-1V5zM14 5a1 1 0 011-1h4a1 1 0 011 1v7a1 1 0 01-1 1h-4a1 1 0 01-1-1V5zM4 16a1 1 0 011-1h4a1 1 0 011 1v3a1 1 0 01-1 1H5a1 1 0 01-1-1v-3zM14 16a1 1 0 011-1h4a1 1 0 011 1v3a1 1 0 01-1 1h-4a1 1 0 01-1-1v-3z"/>
                         </svg>
-                        Dashboard
-                    </button>
-                    <button onclick="showAdminPage('products')" class="w-full flex items-center gap-3 px-4 py-3 rounded-lg hover:bg-gray-800 transition">
-                        <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M20 7l-8-4-8 4m16 0l-8 4m8-4v10l-8 4m0-10L4 7m8 4v10M4 7v10l8 4"/>
-                        </svg>
-                        Products
+                        Dashboard & Analytics
                     </button>
                     <button onclick="showAdminPage('categories')" class="w-full flex items-center gap-3 px-4 py-3 rounded-lg hover:bg-gray-800 transition">
                         <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -614,18 +578,23 @@
                         </svg>
                         Categories
                     </button>
+                    <button onclick="showAdminPage('products')" class="w-full flex items-center gap-3 px-4 py-3 rounded-lg hover:bg-gray-800 transition">
+                        <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M20 7l-8-4-8 4m16 0l-8 4m8-4v10l-8 4m0-10L4 7m8 4v10M4 7v10l8 4"/>
+                        </svg>
+                        Products
+                    </button>
                     <button onclick="showAdminPage('orders')" class="w-full flex items-center gap-3 px-4 py-3 rounded-lg hover:bg-gray-800 transition">
                         <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2m-3 7h3m-3 4h3m-6-4h.01M9 16h.01"/>
                         </svg>
                         Orders
                     </button>
-                    <button onclick="showAdminPage('settings')" class="w-full flex items-center gap-3 px-4 py-3 rounded-lg hover:bg-gray-800 transition">
+                    <button onclick="showAdminPage('banners')" class="w-full flex items-center gap-3 px-4 py-3 rounded-lg hover:bg-gray-800 transition">
                         <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10.325 4.317c.426-1.756 2.924-1.756 3.35 0a1.724 1.724 0 002.573 1.066c1.543-.94 3.31.826 2.37 2.37a1.724 1.724 0 001.065 2.572c1.756.426 1.756 2.924 0 3.35a1.724 1.724 0 00-1.066 2.573c.94 1.543-.826 3.31-2.37 2.37a1.724 1.724 0 00-2.572 1.065c-.426 1.756-2.924 1.756-3.35 0a1.724 1.724 0 00-2.573-1.066c-1.543.94-3.31-.826-2.37-2.37a1.724 1.724 0 00-1.065-2.572c-1.756-.426-1.756-2.924 0-3.35a1.724 1.724 0 001.066-2.573c-.94-1.543.826-3.31 2.37-2.37.996.608 2.296.07 2.572-1.065z"/>
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"/>
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z"/>
                         </svg>
-                        Settings
+                        Banners
                     </button>
                 </nav>
                 
@@ -640,16 +609,38 @@
             </div>
         </div>
 
-        <!-- Admin Pages Container -->
         <div id="adminContent" class="p-4 md:p-8"></div>
     </div>
 
     <script type="module">
-        // Import Firebase
-        import { initializeApp } from 'https://www.gstatic.com/firebasejs/10.7.1/firebase-app.js';
-        import { getFirestore, collection, getDocs, addDoc, updateDoc, deleteDoc, doc } from 'https://www.gstatic.com/firebasejs/10.7.1/firebase-firestore.js';
+        import { initializeApp as initFirebaseApp } from 'https://www.gstatic.com/firebasejs/10.7.1/firebase-app.js';
+        import { 
+            getAuth, 
+            createUserWithEmailAndPassword, 
+            signInWithEmailAndPassword, 
+            signOut, 
+            onAuthStateChanged,
+            updateProfile
+        } from 'https://www.gstatic.com/firebasejs/10.7.1/firebase-auth.js';
+        import { 
+            getFirestore, 
+            collection, 
+            getDocs, 
+            addDoc, 
+            updateDoc, 
+            deleteDoc, 
+            doc,
+            query,
+            where,
+            orderBy as firestoreOrderBy
+        } from 'https://www.gstatic.com/firebasejs/10.7.1/firebase-firestore.js';
+        import {
+            getStorage,
+            ref as storageRef,
+            uploadBytes,
+            getDownloadURL
+        } from 'https://www.gstatic.com/firebasejs/10.7.1/firebase-storage.js';
 
-        // Firebase configuration
         const firebaseConfig = {
             apiKey: "AIzaSyBComq9s_okIVValRxM7QfWU2PuXVQHCnA",
             authDomain: "dark-master-store.firebaseapp.com",
@@ -660,80 +651,272 @@
             measurementId: "G-5SF30SSHG2"
         };
 
-        // Initialize Firebase
-        const app = initializeApp(firebaseConfig);
+        const app = initFirebaseApp(firebaseConfig);
+        const auth = getAuth(app);
         const db = getFirestore(app);
+        const storage = getStorage(app);
 
-        // Global state
+        window.HARDCODED_PRODUCTS = [
+            {
+                id: 'prod_001',
+                name: 'Premium Wireless Headphones',
+                description: 'High-quality wireless headphones with noise cancellation and 30-hour battery life.',
+                price: 899.99,
+                original_price: 1299.99,
+                category_id: 'cat_electronics',
+                rating: 4.8,
+                rating_count: 245,
+                shipping_days: '2-3 days',
+                in_stock: true,
+                is_featured: true,
+                is_sale: true,
+                is_combo: false,
+                sizes: ['One Size'],
+                images: [
+                    'https://images.unsplash.com/photo-1505740420928-5e560c06d30e?w=800',
+                    'https://images.unsplash.com/photo-1484704849700-f032a568e944?w=800'
+                ]
+            },
+            {
+                id: 'prod_002',
+                name: 'Luxury Skincare Combo Pack',
+                description: '4-piece premium skincare set including cleanser, toner, serum, and moisturizer.',
+                price: 1499.99,
+                original_price: 2199.99,
+                category_id: 'cat_beauty',
+                rating: 4.9,
+                rating_count: 389,
+                shipping_days: '1-2 days',
+                in_stock: true,
+                is_featured: true,
+                is_sale: true,
+                is_combo: true,
+                sizes: ['Standard'],
+                images: [
+                    'https://images.unsplash.com/photo-1556228720-195a672e8a03?w=400',
+                    'https://images.unsplash.com/photo-1570194065650-d99fb4bedf0a?w=400',
+                    'https://images.unsplash.com/photo-1608248543803-ba4f8c70ae0b?w=400',
+                    'https://images.unsplash.com/photo-1590736969955-71cc94901144?w=400'
+                ]
+            }
+        ];
+
+        window.HARDCODED_CATEGORIES = [
+            {
+                id: 'cat_electronics',
+                name: 'Electronics',
+                description: 'Latest gadgets and tech',
+                image: 'https://images.unsplash.com/photo-1498049794561-7780e7231661?w=400',
+                order: 1
+            },
+            {
+                id: 'cat_beauty',
+                name: 'Beauty & Skincare',
+                description: 'Premium beauty products',
+                image: 'https://images.unsplash.com/photo-1596462502278-27bfdc403348?w=400',
+                order: 2
+            }
+        ];
+
+        window.HARDCODED_BANNERS = [
+            {
+                id: 'banner_001',
+                title: 'SUMMER SALE',
+                subtitle: 'Up to 50% OFF on selected items',
+                image: 'https://images.unsplash.com/photo-1607082348824-0a96f2a4b9da?w=1200',
+                bg_color: 'from-purple-500 to-pink-500',
+                link: 'products'
+            },
+            {
+                id: 'banner_002',
+                title: 'NEW ARRIVALS',
+                subtitle: 'Check out our latest collection',
+                image: 'https://images.unsplash.com/photo-1441986300917-64674bd600d8?w=1200',
+                bg_color: 'from-blue-500 to-cyan-500',
+                link: 'products'
+            },
+            {
+                id: 'banner_003',
+                title: 'FREE SHIPPING',
+                subtitle: 'On all orders this week',
+                image: 'https://images.unsplash.com/photo-1607082349566-187342175e2f?w=1200',
+                bg_color: 'from-green-500 to-teal-500',
+                link: 'products'
+            }
+        ];
+
         window.appState = {
-            products: [],
-            categories: [],
+            products: [...window.HARDCODED_PRODUCTS],
+            categories: [...window.HARDCODED_CATEGORIES],
+            banners: [...window.HARDCODED_BANNERS],
             orders: [],
             cart: JSON.parse(localStorage.getItem('darkmaster_cart')) || [],
             currentPage: 'home',
             currentProduct: null,
-            isAdmin: false
+            isAdmin: false,
+            currentUser: null,
+            currentBannerIndex: 0,
+            uploadedImages: [],
+            editingProductId: null
         };
 
-        // Hide loading and show app
-        function hideLoading() {
-            document.getElementById('loadingOverlay').classList.add('hidden');
-            document.getElementById('mainStore').classList.remove('hidden');
+        let revenueChart = null;
+
+        onAuthStateChanged(auth, (user) => {
+            if (user) {
+                window.appState.currentUser = user;
+                document.getElementById('userProfileBtn').classList.remove('hidden');
+                document.getElementById('signInBtn').classList.add('hidden');
+                document.getElementById('userEmailDisplay').textContent = user.email;
+            } else {
+                window.appState.currentUser = null;
+                document.getElementById('userProfileBtn').classList.add('hidden');
+                document.getElementById('signInBtn').classList.remove('hidden');
+            }
+        });
+
+        window.openAuthModal = function(mode = 'login') {
+            document.getElementById('authModal').classList.add('active');
+            if (mode === 'login') {
+                document.getElementById('loginForm').classList.remove('hidden');
+                document.getElementById('registerForm').classList.add('hidden');
+                document.getElementById('authModalTitle').textContent = 'Sign In';
+                document.getElementById('authSwitchText').textContent = "Don't have an account?";
+                document.getElementById('authSwitchBtn').textContent = 'Sign Up';
+            } else {
+                document.getElementById('loginForm').classList.add('hidden');
+                document.getElementById('registerForm').classList.remove('hidden');
+                document.getElementById('authModalTitle').textContent = 'Create Account';
+                document.getElementById('authSwitchText').textContent = 'Already have an account?';
+                document.getElementById('authSwitchBtn').textContent = 'Sign In';
+            }
+        };
+
+        window.closeAuthModal = function() {
+            document.getElementById('authModal').classList.remove('active');
+            document.getElementById('authError').classList.add('hidden');
+            document.getElementById('registerError').classList.add('hidden');
+        };
+
+        window.toggleAuthMode = function() {
+            const isLoginMode = !document.getElementById('loginForm').classList.contains('hidden');
+            openAuthModal(isLoginMode ? 'register' : 'login');
+        };
+
+        document.getElementById('loginForm').addEventListener('submit', async (e) => {
+            e.preventDefault();
+            const formData = new FormData(e.target);
+            try {
+                await signInWithEmailAndPassword(auth, formData.get('email'), formData.get('password'));
+                closeAuthModal();
+                showNotification('Welcome back!', 'success');
+            } catch (error) {
+                document.getElementById('authError').textContent = error.message;
+                document.getElementById('authError').classList.remove('hidden');
+            }
+        });
+
+        document.getElementById('registerForm').addEventListener('submit', async (e) => {
+            e.preventDefault();
+            const formData = new FormData(e.target);
+            try {
+                const userCredential = await createUserWithEmailAndPassword(auth, formData.get('email'), formData.get('password'));
+                await updateProfile(userCredential.user, { displayName: formData.get('fullName') });
+                closeAuthModal();
+                showNotification('Account created successfully!', 'success');
+            } catch (error) {
+                document.getElementById('registerError').textContent = error.message;
+                document.getElementById('registerError').classList.remove('hidden');
+            }
+        });
+
+        window.userLogout = async function() {
+            try {
+                await signOut(auth);
+                showNotification('Logged out successfully', 'success');
+                showPage('home');
+            } catch (error) {
+                alert('Error logging out: ' + error.message);
+            }
+        };
+
+        window.toggleUserMenu = function() {
+            document.getElementById('userDropdownMenu').classList.toggle('hidden');
+        };
+
+        document.addEventListener('click', (e) => {
+            const userBtn = document.getElementById('userProfileBtn');
+            const userMenu = document.getElementById('userDropdownMenu');
+            if (userBtn && userMenu && !userBtn.contains(e.target) && !userMenu.contains(e.target)) {
+                userMenu.classList.add('hidden');
+            }
+        });
+
+    async function initializeApp() {
+    // INSTANT: Show hardcoded products immediately
+    applyDailyRandomization();
+    renderHomePage();
+    updateCartDisplay();
+    document.getElementById('loadingOverlay').classList.add('hidden');
+    
+    // BACKGROUND: Load Firebase data without blocking
+    loadCategoriesFromFirestore().then(() => renderHomePage());
+    loadProductsFromFirestore().then(() => renderHomePage());
+    loadOrdersFromFirestore();
+}
+
+        function applyDailyRandomization() {
+            const dayOfYear = Math.floor((new Date() - new Date(new Date().getFullYear(), 0, 0)) / 86400000);
+            const shuffled = [...window.appState.products];
+            let seed = dayOfYear;
+            for (let i = shuffled.length - 1; i > 0; i--) {
+                seed = (seed * 9301 + 49297) % 233280;
+                const j = Math.floor((seed / 233280) * (i + 1));
+                [shuffled[i], shuffled[j]] = [shuffled[j], shuffled[i]];
+            }
+            window.appState.products = shuffled;
+            window.appState.currentBannerIndex = dayOfYear % window.appState.banners.length;
         }
 
-        // Load all data from Firestore
-        async function loadAllData() {
+        async function loadCategoriesFromFirestore() {
             try {
-                console.log('Loading data from Firestore...');
-                
-                // Load categories
-                const categoriesSnapshot = await getDocs(collection(db, 'categories'));
-                window.appState.categories = categoriesSnapshot.docs.map(doc => ({
-                    id: doc.id,
-                    ...doc.data()
-                }));
-                console.log(`Loaded ${window.appState.categories.length} categories`);
+                const snapshot = await getDocs(collection(db, 'categories'));
+                const firebaseCategories = snapshot.docs.map(doc => ({ id: doc.id, ...doc.data() }));
+                window.appState.categories = [...window.HARDCODED_CATEGORIES, ...firebaseCategories];
+            } catch (error) {
+                console.error('Error loading categories:', error);
+            }
+        }
 
-                // Load products
-                const productsSnapshot = await getDocs(collection(db, 'products'));
-                window.appState.products = productsSnapshot.docs.map(doc => ({
-                    id: doc.id,
-                    ...doc.data()
-                }));
-                console.log(`Loaded ${window.appState.products.length} products`);
+        async function loadProductsFromFirestore() {
+            try {
+                const snapshot = await getDocs(collection(db, 'products'));
+                const firebaseProducts = snapshot.docs.map(doc => ({ id: doc.id, ...doc.data() }));
+                window.appState.products = [...window.HARDCODED_PRODUCTS, ...firebaseProducts];
+            } catch (error) {
+                console.error('Error loading products:', error);
+            }
+        }
 
-                // Load orders
+        async function loadOrdersFromFirestore() {
+            try {
                 const ordersSnapshot = await getDocs(collection(db, 'orders'));
                 window.appState.orders = ordersSnapshot.docs.map(doc => ({
                     id: doc.id,
                     ...doc.data()
                 }));
-                console.log(`Loaded ${window.appState.orders.length} orders`);
-
-                // Render initial page
-                renderHomePage();
-                updateCartDisplay();
-                
-                // Hide loading overlay
-                hideLoading();
-                
             } catch (error) {
-                console.error('Error loading data:', error);
-                alert('Error loading data: ' + error.message);
-                hideLoading();
+                console.error('Error loading orders:', error);
             }
         }
 
-        // Render home page
         function renderHomePage() {
-            // Render categories
+            renderBanner();
             const categoriesGrid = document.getElementById('categoriesGrid');
             categoriesGrid.innerHTML = window.appState.categories.map(cat => `
-                <div class="category-card bg-white rounded-2xl shadow-lg overflow-hidden cursor-pointer" onclick="filterByCategory('${cat.id}')">
+                <div class="category-card bg-white rounded-2xl shadow-lg overflow-hidden" onclick="filterByCategory('${cat.id}')">
                     <div class="relative aspect-square">
-                        <img src="${cat.image || 'https://images.unsplash.com/photo-1441986300917-64674bd600d8?w=400'}" 
-                             alt="${cat.name}" 
-                             class="w-full h-full object-cover" />
+                        <img src="${cat.image || 'https://images.unsplash.com/photo-1441986300917-64674bd600d8?w=400'}" alt="${cat.name}" class="w-full h-full object-cover" />
                         <div class="absolute inset-0 bg-gradient-to-t from-black/80 to-transparent"></div>
                         <div class="absolute bottom-0 left-0 right-0 p-4 text-white">
                             <h3 class="font-bold text-lg">${cat.name}</h3>
@@ -743,16 +926,40 @@
                 </div>
             `).join('');
 
-            // Render featured products
             const featuredProducts = window.appState.products.filter(p => p.is_featured).slice(0, 8);
             renderProductGrid('featuredProducts', featuredProducts);
 
-            // Render more products
             const moreProducts = window.appState.products.filter(p => !p.is_featured).slice(0, 4);
             renderProductGrid('moreProducts', moreProducts);
         }
 
-        // Render product grid
+        function renderBanner() {
+            const bannerSection = document.getElementById('bannerSection');
+            const currentBanner = window.appState.banners[window.appState.currentBannerIndex];
+            
+            bannerSection.innerHTML = `
+                <div class="max-w-7xl mx-auto px-4">
+                    <div class="banner-slide bg-gradient-to-r ${currentBanner.bg_color} rounded-3xl overflow-hidden shadow-2xl">
+                        <div class="grid md:grid-cols-2 gap-8 items-center p-8 md:p-12">
+                            <div class="text-white">
+                                <h2 class="text-4xl md:text-5xl font-bold mb-4">${currentBanner.title}</h2>
+                                <p class="text-xl mb-6">${currentBanner.subtitle}</p>
+                                <button onclick="showPage('${currentBanner.link}')" class="bg-white text-black px-8 py-4 rounded-lg font-bold hover:bg-gray-100 transition">
+                                    Shop Now
+                                    <svg class="w-5 h-5 inline ml-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"/>
+                                    </svg>
+                                </button>
+                            </div>
+                            <div class="hidden md:block">
+                                <img src="${currentBanner.image}" alt="${currentBanner.title}" class="rounded-2xl shadow-xl" />
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            `;
+        }
+
         function renderProductGrid(containerId, products) {
             const container = document.getElementById(containerId);
             if (!container) return;
@@ -765,7 +972,6 @@
             container.innerHTML = products.map(product => createProductCard(product)).join('');
         }
 
-        // Create product card HTML - WITH COMBO SUPPORT!
         function createProductCard(product) {
             const price = product.price || 0;
             const originalPrice = product.original_price;
@@ -775,7 +981,6 @@
             const mainImage = images[0] || 'https://images.unsplash.com/photo-1572635196237-14b3f281503f?w=400';
             const isCombo = product.is_combo && images.length >= 4;
 
-            // Badge HTML
             let badgesHTML = '';
             if (product.is_sale) {
                 badgesHTML += '<div class="absolute top-3 left-3 bg-red-500 text-white px-3 py-1 rounded-full text-sm font-bold">SALE</div>';
@@ -783,8 +988,10 @@
             if (product.is_combo) {
                 badgesHTML += `<div class="absolute ${product.is_sale ? 'top-12' : 'top-3'} left-3 bg-green-500 text-white px-3 py-1 rounded-full text-sm font-bold">COMBO</div>`;
             }
+            if (!product.in_stock) {
+                badgesHTML += '<div class="absolute top-3 right-3 bg-gray-800 text-white px-3 py-1 rounded-full text-sm font-bold">OUT OF STOCK</div>';
+            }
 
-            // Image section - COMBO shows 2x2 grid, normal shows single image
             const imageHTML = isCombo ? `
                 <div class="combo-image-grid">
                     <img src="${images[0]}" alt="${product.name}" />
@@ -797,8 +1004,8 @@
             `;
 
             return `
-                <div class="product-card bg-white rounded-2xl shadow-lg overflow-hidden">
-                    <div class="relative aspect-square cursor-pointer" onclick="showProductDetail('${product.id}')">
+                <div class="product-card bg-white rounded-2xl shadow-lg overflow-hidden ${!product.in_stock ? 'opacity-75' : ''}">
+                    <div class="relative aspect-square" onclick="showProductDetail('${product.id}')">
                         ${imageHTML}
                         ${badgesHTML}
                     </div>
@@ -814,14 +1021,20 @@
                             </div>
                             <span class="text-sm text-gray-600">(${reviewCount})</span>
                         </div>
-                        <div class="flex items-baseline gap-2 mb-4">
+                        <div class="flex items-baseline gap-2 mb-2">
                             <span class="text-2xl font-bold">R${price.toFixed(2)}</span>
                             ${originalPrice && originalPrice > price ? `<span class="text-gray-500 line-through">R${originalPrice.toFixed(2)}</span>` : ''}
                         </div>
-                        <p class="text-sm text-gray-600 mb-4">🚚 Ships in ${product.shipping_days || '2-5 days'}</p>
+                        ${product.sizes && product.sizes.length > 0 ? `<p class="text-xs text-gray-500 mb-3">Sizes: ${product.sizes.join(', ')}</p>` : ''}
+                        <p class="text-sm text-gray-600 mb-4 flex items-center gap-2">
+                            <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"/>
+                            </svg>
+                            Ships in ${product.shipping_days || '2-5 days'}
+                        </p>
                         <div class="flex gap-2">
-                            <button onclick="addToCart('${product.id}')" class="flex-1 bg-yellow-400 text-black font-bold py-3 rounded-lg hover:bg-yellow-500 transition">
-                                Add to Cart
+                            <button onclick="addToCart('${product.id}')" class="flex-1 bg-yellow-400 text-black font-bold py-3 rounded-lg hover:bg-yellow-500 transition ${!product.in_stock ? 'opacity-50 cursor-not-allowed' : ''}" ${!product.in_stock ? 'disabled' : ''}>
+                                ${product.in_stock ? 'Add to Cart' : 'Out of Stock'}
                             </button>
                             <button onclick="showProductDetail('${product.id}')" class="px-4 border border-gray-300 rounded-lg hover:bg-gray-100">
                                 <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -835,7 +1048,6 @@
             `;
         }
 
-        // Show product detail
         window.showProductDetail = function(productId) {
             const product = window.appState.products.find(p => p.id === productId);
             if (!product) return;
@@ -851,11 +1063,10 @@
                             <img id="mainProductImage" src="${mainImage}" alt="${product.name}" class="w-full h-full object-cover" />
                         </div>
                         ${images.length > 1 ? `
-                            <div class="grid grid-cols-5 gap-2">
+                            <div class="grid grid-cols-6 gap-2">
                                 ${images.map((img, i) => `
-                                    <button onclick="document.getElementById('mainProductImage').src='${img}'" 
-                                            class="aspect-square rounded-lg overflow-hidden border-2 hover:border-yellow-400">
-                                        <img src="${img}" alt="Thumbnail ${i+1}" class="w-full h-full object-cover" />
+                                    <button onclick="document.getElementById('mainProductImage').src='${img}'" class="aspect-square rounded-lg overflow-hidden border-2 hover:border-yellow-400 transition">
+                                        <img src="${img}" alt="Thumb ${i+1}" class="w-full h-full object-cover" />
                                     </button>
                                 `).join('')}
                             </div>
@@ -864,6 +1075,8 @@
                     <div>
                         <h1 class="text-3xl font-bold mb-4">${product.name}</h1>
                         ${product.is_combo ? '<div class="inline-block bg-green-500 text-white px-4 py-2 rounded-full text-sm font-bold mb-4">COMBO DEAL</div>' : ''}
+                        ${product.is_sale ? '<div class="inline-block bg-red-500 text-white px-4 py-2 rounded-full text-sm font-bold mb-4 ml-2">ON SALE</div>' : ''}
+                        ${!product.in_stock ? '<div class="inline-block bg-gray-800 text-white px-4 py-2 rounded-full text-sm font-bold mb-4 ml-2">OUT OF STOCK</div>' : ''}
                         <div class="flex items-center gap-2 mb-4">
                             <div class="flex">
                                 ${[...Array(5)].map((_, i) => `
@@ -883,29 +1096,44 @@
                         <p class="text-gray-700 mb-6">${product.description || ''}</p>
                         ${product.sizes && product.sizes.length > 0 ? `
                             <div class="mb-6">
-                                <h3 class="font-semibold mb-2">Select Size:</h3>
-                                <div class="flex gap-2">
-                                    ${product.sizes.map(size => `
-                                        <button onclick="window.selectedSize='${size}'; this.parentElement.querySelectorAll('button').forEach(b => b.classList.remove('bg-black', 'text-white')); this.classList.add('bg-black', 'text-white')" 
-                                                class="px-4 py-2 border rounded-lg hover:border-black">
-                                            ${size}
-                                        </button>
-                                    `).join('')}
+                                <p class="font-semibold mb-2">Available Sizes:</p>
+                                <div class="flex flex-wrap gap-2">
+                                    ${product.sizes.map(size => `<span class="size-badge">${size}</span>`).join('')}
                                 </div>
                             </div>
                         ` : ''}
-                        <div class="flex items-center gap-4 mb-6">
-                            <span class="font-semibold">Quantity:</span>
-                            <div class="flex items-center border rounded-lg">
-                                <button onclick="let q=document.getElementById('qty'); q.value=Math.max(1, parseInt(q.value)-1)" class="px-4 py-2 hover:bg-gray-100">-</button>
-                                <input id="qty" type="number" value="1" min="1" class="w-16 text-center border-x py-2" />
-                                <button onclick="let q=document.getElementById('qty'); q.value=parseInt(q.value)+1" class="px-4 py-2 hover:bg-gray-100">+</button>
+                        ${product.in_stock ? `
+                            <div class="flex items-center gap-4 mb-6">
+                                <span class="font-semibold">Quantity:</span>
+                                <div class="flex items-center border rounded-lg">
+                                    <button onclick="let q=document.getElementById('qty'); q.value=Math.max(1, parseInt(q.value)-1)" class="px-4 py-2 hover:bg-gray-100">
+                                        <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M20 12H4"/>
+                                        </svg>
+                                    </button>
+                                    <input id="qty" type="number" value="1" min="1" class="w-16 text-center border-x py-2" />
+                                    <button onclick="let q=document.getElementById('qty'); q.value=parseInt(q.value)+1" class="px-4 py-2 hover:bg-gray-100">
+                                        <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4"/>
+                                        </svg>
+                                    </button>
+                                </div>
                             </div>
-                        </div>
-                        <button onclick="addToCart('${product.id}', parseInt(document.getElementById('qty').value))" 
-                                class="w-full bg-yellow-400 text-black font-bold py-4 rounded-lg hover:bg-yellow-500 text-lg">
-                            Add to Cart
-                        </button>
+                            <button onclick="addToCart('${product.id}', parseInt(document.getElementById('qty').value))" class="w-full bg-yellow-400 text-black font-bold py-4 rounded-lg hover:bg-yellow-500 text-lg transition">
+                                Add to Cart
+                            </button>
+                            <div class="mt-6 p-4 bg-green-50 rounded-lg flex items-center gap-2 text-green-700">
+                                <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"/>
+                                </svg>
+                                <span class="font-semibold">Free shipping on this item</span>
+                            </div>
+                        ` : `
+                            <div class="p-6 bg-gray-100 rounded-lg text-center">
+                                <p class="text-lg font-semibold text-gray-700">Currently Out of Stock</p>
+                                <p class="text-sm text-gray-600 mt-2">Check back soon!</p>
+                            </div>
+                        `}
                     </div>
                 </div>
             `;
@@ -914,10 +1142,9 @@
             showPage('productDetail');
         };
 
-        // Add to cart
         window.addToCart = function(productId, quantity = 1) {
             const product = window.appState.products.find(p => p.id === productId);
-            if (!product) return;
+            if (!product || !product.in_stock) return;
 
             const existingItem = window.appState.cart.find(item => item.id === productId);
             
@@ -935,31 +1162,30 @@
 
             localStorage.setItem('darkmaster_cart', JSON.stringify(window.appState.cart));
             updateCartDisplay();
-            alert(`${product.name} added to cart!`);
+            showNotification(`${product.name} added to cart!`, 'success');
         };
 
-        // Update cart display
         function updateCartDisplay() {
             const count = window.appState.cart.reduce((sum, item) => sum + item.quantity, 0);
             const cartCount = document.getElementById('cartCount');
             if (cartCount) {
                 cartCount.textContent = count;
-                cartCount.style.display = count > 0 ? 'flex' : 'none';
+                cartCount.classList.toggle('hidden', count === 0);
             }
         }
 
-        // Render cart page
         function renderCartPage() {
             const cartContent = document.getElementById('cartContent');
             
             if (window.appState.cart.length === 0) {
                 cartContent.innerHTML = `
                     <div class="text-center py-16">
+                        <svg class="w-24 h-24 mx-auto text-gray-300 mb-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 3h2l.4 2M7 13h10l4-8H5.4M7 13L5.4 5M7 13l-2.293 2.293c-.63.63-.184 1.707.707 1.707H17m0 0a2 2 0 100 4 2 2 0 000-4zm-8 2a2 2 0 11-4 0 2 2 0 014 0z"/>
+                        </svg>
                         <h2 class="text-2xl font-bold mb-4">Your Cart is Empty</h2>
                         <p class="text-gray-600 mb-8">Discover amazing products!</p>
-                        <button onclick="showPage('products')" class="bg-yellow-400 text-black px-8 py-3 rounded-lg font-bold hover:bg-yellow-500">
-                            Start Shopping
-                        </button>
+                        <button onclick="showPage('products')" class="bg-yellow-400 text-black px-8 py-3 rounded-lg font-bold hover:bg-yellow-500 transition">Start Shopping</button>
                     </div>
                 `;
                 return;
@@ -978,13 +1204,26 @@
                                     <p class="text-gray-600">R${item.price.toFixed(2)}</p>
                                 </div>
                                 <div class="flex items-center gap-2">
-                                    <button onclick="updateCartQuantity('${item.id}', ${item.quantity - 1})" class="px-3 py-1 border rounded hover:bg-gray-100">-</button>
+                                    <button onclick="updateCartQuantity('${item.id}', ${item.quantity - 1})" class="px-3 py-1 border rounded hover:bg-gray-100">
+                                        <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M20 12H4"/>
+                                        </svg>
+                                    </button>
                                     <span class="font-medium w-8 text-center">${item.quantity}</span>
-                                    <button onclick="updateCartQuantity('${item.id}', ${item.quantity + 1})" class="px-3 py-1 border rounded hover:bg-gray-100">+</button>
+                                    <button onclick="updateCartQuantity('${item.id}', ${item.quantity + 1})" class="px-3 py-1 border rounded hover:bg-gray-100">
+                                        <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4"/>
+                                        </svg>
+                                    </button>
                                 </div>
                                 <div class="text-right">
                                     <p class="font-semibold">R${(item.price * item.quantity).toFixed(2)}</p>
-                                    <button onclick="removeFromCart('${item.id}')" class="text-red-500 text-sm hover:text-red-700">Remove</button>
+                                    <button onclick="removeFromCart('${item.id}')" class="text-red-500 text-sm hover:text-red-700 flex items-center gap-1">
+                                        <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16"/>
+                                        </svg>
+                                        Remove
+                                    </button>
                                 </div>
                             </div>
                         `).join('')}
@@ -998,26 +1237,24 @@
                             </div>
                             <div class="flex justify-between">
                                 <span>Shipping</span>
-                                <span class="text-green-600 font-medium">FREE</span>
+                                <span class="text-green-600 font-medium flex items-center gap-1">
+                                    <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"/>
+                                    </svg>
+                                    FREE
+                                </span>
                             </div>
                             <div class="border-t pt-3 flex justify-between font-semibold text-lg">
                                 <span>Total</span>
                                 <span>R${subtotal.toFixed(2)}</span>
                             </div>
                         </div>
-                        <button onclick="showPage('checkout')" class="w-full bg-green-500 text-white font-bold py-3 rounded-lg hover:bg-green-600">
-                            Proceed to Checkout
-                        </button>
-                        <div class="mt-6 text-sm text-gray-600 space-y-1">
-                            <p>• Payment via bank transfer</p>
-                            <p>• Free delivery on all orders</p>
-                        </div>
+                        <button onclick="proceedToCheckout()" class="w-full bg-green-500 text-white font-bold py-3 rounded-lg hover:bg-green-600 transition">Proceed to Checkout</button>
                     </div>
                 </div>
             `;
         }
 
-        // Update cart quantity
         window.updateCartQuantity = function(productId, newQuantity) {
             if (newQuantity <= 0) {
                 removeFromCart(productId);
@@ -1033,7 +1270,6 @@
             }
         };
 
-        // Remove from cart
         window.removeFromCart = function(productId) {
             window.appState.cart = window.appState.cart.filter(item => item.id !== productId);
             localStorage.setItem('darkmaster_cart', JSON.stringify(window.appState.cart));
@@ -1041,7 +1277,16 @@
             renderCartPage();
         };
 
-        // Render checkout page
+        window.proceedToCheckout = function() {
+            if (!window.appState.currentUser) {
+                showNotification('Please sign in to checkout', 'error');
+                openAuthModal('login');
+                return;
+            }
+            showPage('checkout');
+            renderCheckoutPage();
+        };
+
         function renderCheckoutPage() {
             const checkoutContent = document.getElementById('checkoutContent');
             const subtotal = window.appState.cart.reduce((sum, item) => sum + (item.price * item.quantity), 0);
@@ -1053,28 +1298,28 @@
                         <form id="checkoutForm" class="space-y-4">
                             <div>
                                 <label class="block text-sm font-medium mb-2">Full Name *</label>
-                                <input required name="fullName" class="w-full px-4 py-3 border rounded-lg" placeholder="Enter your full name" />
+                                <input required name="fullName" value="${window.appState.currentUser?.displayName || ''}" class="w-full px-4 py-3 border rounded-lg" />
                             </div>
                             <div>
                                 <label class="block text-sm font-medium mb-2">Phone Number *</label>
-                                <input required name="phone" class="w-full px-4 py-3 border rounded-lg" placeholder="Enter your phone number" />
+                                <input required name="phone" class="w-full px-4 py-3 border rounded-lg" />
                             </div>
                             <div>
                                 <label class="block text-sm font-medium mb-2">Email Address</label>
-                                <input type="email" name="email" class="w-full px-4 py-3 border rounded-lg" placeholder="Enter your email" />
+                                <input type="email" name="email" value="${window.appState.currentUser?.email || ''}" class="w-full px-4 py-3 border rounded-lg" readonly />
                             </div>
                             <div>
                                 <label class="block text-sm font-medium mb-2">Street Address *</label>
-                                <input required name="address" class="w-full px-4 py-3 border rounded-lg" placeholder="Enter your full address" />
+                                <input required name="address" class="w-full px-4 py-3 border rounded-lg" />
                             </div>
                             <div class="grid grid-cols-2 gap-4">
                                 <div>
                                     <label class="block text-sm font-medium mb-2">City *</label>
-                                    <input required name="city" class="w-full px-4 py-3 border rounded-lg" placeholder="Enter your city" />
+                                    <input required name="city" class="w-full px-4 py-3 border rounded-lg" />
                                 </div>
                                 <div>
                                     <label class="block text-sm font-medium mb-2">Postal Code</label>
-                                    <input name="postalCode" class="w-full px-4 py-3 border rounded-lg" placeholder="Enter postal code" />
+                                    <input name="postalCode" class="w-full px-4 py-3 border rounded-lg" />
                                 </div>
                             </div>
                         </form>
@@ -1082,49 +1327,18 @@
 
                     <div class="space-y-6">
                         <div class="bg-white rounded-2xl shadow-lg p-6">
-                            <h2 class="text-2xl font-bold mb-4">Banking Details (ZAR Only)</h2>
-                            <div class="grid grid-cols-2 gap-4 mb-6">
-                                <div class="text-center p-4 border rounded-lg">
-                                    <div class="w-16 h-16 mx-auto mb-2 bg-gradient-to-r from-blue-600 to-red-500 rounded-lg flex items-center justify-center">
-                                        <span class="text-white font-bold text-2xl">C</span>
-                                    </div>
-                                    <h3 class="font-semibold">Capitec</h3>
-                                    <p class="text-sm text-gray-600">Savings</p>
-                                    <p class="text-sm font-mono font-bold">2037437125</p>
-                                </div>
-                                <div class="text-center p-4 border rounded-lg">
-                                    <div class="w-16 h-16 mx-auto mb-2 bg-gradient-to-r from-orange-500 to-red-500 rounded-lg flex items-center justify-center">
-                                        <span class="text-white font-bold text-2xl">F</span>
-                                    </div>
-                                    <h3 class="font-semibold">FNB</h3>
-                                    <p class="text-sm text-gray-600">Savings</p>
-                                    <p class="text-sm font-mono font-bold">63116681461</p>
-                                </div>
-                            </div>
-                            <div class="bg-yellow-50 p-4 rounded-lg">
-                                <h3 class="font-semibold mb-2">📋 Payment Instructions:</h3>
-                                <ol class="text-sm space-y-2 text-gray-700">
-                                    <li>1. Deposit money into one of the bank accounts above</li>
-                                    <li>2. Take a screenshot of your payment confirmation</li>
-                                    <li>3. Click "Complete Order via Email" below</li>
-                                    <li>4. Your email app will open - attach your payment screenshot</li>
-                                    <li>5. Send the email to complete your order</li>
-                                </ol>
-                            </div>
-                        </div>
-
-                        <div class="bg-white rounded-2xl shadow-lg p-6">
                             <h2 class="text-xl font-semibold mb-4">Order Summary</h2>
                             ${window.appState.cart.map(item => `
-                                <div class="flex justify-between items-center py-2">
-                                    <div>
-                                        <p class="font-medium">${item.name}</p>
-                                        <p class="text-sm text-gray-600">Qty: ${item.quantity}</p>
+                                <div class="flex items-center gap-3 py-2 border-b">
+                                    <img src="${item.image}" alt="${item.name}" class="w-12 h-12 object-cover rounded" />
+                                    <div class="flex-1">
+                                        <p class="font-medium text-sm">${item.name}</p>
+                                        <p class="text-xs text-gray-600">Qty: ${item.quantity}</p>
                                     </div>
                                     <p class="font-semibold">R${(item.price * item.quantity).toFixed(2)}</p>
                                 </div>
                             `).join('')}
-                            <div class="border-t pt-4 mt-4 space-y-2">
+                            <div class="pt-4 mt-4 space-y-2">
                                 <div class="flex justify-between">
                                     <span>Subtotal</span>
                                     <span>R${subtotal.toFixed(2)}</span>
@@ -1138,86 +1352,174 @@
                                     <span>R${subtotal.toFixed(2)}</span>
                                 </div>
                             </div>
-                            <button onclick="completeOrder()" class="w-full mt-6 bg-green-500 text-white font-bold py-3 rounded-lg hover:bg-green-600">
-                                Complete Order via Email
-                            </button>
-                            <p class="text-center text-sm text-gray-600 mt-4">Email: darkmasterstore@gmail.com</p>
+                        </div>
+
+                        <div class="bg-gradient-to-r from-blue-500 to-blue-600 rounded-2xl shadow-lg p-6 text-white">
+                            <h2 class="text-xl font-semibold mb-4 flex items-center gap-2">
+                                <svg class="w-6 h-6" fill="currentColor" viewBox="0 0 24 24">
+                                    <path d="M20.067 8.478c.492.88.556 2.014.3 3.327-.74 3.806-3.276 5.12-6.514 5.12h-.5a.805.805 0 00-.794.68l-.04.22-.63 3.993-.03.17a.804.804 0 01-.794.68H7.78a.483.483 0 01-.477-.558L7.4 21.3l.65-4.133.04-.219a.805.805 0 01.794-.68h.5c3.238 0 5.774-1.314 6.514-5.12.256-1.313.192-2.447-.3-3.327z"/>
+                                </svg>
+                                Pay with PayPal
+                            </h2>
+                            <p class="text-sm mb-6 opacity-90">Complete your order securely</p>
+                            <div id="paypal-button-container"></div>
                         </div>
                     </div>
                 </div>
             `;
+
+            initializePayPal(subtotal);
         }
 
-        // Complete order
-        window.completeOrder = async function() {
-            const form = document.getElementById('checkoutForm');
-            if (!form.checkValidity()) {
-                form.reportValidity();
-                return;
-            }
+        function initializePayPal(amount) {
+            if (!window.paypal) return;
 
+            paypal.Buttons({
+                createOrder: (data, actions) => {
+                    const form = document.getElementById('checkoutForm');
+                    if (!form.checkValidity()) {
+                        form.reportValidity();
+                        return;
+                    }
+
+                    return actions.order.create({
+                        purchase_units: [{
+                            amount: { value: amount.toFixed(2), currency_code: 'USD' },
+                            description: `Dark Master Store Order - ${window.appState.cart.length} items`
+                        }]
+                    });
+                },
+                onApprove: (data, actions) => actions.order.capture().then(details => completeOrder(details)),
+                onError: (err) => {
+                    console.error('PayPal error:', err);
+                    showNotification('Payment failed. Try again.', 'error');
+                }
+            }).render('#paypal-button-container');
+        }
+
+        async function completeOrder(paymentDetails) {
+            const form = document.getElementById('checkoutForm');
             const formData = new FormData(form);
-            const customerInfo = {
+            
+            const orderData = {
+                userId: window.appState.currentUser.uid,
+                userEmail: window.appState.currentUser.email,
                 fullName: formData.get('fullName'),
                 phone: formData.get('phone'),
-                email: formData.get('email'),
                 address: formData.get('address'),
                 city: formData.get('city'),
-                postalCode: formData.get('postalCode')
+                postalCode: formData.get('postalCode'),
+                items: window.appState.cart,
+                total: window.appState.cart.reduce((sum, item) => sum + (item.price * item.quantity), 0),
+                status: 'pending',
+                paymentDetails: paymentDetails,
+                paymentMethod: 'paypal',
+                createdAt: new Date().toISOString()
             };
 
-            const subtotal = window.appState.cart.reduce((sum, item) => sum + (item.price * item.quantity), 0);
-
-            // Create order in Firestore
             try {
-                await addDoc(collection(db, 'orders'), {
-                    ...customerInfo,
-                    items: window.appState.cart,
-                    total: subtotal,
-                    status: 'pending',
-                    createdAt: new Date().toISOString()
-                });
-
-                // Create email content
-                const orderDetails = window.appState.cart.map(item => 
-                    `${item.name} (Qty: ${item.quantity}) - R${(item.price * item.quantity).toFixed(2)}`
-                ).join('\n');
-                
-                const emailBody = `🛒 New Order from Dark Master Store!\n\n${orderDetails}\n\nSubtotal: R${subtotal.toFixed(2)}\nShipping: FREE\nTotal: R${subtotal.toFixed(2)}\n\nCustomer: ${customerInfo.fullName}\nPhone: ${customerInfo.phone}\nEmail: ${customerInfo.email}\nAddress: ${customerInfo.address}, ${customerInfo.city}, ${customerInfo.postalCode}\n\nPayment Method: Bank Transfer`;
-                
-                const subject = `New Order - R${subtotal.toFixed(2)} - ${customerInfo.fullName}`;
-                
-                window.location.href = `mailto:darkmasterstore@gmail.com?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(emailBody)}`;
-                
-                // Clear cart
+                await addDoc(collection(db, 'orders'), orderData);
                 window.appState.cart = [];
                 localStorage.removeItem('darkmaster_cart');
                 updateCartDisplay();
-                
-                alert('Order submitted! Your email app should open. Please attach payment proof and send.');
-                showPage('home');
+                showNotification('Order placed successfully!', 'success');
+                showPage('myOrders');
+                loadOrdersFromFirestore();
             } catch (error) {
-                console.error('Error creating order:', error);
-                alert('Error creating order: ' + error.message);
+                console.error('Error:', error);
+                showNotification('Error creating order.', 'error');
             }
-        };
+        }
 
-        // Filter by category
+        function renderMyOrdersPage() {
+            if (!window.appState.currentUser) {
+                document.getElementById('myOrdersContent').innerHTML = `
+                    <div class="text-center py-16">
+                        <h2 class="text-2xl font-bold mb-4">Please Sign In</h2>
+                        <button onclick="openAuthModal('login')" class="bg-yellow-400 text-black px-8 py-3 rounded-lg font-bold hover:bg-yellow-500">Sign In</button>
+                    </div>
+                `;
+                return;
+            }
+
+            const myOrders = window.appState.orders.filter(order => order.userId === window.appState.currentUser.uid);
+
+            if (myOrders.length === 0) {
+                document.getElementById('myOrdersContent').innerHTML = `
+                    <div class="text-center py-16">
+                        <svg class="w-24 h-24 mx-auto text-gray-300 mb-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2"/>
+                        </svg>
+                        <h2 class="text-2xl font-bold mb-4">No Orders Yet</h2>
+                        <button onclick="showPage('products')" class="bg-yellow-400 text-black px-8 py-3 rounded-lg font-bold hover:bg-yellow-500">Start Shopping</button>
+                    </div>
+                `;
+                return;
+            }
+
+            document.getElementById('myOrdersContent').innerHTML = `
+                <div class="space-y-4">
+                    ${myOrders.map(order => `
+                        <div class="bg-white rounded-xl shadow-lg p-6">
+                            <div class="flex flex-wrap justify-between items-start mb-4 gap-4">
+                                <div>
+                                    <p class="text-sm text-gray-500">Order Date</p>
+                                    <p class="font-semibold">${new Date(order.createdAt).toLocaleDateString()}</p>
+                                </div>
+                                <div>
+                                    <p class="text-sm text-gray-500">Total</p>
+                                    <p class="font-semibold text-lg">R${order.total.toFixed(2)}</p>
+                                </div>
+                                <div>${getOrderStatusBadge(order.status)}</div>
+                            </div>
+                            <div class="border-t pt-4">
+                                <p class="text-sm font-medium mb-3">Items:</p>
+                                <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
+                                    ${order.items.map(item => `
+                                        <div class="flex items-center gap-3 p-2 bg-gray-50 rounded-lg">
+                                            <img src="${item.image}" alt="${item.name}" class="w-16 h-16 object-cover rounded" />
+                                            <div class="flex-1">
+                                                <p class="font-medium text-sm">${item.name}</p>
+                                                <p class="text-xs text-gray-600">Qty: ${item.quantity} × R${item.price.toFixed(2)}</p>
+                                            </div>
+                                        </div>
+                                    `).join('')}
+                                </div>
+                            </div>
+                            <div class="border-t mt-4 pt-4 text-sm text-gray-600">
+                                <p><strong>Shipping to:</strong> ${order.address}, ${order.city}</p>
+                                <p><strong>Contact:</strong> ${order.phone}</p>
+                            </div>
+                        </div>
+                    `).join('')}
+                </div>
+            `;
+        }
+
+        function getOrderStatusBadge(status) {
+            const config = {
+                pending: { label: 'Pending', class: 'status-pending' },
+                processing: { label: 'Processing', class: 'status-processing' },
+                shipped: { label: 'Shipped', class: 'status-shipped' },
+                delivered: { label: 'Delivered', class: 'status-delivered' },
+                cancelled: { label: 'Cancelled', class: 'status-cancelled' }
+            };
+            const c = config[status] || config.pending;
+            return `<span class="order-status-badge ${c.class}">${c.label}</span>`;
+        }
+
         window.filterByCategory = function(categoryId) {
             document.getElementById('categoryFilter').value = categoryId;
             showPage('products');
             filterProducts();
         };
 
-        // Search products
         window.searchProducts = function() {
-            const query = document.getElementById('searchInput').value;
-            document.getElementById('productsSearchInput').value = query;
+            document.getElementById('productsSearchInput').value = document.getElementById('searchInput').value;
             showPage('products');
             filterProducts();
         };
 
-        // Filter products
         window.filterProducts = function() {
             const searchQuery = document.getElementById('productsSearchInput').value.toLowerCase();
             const categoryFilter = document.getElementById('categoryFilter').value;
@@ -1225,7 +1527,6 @@
 
             let filtered = [...window.appState.products];
 
-            // Apply search filter
             if (searchQuery) {
                 filtered = filtered.filter(p => 
                     p.name.toLowerCase().includes(searchQuery) ||
@@ -1233,34 +1534,20 @@
                 );
             }
 
-            // Apply category filter
-            if (categoryFilter) {
-                filtered = filtered.filter(p => p.category_id === categoryFilter);
-            }
+            if (categoryFilter) filtered = filtered.filter(p => p.category_id === categoryFilter);
 
-            // Apply sort
-            if (sortFilter === 'price-low') {
-                filtered.sort((a, b) => (a.price || 0) - (b.price || 0));
-            } else if (sortFilter === 'price-high') {
-                filtered.sort((a, b) => (b.price || 0) - (a.price || 0));
-            } else {
-                filtered.sort((a, b) => new Date(b.created_date || 0) - new Date(a.created_date || 0));
-            }
+            if (sortFilter === 'price-low') filtered.sort((a, b) => (a.price || 0) - (b.price || 0));
+            else if (sortFilter === 'price-high') filtered.sort((a, b) => (b.price || 0) - (a.price || 0));
 
             renderProductGrid('allProductsGrid', filtered);
         };
 
-        // Render products page
         function renderProductsPage() {
-            // Populate category filter
-            const categoryFilter = document.getElementById('categoryFilter');
-            categoryFilter.innerHTML = '<option value="">All Categories</option>' +
+            document.getElementById('categoryFilter').innerHTML = '<option value="">All Categories</option>' +
                 window.appState.categories.map(cat => `<option value="${cat.id}">${cat.name}</option>`).join('');
-
             filterProducts();
         }
 
-        // Show page
         window.showPage = function(pageName) {
             document.querySelectorAll('.page').forEach(page => page.classList.add('hidden'));
             
@@ -1277,70 +1564,47 @@
                 renderCartPage();
             } else if (pageName === 'checkout') {
                 document.getElementById('checkoutPage').classList.remove('hidden');
-                renderCheckoutPage();
-            } else if (pageName === 'sellWithUs') {
-                document.getElementById('sellWithUsPage').classList.remove('hidden');
+            } else if (pageName === 'myOrders') {
+                document.getElementById('myOrdersPage').classList.remove('hidden');
+                renderMyOrdersPage();
             }
 
             toggleMobileMenu(false);
         };
 
-        // Toggle mobile menu
         window.toggleMobileMenu = function(show) {
             const menu = document.getElementById('mobileMenu');
-            if (show === undefined) {
-                menu.classList.toggle('hidden');
-            } else {
-                if (show) {
-                    menu.classList.remove('hidden');
-                } else {
-                    menu.classList.add('hidden');
-                }
-            }
+            if (show === undefined) menu.classList.toggle('hidden');
+            else menu.classList.toggle('hidden', !show);
         };
 
-        // Show admin login
-        window.showAdminLogin = function() {
-            document.getElementById('adminLoginPopup').classList.remove('hidden');
-        };
+        function showNotification(message, type = 'success') {
+            const bgColor = type === 'success' ? 'bg-green-500' : 'bg-red-500';
+            const notification = document.createElement('div');
+            notification.className = `fixed top-20 right-4 ${bgColor} text-white px-6 py-3 rounded-lg shadow-lg z-50`;
+            notification.textContent = message;
+            document.body.appendChild(notification);
+            setTimeout(() => notification.remove(), 3000);
+        }
 
-        // Toggle password visibility
-        window.togglePasswordVisibility = function() {
-            const input = document.getElementById('adminPasswordInput');
-            const icon = document.getElementById('eyeIcon');
-            if (input.type === 'password') {
-                input.type = 'text';
-                icon.innerHTML = '<path d="M13.875 18.825A10.05 10.05 0 0112 19c-4.478 0-8.268-2.943-9.543-7a9.97 9.97 0 011.563-3.029m5.858.908a3 3 0 114.243 4.243M9.878 9.878l4.242 4.242M9.88 9.88l-3.29-3.29m7.532 7.532l3.29 3.29M3 3l3.59 3.59m0 0A9.953 9.953 0 0112 5c4.478 0 8.268 2.943 9.543 7a10.025 10.025 0 01-4.132 5.411m0 0L21 21"/>';
-            } else {
-                input.type = 'password';
-                icon.innerHTML = '<path d="M10 12a2 2 0 100-4 2 2 0 000 4z"/><path fill-rule="evenodd" d="M.458 10C1.732 5.943 5.522 3 10 3s8.268 2.943 9.542 7c-1.274 4.057-5.064 7-9.542 7S1.732 14.057.458 10zM14 10a4 4 0 11-8 0 4 4 0 018 0z"/>';
-            }
-        };
+        window.showAdminLogin = function() { document.getElementById('adminLoginPopup').classList.add('active'); };
+        window.closeAdminLogin = function() { document.getElementById('adminLoginPopup').classList.remove('active'); };
 
-        // Attempt admin login
         window.attemptAdminLogin = function() {
-            const password = document.getElementById('adminPasswordInput').value;
-            const correctPassword = 'VNAXXTTM';
-
-            if (password === correctPassword) {
+            if (document.getElementById('adminPasswordInput').value === 'VNAXXTTM') {
                 window.appState.isAdmin = true;
-                document.getElementById('adminLoginPopup').classList.add('hidden');
+                closeAdminLogin();
                 document.getElementById('mainStore').classList.add('hidden');
                 document.getElementById('adminPanel').classList.remove('hidden');
                 showAdminPage('dashboard');
             } else {
-                const error = document.getElementById('adminLoginError');
-                error.textContent = 'Invalid password. Please try again.';
-                error.classList.remove('hidden');
+                document.getElementById('adminLoginError').textContent = 'Invalid password.';
+                document.getElementById('adminLoginError').classList.remove('hidden');
             }
         };
 
-        // Toggle admin sidebar
-        window.toggleAdminSidebar = function() {
-            document.getElementById('adminSidebar').classList.toggle('hidden');
-        };
+        window.toggleAdminSidebar = function() { document.getElementById('adminSidebar').classList.toggle('hidden'); };
 
-        // Admin logout
         window.adminLogout = function() {
             window.appState.isAdmin = false;
             document.getElementById('adminPanel').classList.add('hidden');
@@ -1348,40 +1612,93 @@
             showPage('home');
         };
 
-        // Show admin page
         window.showAdminPage = function(pageName) {
             toggleAdminSidebar();
-            
-            if (pageName === 'dashboard') {
-                renderAdminDashboard();
-            } else if (pageName === 'products') {
-                renderAdminProducts();
-            } else if (pageName === 'categories') {
-                renderAdminCategories();
-            } else if (pageName === 'orders') {
-                renderAdminOrders();
-            } else if (pageName === 'settings') {
-                renderAdminSettings();
-            }
+            if (pageName === 'dashboard') renderAdminDashboard();
+            else if (pageName === 'categories') renderAdminCategories();
+            else if (pageName === 'products') renderAdminProducts();
+            else if (pageName === 'orders') renderAdminOrders();
+            else if (pageName === 'banners') renderAdminBanners();
         };
 
-        // Render admin dashboard
+        async function uploadImageToStorage(file) {
+            const fileName = `products/${Date.now()}_${file.name}`;
+            const fileRef = storageRef(storage, fileName);
+            await uploadBytes(fileRef, file);
+            return await getDownloadURL(fileRef);
+        }
+
+        window.handleProductImages = async function(files) {
+            const fileList = Array.from(files);
+            if (window.appState.uploadedImages.length + fileList.length > 6) {
+                alert('Maximum 6 images allowed');
+                return;
+            }
+
+            document.getElementById('uploadProgress').classList.remove('hidden');
+            
+            for (const file of fileList) {
+                try {
+                    const url = await uploadImageToStorage(file);
+                    window.appState.uploadedImages.push(url);
+                } catch (error) {
+                    console.error('Upload error:', error);
+                    alert('Failed to upload image: ' + file.name);
+                }
+            }
+            
+            document.getElementById('uploadProgress').classList.add('hidden');
+            renderImagePreviews();
+        };
+
+        function renderImagePreviews() {
+            const container = document.getElementById('imagePreviewsContainer');
+            container.innerHTML = window.appState.uploadedImages.map((url, index) => `
+                <div class="image-preview-item">
+                    <img src="${url}" class="image-preview-img" alt="Preview ${index + 1}" />
+                    <button onclick="removeUploadedImage(${index})" class="image-preview-remove">×</button>
+                </div>
+            `).join('');
+        }
+
+        window.removeUploadedImage = function(index) {
+            window.appState.uploadedImages.splice(index, 1);
+            renderImagePreviews();
+        };
+
         function renderAdminDashboard() {
-            const totalProducts = window.appState.products.length;
             const totalOrders = window.appState.orders.length;
             const totalRevenue = window.appState.orders.reduce((sum, order) => sum + (order.total || 0), 0);
+            const pendingOrders = window.appState.orders.filter(o => o.status === 'pending').length;
+
+            // Calculate monthly revenue
+            const monthlyData = {};
+            window.appState.orders.forEach(order => {
+                const date = new Date(order.createdAt);
+                const monthKey = `${date.getFullYear()}-${String(date.getMonth() + 1).padStart(2, '0')}`;
+                if (!monthlyData[monthKey]) monthlyData[monthKey] = 0;
+                monthlyData[monthKey] += order.total || 0;
+            });
+
+            const sortedMonths = Object.keys(monthlyData).sort().slice(-12);
+            const monthLabels = sortedMonths.map(m => {
+                const [year, month] = m.split('-');
+                return new Date(year, month - 1).toLocaleDateString('en', { month: 'short', year: 'numeric' });
+            });
+            const monthRevenues = sortedMonths.map(m => monthlyData[m]);
 
             document.getElementById('adminContent').innerHTML = `
-                <h1 class="text-3xl font-bold mb-8">Dashboard</h1>
-                <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+                <h1 class="text-3xl font-bold mb-8">Dashboard & Analytics</h1>
+                
+                <div class="grid grid-cols-1 md:grid-cols-4 gap-6 mb-8">
                     <div class="bg-white rounded-2xl shadow-lg p-6">
                         <div class="flex items-center justify-between mb-4">
-                            <h3 class="text-gray-600 font-medium">Total Products</h3>
+                            <h3 class="text-gray-600 font-medium">Products</h3>
                             <svg class="w-8 h-8 text-blue-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M20 7l-8-4-8 4m16 0l-8 4m8-4v10l-8 4m0-10L4 7m8 4v10M4 7v10l8 4"/>
                             </svg>
                         </div>
-                        <p class="text-3xl font-bold">${totalProducts}</p>
+                        <p class="text-3xl font-bold">${window.appState.products.length}</p>
                     </div>
                     <div class="bg-white rounded-2xl shadow-lg p-6">
                         <div class="flex items-center justify-between mb-4">
@@ -1391,30 +1708,235 @@
                             </svg>
                         </div>
                         <p class="text-3xl font-bold">${totalOrders}</p>
+                        <p class="text-sm text-yellow-600 mt-2">${pendingOrders} pending</p>
                     </div>
                     <div class="bg-white rounded-2xl shadow-lg p-6">
                         <div class="flex items-center justify-between mb-4">
-                            <h3 class="text-gray-600 font-medium">Total Revenue</h3>
+                            <h3 class="text-gray-600 font-medium">Revenue</h3>
                             <svg class="w-8 h-8 text-yellow-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8c1.11 0 2.08.402 2.599 1M12 8V7m0 1v8m0 0v1m0-1c-1.11 0-2.08-.402-2.599-1M21 12a9 9 0 11-18 0 9 9 0 0118 0z"/>
                             </svg>
                         </div>
                         <p class="text-3xl font-bold">R${totalRevenue.toFixed(2)}</p>
                     </div>
+                    <div class="bg-white rounded-2xl shadow-lg p-6">
+                        <div class="flex items-center justify-between mb-4">
+                            <h3 class="text-gray-600 font-medium">Categories</h3>
+                            <svg class="w-8 h-8 text-purple-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M7 7h.01M7 3h5c.512 0 1.024.195 1.414.586l7 7a2 2 0 010 2.828l-7 7a2 2 0 01-2.828 0l-7-7A1.994 1.994 0 013 12V7a4 4 0 014-4z"/>
+                            </svg>
+                        </div>
+                        <p class="text-3xl font-bold">${window.appState.categories.length}</p>
+                    </div>
+                </div>
+
+                <div class="bg-white rounded-2xl shadow-lg p-6 mb-8">
+                    <h2 class="text-2xl font-bold mb-6">Revenue Trend (Last 12 Months)</h2>
+                    <canvas id="revenueChart" style="max-height: 400px;"></canvas>
+                </div>
+
+                <div class="bg-yellow-50 border-2 border-yellow-200 rounded-xl p-6">
+                    <h3 class="font-bold text-yellow-900 mb-2">📊 Analytics Info</h3>
+                    <p class="text-sm text-yellow-800">This graph shows real revenue from Firestore orders. Data auto-refreshes when orders are placed.</p>
+                </div>
+            `;
+
+            setTimeout(() => {
+                const ctx = document.getElementById('revenueChart');
+                if (ctx && revenueChart) revenueChart.destroy();
+                revenueChart = new Chart(ctx, {
+                    type: 'line',
+                    data: {
+                        labels: monthLabels,
+                        datasets: [{
+                            label: 'Revenue (ZAR)',
+                            data: monthRevenues,
+                            borderColor: '#fbbf24',
+                            backgroundColor: 'rgba(251, 191, 36, 0.1)',
+                            fill: true,
+                            tension: 0.4,
+                            borderWidth: 3
+                        }]
+                    },
+                    options: {
+                        responsive: true,
+                        maintainAspectRatio: false,
+                        plugins: {
+                            legend: { display: true },
+                            tooltip: {
+                                callbacks: {
+                                    label: (context) => `R${context.parsed.y.toFixed(2)}`
+                                }
+                            }
+                        },
+                        scales: {
+                            y: {
+                                beginAtZero: true,
+                                ticks: {
+                                    callback: (value) => `R${value}`
+                                }
+                            }
+                        }
+                    }
+                });
+            }, 100);
+        }
+
+        function renderAdminCategories() {
+            document.getElementById('adminContent').innerHTML = `
+                <div class="flex justify-between items-center mb-8">
+                    <h1 class="text-3xl font-bold">Manage Categories</h1>
+                    <button onclick="showAddCategory()" class="bg-yellow-400 text-black px-6 py-3 rounded-lg font-bold hover:bg-yellow-500 flex items-center gap-2">
+                        <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4"/>
+                        </svg>
+                        Add Category
+                    </button>
+                </div>
+
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+                    ${window.appState.categories.map(cat => `
+                        <div class="bg-white rounded-xl shadow-lg overflow-hidden">
+                            <img src="${cat.image}" alt="${cat.name}" class="w-full h-48 object-cover" />
+                            <div class="p-4">
+                                <h3 class="font-bold text-lg mb-2">${cat.name}</h3>
+                                <p class="text-sm text-gray-600 mb-4">${cat.description || ''}</p>
+                                <button onclick="editCategory('${cat.id}')" class="w-full bg-blue-500 text-white px-4 py-2 rounded-lg hover:bg-blue-600 font-semibold">
+                                    Edit
+                                </button>
+                            </div>
+                        </div>
+                    `).join('')}
                 </div>
             `;
         }
 
-        // Render admin products
+        window.showAddCategory = function() {
+            document.getElementById('adminContent').innerHTML = `
+                <div class="max-w-2xl">
+                    <div class="flex items-center gap-4 mb-8">
+                        <button onclick="showAdminPage('categories')" class="p-2 hover:bg-gray-100 rounded-lg">
+                            <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"/>
+                            </svg>
+                        </button>
+                        <h1 class="text-3xl font-bold">Add Category</h1>
+                    </div>
+
+                    <form id="categoryForm" class="bg-white rounded-2xl shadow-lg p-8 space-y-6">
+                        <div>
+                            <label class="block text-sm font-medium mb-2">Category Image</label>
+                            <div class="upload-zone" onclick="document.getElementById('categoryImageInput').click()">
+                                <svg class="w-16 h-16 mx-auto text-blue-400 mb-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z"/>
+                                </svg>
+                                <p class="font-bold text-lg text-gray-700">Click to Upload Image</p>
+                                <p class="text-sm text-gray-500 mt-2">PNG, JPG up to 5MB</p>
+                                <input type="file" id="categoryImageInput" accept="image/*" class="hidden" onchange="uploadCategoryImage(this.files[0])" />
+                            </div>
+                            <div id="categoryImagePreview" class="mt-4 hidden">
+                                <img id="categoryImagePreviewImg" class="w-full h-48 object-cover rounded-lg" />
+                            </div>
+                            <p id="categoryUploadProgress" class="hidden text-blue-600 mt-2">Uploading...</p>
+                        </div>
+
+                        <div>
+                            <label class="block text-sm font-medium mb-2">Category ID *</label>
+                            <input required name="id" class="w-full px-4 py-3 border rounded-lg" placeholder="cat_example" />
+                        </div>
+
+                        <div>
+                            <label class="block text-sm font-medium mb-2">Category Name *</label>
+                            <input required name="name" class="w-full px-4 py-3 border rounded-lg" placeholder="Enter category name" />
+                        </div>
+
+                        <div>
+                            <label class="block text-sm font-medium mb-2">Description</label>
+                            <textarea name="description" rows="3" class="w-full px-4 py-3 border rounded-lg" placeholder="Category description"></textarea>
+                        </div>
+
+                        <div class="flex gap-4">
+                            <button type="button" onclick="showAdminPage('categories')" class="flex-1 border border-gray-300 px-6 py-3 rounded-lg font-bold hover:bg-gray-100">Cancel</button>
+                            <button type="submit" class="flex-1 bg-yellow-400 text-black px-6 py-3 rounded-lg font-bold hover:bg-yellow-500">Save Category</button>
+                        </div>
+                    </form>
+
+                    <div id="categoryCodeSection" class="hidden mt-8 bg-white rounded-2xl shadow-lg p-8">
+                        <h2 class="text-2xl font-bold mb-4 text-green-600">✓ Category Saved!</h2>
+                        <p class="text-gray-700 mb-4">Copy & paste into <code class="bg-gray-100 px-2 py-1 rounded">window.HARDCODED_CATEGORIES</code>:</p>
+                        <div class="code-block">
+                            <button onclick="copyCategoryCode()" class="copy-code-btn">Copy</button>
+                            <pre id="categoryCode"></pre>
+                        </div>
+                    </div>
+                </div>
+            `;
+
+            window.categoryImageUrl = null;
+
+            window.uploadCategoryImage = async function(file) {
+                if (!file) return;
+                document.getElementById('categoryUploadProgress').classList.remove('hidden');
+                try {
+                    window.categoryImageUrl = await uploadImageToStorage(file);
+                    document.getElementById('categoryImagePreviewImg').src = window.categoryImageUrl;
+                    document.getElementById('categoryImagePreview').classList.remove('hidden');
+                    document.getElementById('categoryUploadProgress').classList.add('hidden');
+                } catch (error) {
+                    alert('Upload failed: ' + error.message);
+                    document.getElementById('categoryUploadProgress').classList.add('hidden');
+                }
+            };
+
+            document.getElementById('categoryForm').onsubmit = async function(e) {
+                e.preventDefault();
+                const formData = new FormData(e.target);
+                const categoryData = {
+                    id: formData.get('id'),
+                    name: formData.get('name'),
+                    description: formData.get('description'),
+                    image: window.categoryImageUrl || '',
+                    order: window.appState.categories.length + 1
+                };
+
+                try {
+                    await addDoc(collection(db, 'categories'), categoryData);
+                    const code = `{
+    id: '${categoryData.id}',
+    name: '${categoryData.name}',
+    description: '${categoryData.description}',
+                    image: '${categoryData.image}',
+    order: ${categoryData.order}
+},`;
+                    document.getElementById('categoryCode').textContent = code;
+                    document.getElementById('categoryForm').classList.add('hidden');
+                    document.getElementById('categoryCodeSection').classList.remove('hidden');
+                    showNotification('Category saved!', 'success');
+                    loadCategoriesFromFirestore();
+                } catch (error) {
+                    alert('Error: ' + error.message);
+                }
+            };
+
+            window.copyCategoryCode = function() {
+                navigator.clipboard.writeText(document.getElementById('categoryCode').textContent);
+                showNotification('Code copied!', 'success');
+            };
+        }
+
         function renderAdminProducts() {
             document.getElementById('adminContent').innerHTML = `
                 <div class="flex justify-between items-center mb-8">
                     <h1 class="text-3xl font-bold">Manage Products</h1>
-                    <button onclick="showAddProduct()" class="bg-yellow-400 text-black px-6 py-3 rounded-lg font-bold hover:bg-yellow-500">
-                        + Add New Product
+                    <button onclick="showAddProduct()" class="bg-yellow-400 text-black px-6 py-3 rounded-lg font-bold hover:bg-yellow-500 flex items-center gap-2">
+                        <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4"/>
+                        </svg>
+                        Add Product
                     </button>
                 </div>
-                <div class="bg-white rounded-2xl shadow-lg overflow-hidden">
+
+                <div class="bg-white rounded-2xl shadow-lg overflow-x-auto">
                     <table class="products-table">
                         <thead>
                             <tr>
@@ -1423,7 +1945,6 @@
                                 <th>Category</th>
                                 <th>Price</th>
                                 <th>Stock</th>
-                                <th class="text-center">Main Section</th>
                                 <th>Actions</th>
                             </tr>
                         </thead>
@@ -1432,21 +1953,14 @@
                                 const category = window.appState.categories.find(c => c.id === product.category_id);
                                 return `
                                     <tr>
-                                        <td><img src="${product.images?.[0] || ''}" alt="${product.name}" class="w-12 h-12 object-cover rounded" /></td>
+                                        <td><img src="${product.images?.[0] || ''}" class="w-16 h-16 object-cover rounded-lg" /></td>
                                         <td class="font-medium">${product.name}</td>
                                         <td>${category?.name || 'N/A'}</td>
                                         <td>R${(product.price || 0).toFixed(2)}</td>
+                                        <td>${product.in_stock ? '<span class="text-green-600 font-semibold">In Stock</span>' : '<span class="text-red-600 font-semibold">Out of Stock</span>'}</td>
                                         <td>
-                                            <span class="px-2 py-1 rounded-full text-xs ${product.in_stock ? 'bg-green-100 text-green-800' : 'bg-red-100 text-red-800'}">
-                                                ${product.in_stock ? 'In Stock' : 'Out of Stock'}
-                                            </span>
-                                        </td>
-                                        <td class="text-center">
-                                            <div class="toggle-switch ${product.is_featured ? 'active' : ''}" onclick="toggleProductFeatured('${product.id}')"></div>
-                                        </td>
-                                        <td>
-                                            <button onclick="editProduct('${product.id}')" class="text-blue-600 hover:text-blue-800 mr-3">Edit</button>
-                                            <button onclick="deleteProduct('${product.id}')" class="text-red-600 hover:text-red-800">Delete</button>
+                                            <button onclick="editProduct('${product.id}')" class="text-blue-600 hover:text-blue-800 mr-3 font-semibold">Edit</button>
+                                            <button onclick="deleteProduct('${product.id}')" class="text-red-600 hover:text-red-800 font-semibold">Delete</button>
                                         </td>
                                     </tr>
                                 `;
@@ -1457,53 +1971,37 @@
             `;
         }
 
-        // Toggle product featured
-        window.toggleProductFeatured = async function(productId) {
+        window.showAddProduct = function() {
+            window.appState.uploadedImages = [];
+            window.appState.editingProductId = null;
+            renderProductForm();
+        };
+
+        window.editProduct = async function(productId) {
             const product = window.appState.products.find(p => p.id === productId);
             if (!product) return;
-
-            try {
-                await updateDoc(doc(db, 'products', productId), {
-                    is_featured: !product.is_featured
-                });
-
-                product.is_featured = !product.is_featured;
-                renderAdminProducts();
-            } catch (error) {
-                console.error('Error updating product:', error);
-                alert('Error updating product: ' + error.message);
-            }
+            window.appState.editingProductId = productId;
+            window.appState.uploadedImages = [...(product.images || [])];
+            renderProductForm(product);
         };
 
-        // Show add product form
-        window.showAddProduct = function() {
-            showProductForm();
-        };
-
-        // Edit product
-        window.editProduct = function(productId) {
-            const product = window.appState.products.find(p => p.id === productId);
-            showProductForm(product);
-        };
-
-        // Delete product
         window.deleteProduct = async function(productId) {
-            if (!confirm('Are you sure you want to delete this product?')) return;
-
+            if (!confirm('Delete this product?')) return;
             try {
-                await deleteDoc(doc(db, 'products', productId));
+                const product = window.appState.products.find(p => p.id === productId);
+                if (product && !product.id.startsWith('prod_00')) {
+                    await deleteDoc(doc(db, 'products', productId));
+                }
                 window.appState.products = window.appState.products.filter(p => p.id !== productId);
+                showNotification('Product deleted!', 'success');
                 renderAdminProducts();
-                alert('Product deleted successfully!');
             } catch (error) {
-                console.error('Error deleting product:', error);
-                alert('Error deleting product: ' + error.message);
+                alert('Error: ' + error.message);
             }
         };
 
-        // Show product form - WITH COMBO CHECKBOX!
-        function showProductForm(product = null) {
-            const isEdit = !!product;
+        function renderProductForm(editProduct = null) {
+            const isEdit = !!editProduct;
             
             document.getElementById('adminContent').innerHTML = `
                 <div class="max-w-4xl">
@@ -1513,43 +2011,42 @@
                                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"/>
                             </svg>
                         </button>
-                        <h1 class="text-3xl font-bold">${isEdit ? 'Edit Product' : 'Add New Product'}</h1>
+                        <h1 class="text-3xl font-bold">${isEdit ? 'Edit' : 'Add'} Product</h1>
                     </div>
 
                     <form id="productForm" class="bg-white rounded-2xl shadow-lg p-8 space-y-6">
                         <div>
-                            <label class="block text-sm font-medium mb-2">Product Images (Base64) *</label>
-                            <div class="upload-btn-wrapper">
-                                <label class="upload-btn cursor-pointer">
-                                    <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z"/>
-                                    </svg>
-                                    <span>📷 Select Multiple Images (JPG, PNG, WEBP)</span>
-                                    <input type="file" multiple accept="image/*" onchange="handleImageUpload(event)" />
-                                </label>
+                            <label class="block text-sm font-medium mb-2">Product Images (Upload up to 6) *</label>
+                            <div class="upload-zone" onclick="document.getElementById('productImagesInput').click()">
+                                <svg class="w-16 h-16 mx-auto text-blue-400 mb-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z"/>
+                                </svg>
+                                <p class="font-bold text-lg text-gray-700">Click to Upload Images</p>
+                                <p class="text-sm text-gray-500 mt-2">Select multiple images (max 6)</p>
+                                <input type="file" id="productImagesInput" accept="image/*" multiple class="hidden" onchange="handleProductImages(this.files)" />
                             </div>
-                            <p class="text-sm text-gray-600 mt-2">💡 For COMBO: Upload at least 4 images to show 2x2 grid</p>
-                            <div id="imagePreviewGrid" class="image-preview-grid"></div>
+                            <p id="uploadProgress" class="hidden text-blue-600 mt-2 font-semibold">Uploading images...</p>
+                            <div id="imagePreviewsContainer" class="image-preview-grid"></div>
                         </div>
 
                         <div>
                             <label class="block text-sm font-medium mb-2">Product Name *</label>
-                            <input required name="name" value="${product?.name || ''}" class="w-full px-4 py-3 border rounded-lg" placeholder="Enter product name" />
+                            <input required name="name" value="${editProduct?.name || ''}" class="w-full px-4 py-3 border rounded-lg" />
                         </div>
 
                         <div>
                             <label class="block text-sm font-medium mb-2">Description</label>
-                            <textarea name="description" rows="4" class="w-full px-4 py-3 border rounded-lg" placeholder="Enter product description">${product?.description || ''}</textarea>
+                            <textarea name="description" rows="4" class="w-full px-4 py-3 border rounded-lg">${editProduct?.description || ''}</textarea>
                         </div>
 
                         <div class="grid grid-cols-2 gap-4">
                             <div>
                                 <label class="block text-sm font-medium mb-2">Price (ZAR) *</label>
-                                <input required type="number" step="0.01" name="price" value="${product?.price || ''}" class="w-full px-4 py-3 border rounded-lg" placeholder="0.00" />
+                                <input required type="number" step="0.01" name="price" value="${editProduct?.price || ''}" class="w-full px-4 py-3 border rounded-lg" />
                             </div>
                             <div>
                                 <label class="block text-sm font-medium mb-2">Original Price (ZAR)</label>
-                                <input type="number" step="0.01" name="original_price" value="${product?.original_price || ''}" class="w-full px-4 py-3 border rounded-lg" placeholder="0.00" />
+                                <input type="number" step="0.01" name="original_price" value="${editProduct?.original_price || ''}" class="w-full px-4 py-3 border rounded-lg" />
                             </div>
                         </div>
 
@@ -1558,90 +2055,86 @@
                             <select required name="category_id" class="w-full px-4 py-3 border rounded-lg">
                                 <option value="">Select category</option>
                                 ${window.appState.categories.map(cat => `
-                                    <option value="${cat.id}" ${product?.category_id === cat.id ? 'selected' : ''}>${cat.name}</option>
+                                    <option value="${cat.id}" ${editProduct?.category_id === cat.id ? 'selected' : ''}>${cat.name}</option>
                                 `).join('')}
                             </select>
+                        </div>
+
+                        <div>
+                            <label class="block text-sm font-medium mb-2">Sizes (comma-separated)</label>
+                            <input name="sizes" value="${editProduct?.sizes?.join(', ') || ''}" placeholder="S, M, L, XL" class="w-full px-4 py-3 border rounded-lg" />
                         </div>
 
                         <div class="grid grid-cols-2 gap-4">
                             <div>
                                 <label class="block text-sm font-medium mb-2">Rating (1-5)</label>
-                                <input type="number" min="1" max="5" step="0.1" name="rating" value="${product?.rating || 5}" class="w-full px-4 py-3 border rounded-lg" />
+                                <input type="number" min="1" max="5" step="0.1" name="rating" value="${editProduct?.rating || 5}" class="w-full px-4 py-3 border rounded-lg" />
                             </div>
                             <div>
-                                <label class="block text-sm font-medium mb-2">Rating Count</label>
-                                <input type="number" min="0" name="rating_count" value="${product?.rating_count || 0}" class="w-full px-4 py-3 border rounded-lg" />
+                                <label class="block text-sm font-medium mb-2">Review Count</label>
+                                <input type="number" min="0" name="rating_count" value="${editProduct?.rating_count || 0}" class="w-full px-4 py-3 border rounded-lg" />
                             </div>
                         </div>
 
                         <div>
                             <label class="block text-sm font-medium mb-2">Shipping Days</label>
-                            <input name="shipping_days" value="${product?.shipping_days || '2-5 days'}" class="w-full px-4 py-3 border rounded-lg" placeholder="2-5 days" />
+                            <input name="shipping_days" value="${editProduct?.shipping_days || '2-3 days'}" class="w-full px-4 py-3 border rounded-lg" />
                         </div>
 
                         <div class="grid grid-cols-2 gap-4">
-                            <label class="flex items-center gap-3 p-4 border rounded-lg cursor-pointer hover:bg-gray-50">
-                                <input type="checkbox" name="in_stock" ${product?.in_stock !== false ? 'checked' : ''} class="w-5 h-5" />
-                                <div>
-                                    <span class="font-medium">In Stock</span>
-                                    <p class="text-xs text-gray-600">Product available for purchase</p>
-                                </div>
+                            <label class="flex items-center gap-3 p-4 border-2 rounded-lg cursor-pointer hover:bg-gray-50 ${editProduct?.in_stock ? 'border-green-500 bg-green-50' : ''}">
+                                <input type="checkbox" name="in_stock" ${editProduct?.in_stock !== false ? 'checked' : ''} class="w-5 h-5" />
+                                <span class="font-medium">In Stock</span>
                             </label>
                             
                             <label class="flex items-center gap-3 p-4 border rounded-lg cursor-pointer hover:bg-gray-50">
-                                <input type="checkbox" name="is_featured" ${product?.is_featured ? 'checked' : ''} class="w-5 h-5" />
-                                <div>
-                                    <span class="font-medium">Featured on Main</span>
-                                    <p class="text-xs text-gray-600">Show on homepage</p>
-                                </div>
+                                <input type="checkbox" name="is_featured" ${editProduct?.is_featured ? 'checked' : ''} class="w-5 h-5" />
+                                <span class="font-medium">Featured</span>
                             </label>
                             
                             <label class="flex items-center gap-3 p-4 border rounded-lg cursor-pointer hover:bg-gray-50">
-                                <input type="checkbox" name="is_sale" ${product?.is_sale ? 'checked' : ''} class="w-5 h-5" />
-                                <div>
-                                    <span class="font-medium">On Sale</span>
-                                    <p class="text-xs text-gray-600">Show RED "SALE" badge</p>
-                                </div>
+                                <input type="checkbox" name="is_sale" ${editProduct?.is_sale ? 'checked' : ''} class="w-5 h-5" />
+                                <span class="font-medium">On Sale</span>
                             </label>
                             
                             <label class="flex items-center gap-3 p-4 border-2 border-green-500 rounded-lg cursor-pointer hover:bg-green-50">
-                                <input type="checkbox" name="is_combo" ${product?.is_combo ? 'checked' : ''} class="w-5 h-5" />
-                                <div>
-                                    <span class="font-medium text-green-700">✨ COMBO Deal</span>
-                                    <p class="text-xs text-green-600">Show GREEN badge + 4 images grid</p>
-                                </div>
+                                <input type="checkbox" name="is_combo" ${editProduct?.is_combo ? 'checked' : ''} class="w-5 h-5" />
+                                <span class="font-medium text-green-700">✨ COMBO</span>
                             </label>
                         </div>
 
                         <div class="flex gap-4">
-                            <button type="button" onclick="showAdminPage('products')" class="flex-1 border border-gray-300 px-6 py-3 rounded-lg font-bold hover:bg-gray-100">
-                                Cancel
-                            </button>
-                            <button type="submit" class="flex-1 bg-yellow-400 text-black px-6 py-3 rounded-lg font-bold hover:bg-yellow-500">
-                                ${isEdit ? 'Update Product' : 'Create Product'}
-                            </button>
+                            <button type="button" onclick="showAdminPage('products')" class="flex-1 border px-6 py-3 rounded-lg font-bold hover:bg-gray-100">Cancel</button>
+                            <button type="submit" class="flex-1 bg-yellow-400 text-black px-6 py-3 rounded-lg font-bold hover:bg-yellow-500">${isEdit ? 'Update' : 'Create'} Product</button>
                         </div>
                     </form>
+
+                    <div id="productCodeSection" class="hidden mt-8 bg-white rounded-2xl shadow-lg p-8">
+                        <h2 class="text-2xl font-bold mb-4 text-green-600">✓ Product Saved!</h2>
+                        <p class="text-gray-700 mb-4">Copy & paste into <code class="bg-gray-100 px-2 py-1 rounded">window.HARDCODED_PRODUCTS</code>:</p>
+                        <div class="code-block">
+                            <button onclick="copyProductCode()" class="copy-code-btn">Copy</button>
+                            <pre id="productCode"></pre>
+                        </div>
+                        <button onclick="showAdminPage('products')" class="mt-6 bg-gray-800 text-white px-6 py-3 rounded-lg font-bold hover:bg-gray-700">Back</button>
+                    </div>
                 </div>
             `;
 
-            // If editing, show existing images
-            if (product && product.images) {
-                window.uploadedImages = [...product.images];
-                displayImagePreviews();
-            } else {
-                window.uploadedImages = [];
-            }
+            renderImagePreviews();
 
-            // Handle form submission
             document.getElementById('productForm').onsubmit = async function(e) {
                 e.preventDefault();
                 const btn = e.target.querySelector('[type="submit"]');
                 btn.disabled = true;
-                btn.textContent = 'Saving...';
+                btn.textContent = isEdit ? 'Updating...' : 'Saving...';
 
                 const formData = new FormData(e.target);
+                const sizesInput = formData.get('sizes');
+                const sizes = sizesInput ? sizesInput.split(',').map(s => s.trim()).filter(Boolean) : [];
+
                 const productData = {
+                    id: window.appState.editingProductId || 'prod_' + Date.now(),
                     name: formData.get('name'),
                     description: formData.get('description'),
                     price: parseFloat(formData.get('price')),
@@ -1653,221 +2146,68 @@
                     in_stock: formData.get('in_stock') === 'on',
                     is_featured: formData.get('is_featured') === 'on',
                     is_sale: formData.get('is_sale') === 'on',
-                    is_combo: formData.get('is_combo') === 'on', // NEW!
-                    images: window.uploadedImages,
-                    created_date: new Date().toISOString()
+                    is_combo: formData.get('is_combo') === 'on',
+                    sizes: sizes,
+                    images: window.appState.uploadedImages
                 };
 
                 try {
                     if (isEdit) {
-                        await updateDoc(doc(db, 'products', product.id), productData);
-                        const index = window.appState.products.findIndex(p => p.id === product.id);
-                        window.appState.products[index] = { id: product.id, ...productData };
-                        alert('Product updated successfully!');
+                        await updateDoc(doc(db, 'products', window.appState.editingProductId), productData);
+                        showNotification('Product updated!', 'success');
                     } else {
-                        const docRef = await addDoc(collection(db, 'products'), productData);
-                        window.appState.products.push({ id: docRef.id, ...productData });
-                        alert('Product created successfully!');
+                        await addDoc(collection(db, 'products'), productData);
+                        const code = `{
+    id: '${productData.id}',
+    name: '${productData.name}',
+    description: '${productData.description || ''}',
+    price: ${productData.price},
+    ${productData.original_price ? `original_price: ${productData.original_price},` : ''}
+    category_id: '${productData.category_id}',
+    rating: ${productData.rating},
+    rating_count: ${productData.rating_count},
+    shipping_days: '${productData.shipping_days}',
+    in_stock: ${productData.in_stock},
+    is_featured: ${productData.is_featured},
+    is_sale: ${productData.is_sale},
+    is_combo: ${productData.is_combo},
+    sizes: [${sizes.map(s => `'${s}'`).join(', ')}],
+    images: [
+        ${productData.images.map(img => `'${img}'`).join(',\n        ')}
+    ]
+},`;
+                        document.getElementById('productCode').textContent = code;
+                        document.getElementById('productForm').classList.add('hidden');
+                        document.getElementById('productCodeSection').classList.remove('hidden');
+                        showNotification('Product saved!', 'success');
                     }
-                    showAdminPage('products');
+                    loadProductsFromFirestore();
                 } catch (error) {
-                    console.error('Error saving product:', error);
-                    alert('Error saving product: ' + error.message);
+                    alert('Error: ' + error.message);
                     btn.disabled = false;
                     btn.textContent = isEdit ? 'Update Product' : 'Create Product';
                 }
             };
-        }
 
-        // Handle image upload (convert to base64)
-        window.handleImageUpload = function(event) {
-            const files = Array.from(event.target.files);
-            
-            files.forEach(file => {
-                const reader = new FileReader();
-                reader.onload = function(e) {
-                    window.uploadedImages.push(e.target.result);
-                    displayImagePreviews();
-                };
-                reader.readAsDataURL(file);
-            });
-        };
-
-        // Display image previews
-        function displayImagePreviews() {
-            const grid = document.getElementById('imagePreviewGrid');
-            if (!grid) return;
-
-            grid.innerHTML = window.uploadedImages.map((img, index) => `
-                <div class="image-preview-item">
-                    <img src="${img}" alt="Preview ${index + 1}" class="image-preview-img" />
-                    <button type="button" onclick="removeImage(${index})" class="image-preview-remove">×</button>
-                </div>
-            `).join('');
-        }
-
-        // Remove image
-        window.removeImage = function(index) {
-            window.uploadedImages.splice(index, 1);
-            displayImagePreviews();
-        };
-
-        // Render admin categories
-        function renderAdminCategories() {
-            document.getElementById('adminContent').innerHTML = `
-                <div class="flex justify-between items-center mb-8">
-                    <h1 class="text-3xl font-bold">Manage Categories</h1>
-                    <button onclick="showAddCategory()" class="bg-yellow-400 text-black px-6 py-3 rounded-lg font-bold hover:bg-yellow-500">
-                        + Add New Category
-                    </button>
-                </div>
-                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-                    ${window.appState.categories.map(category => `
-                        <div class="bg-white rounded-2xl shadow-lg overflow-hidden">
-                            <img src="${category.image || ''}" alt="${category.name}" class="w-full h-48 object-cover" />
-                            <div class="p-6">
-                                <h3 class="font-bold text-xl mb-2">${category.name}</h3>
-                                <p class="text-gray-600 mb-4">${category.description || ''}</p>
-                                <div class="flex gap-2">
-                                    <button onclick="editCategory('${category.id}')" class="flex-1 text-blue-600 border border-blue-600 px-4 py-2 rounded-lg hover:bg-blue-50">
-                                        Edit
-                                    </button>
-                                    <button onclick="deleteCategory('${category.id}')" class="flex-1 text-red-600 border border-red-600 px-4 py-2 rounded-lg hover:bg-red-50">
-                                        Delete
-                                    </button>
-                                </div>
-                            </div>
-                        </div>
-                    `).join('')}
-                </div>
-            `;
-        }
-
-        // Show add category
-        window.showAddCategory = function() {
-            showCategoryForm();
-        };
-
-        // Edit category
-        window.editCategory = function(categoryId) {
-            const category = window.appState.categories.find(c => c.id === categoryId);
-            showCategoryForm(category);
-        };
-
-        // Delete category
-        window.deleteCategory = async function(categoryId) {
-            if (!confirm('Are you sure you want to delete this category?')) return;
-
-            try {
-                await deleteDoc(doc(db, 'categories', categoryId));
-                window.appState.categories = window.appState.categories.filter(c => c.id !== categoryId);
-                renderAdminCategories();
-                alert('Category deleted successfully!');
-            } catch (error) {
-                console.error('Error deleting category:', error);
-                alert('Error deleting category: ' + error.message);
-            }
-        };
-
-        // Show category form
-        function showCategoryForm(category = null) {
-            const isEdit = !!category;
-            
-            document.getElementById('adminContent').innerHTML = `
-                <div class="max-w-2xl">
-                    <div class="flex items-center gap-4 mb-8">
-                        <button onclick="showAdminPage('categories')" class="p-2 hover:bg-gray-100 rounded-lg">
-                            <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"/>
-                            </svg>
-                        </button>
-                        <h1 class="text-3xl font-bold">${isEdit ? 'Edit Category' : 'Add New Category'}</h1>
-                    </div>
-
-                    <form id="categoryForm" class="bg-white rounded-2xl shadow-lg p-8 space-y-6">
-                        <div>
-                            <label class="block text-sm font-medium mb-2">Category Name *</label>
-                            <input required name="name" value="${category?.name || ''}" class="w-full px-4 py-3 border rounded-lg" placeholder="Enter category name" />
-                        </div>
-
-                        <div>
-                            <label class="block text-sm font-medium mb-2">Description</label>
-                            <textarea name="description" rows="3" class="w-full px-4 py-3 border rounded-lg" placeholder="Enter category description">${category?.description || ''}</textarea>
-                        </div>
-
-                        <div>
-                            <label class="block text-sm font-medium mb-2">Image URL</label>
-                            <input name="image" value="${category?.image || ''}" class="w-full px-4 py-3 border rounded-lg" placeholder="Paste image URL here" />
-                        </div>
-
-                        <div>
-                            <label class="block text-sm font-medium mb-2">Display Order</label>
-                            <input type="number" name="order" value="${category?.order || 0}" class="w-full px-4 py-3 border rounded-lg" />
-                        </div>
-
-                        <div class="flex gap-4">
-                            <button type="button" onclick="showAdminPage('categories')" class="flex-1 border border-gray-300 px-6 py-3 rounded-lg font-bold hover:bg-gray-100">
-                                Cancel
-                            </button>
-                            <button type="submit" class="flex-1 bg-yellow-400 text-black px-6 py-3 rounded-lg font-bold hover:bg-yellow-500">
-                                ${isEdit ? 'Update Category' : 'Create Category'}
-                            </button>
-                        </div>
-                    </form>
-                </div>
-            `;
-
-            document.getElementById('categoryForm').onsubmit = async function(e) {
-                e.preventDefault();
-                const btn = e.target.querySelector('[type="submit"]');
-                btn.disabled = true;
-                btn.textContent = 'Saving...';
-
-                const formData = new FormData(e.target);
-                const categoryData = {
-                    name: formData.get('name'),
-                    description: formData.get('description'),
-                    image: formData.get('image'),
-                    order: parseInt(formData.get('order')) || 0
-                };
-
-                try {
-                    if (isEdit) {
-                        await updateDoc(doc(db, 'categories', category.id), categoryData);
-                        const index = window.appState.categories.findIndex(c => c.id === category.id);
-                        window.appState.categories[index] = { id: category.id, ...categoryData };
-                        alert('Category updated successfully!');
-                    } else {
-                        const docRef = await addDoc(collection(db, 'categories'), categoryData);
-                        window.appState.categories.push({ id: docRef.id, ...categoryData });
-                        alert('Category created successfully!');
-                    }
-                    showAdminPage('categories');
-                } catch (error) {
-                    console.error('Error saving category:', error);
-                    alert('Error saving category: ' + error.message);
-                    btn.disabled = false;
-                    btn.textContent = isEdit ? 'Update Category' : 'Create Category';
-                }
+            window.copyProductCode = function() {
+                navigator.clipboard.writeText(document.getElementById('productCode').textContent);
+                showNotification('Code copied!', 'success');
             };
         }
 
-        // Render admin orders
         function renderAdminOrders() {
             document.getElementById('adminContent').innerHTML = `
                 <h1 class="text-3xl font-bold mb-8">Manage Orders</h1>
-                <div class="bg-white rounded-2xl shadow-lg overflow-hidden">
+                <div class="bg-white rounded-2xl shadow-lg overflow-x-auto">
                     ${window.appState.orders.length === 0 ? `
-                        <div class="p-12 text-center text-gray-600">
-                            No orders yet
-                        </div>
+                        <div class="p-12 text-center text-gray-600">No orders yet</div>
                     ` : `
                         <table class="products-table">
                             <thead>
                                 <tr>
-                                    <th>Order Date</th>
-                                    <th>Customer</th>
                                     <th>Items</th>
+                                    <th>Date</th>
+                                    <th>Customer</th>
                                     <th>Total</th>
                                     <th>Status</th>
                                     <th>Actions</th>
@@ -1876,22 +2216,24 @@
                             <tbody>
                                 ${window.appState.orders.map(order => `
                                     <tr>
+                                        <td>
+                                            <div class="flex gap-1">
+                                                ${order.items.slice(0, 3).map(item => `
+                                                    <img src="${item.image}" alt="${item.name}" class="w-10 h-10 object-cover rounded border" />
+                                                `).join('')}
+                                                ${order.items.length > 3 ? `<div class="w-10 h-10 bg-gray-200 rounded flex items-center justify-center text-xs font-bold">+${order.items.length - 3}</div>` : ''}
+                                            </div>
+                                        </td>
                                         <td>${new Date(order.createdAt).toLocaleDateString()}</td>
                                         <td>
                                             <div class="font-medium">${order.fullName}</div>
-                                            <div class="text-sm text-gray-600">${order.phone}</div>
+                                            <div class="text-sm text-gray-600">${order.userEmail}</div>
                                         </td>
-                                        <td>${order.items?.length || 0} items</td>
                                         <td class="font-semibold">R${(order.total || 0).toFixed(2)}</td>
+                                        <td>${getOrderStatusBadge(order.status)}</td>
                                         <td>
-                                            <span class="px-2 py-1 rounded-full text-xs ${
-                                                order.status === 'completed' ? 'bg-green-100 text-green-800' : 'bg-yellow-100 text-yellow-800'
-                                            }">
-                                                ${order.status || 'pending'}
-                                            </span>
-                                        </td>
-                                        <td>
-                                            <button onclick="viewOrder('${order.id}')" class="text-blue-600 hover:text-blue-800">View Details</button>
+                                            <button onclick="viewOrderDetails('${order.id}')" class="text-blue-600 hover:text-blue-800 mr-3 font-semibold">View</button>
+                                            <button onclick="updateOrderStatus('${order.id}')" class="text-green-600 hover:text-green-800 font-semibold">Update</button>
                                         </td>
                                     </tr>
                                 `).join('')}
@@ -1902,75 +2244,193 @@
             `;
         }
 
-        // View order details
-        window.viewOrder = function(orderId) {
+        window.viewOrderDetails = function(orderId) {
             const order = window.appState.orders.find(o => o.id === orderId);
             if (!order) return;
 
-            alert(`Order Details:\n\nCustomer: ${order.fullName}\nPhone: ${order.phone}\nAddress: ${order.address}, ${order.city}\n\nItems:\n${order.items.map(item => `- ${item.name} (x${item.quantity}) - R${(item.price * item.quantity).toFixed(2)}`).join('\n')}\n\nTotal: R${order.total.toFixed(2)}`);
+            let details = `Order Details:\n\nCustomer: ${order.fullName}\nEmail: ${order.userEmail}\nPhone: ${order.phone}\nAddress: ${order.address}, ${order.city}\n\nItems:\n`;
+            order.items.forEach(item => {
+                details += `- ${item.name} (x${item.quantity}) - R${(item.price * item.quantity).toFixed(2)}\n`;
+            });
+            details += `\nTotal: R${order.total.toFixed(2)}\nStatus: ${order.status}`;
+            alert(details);
         };
 
-        // Render admin settings
-        function renderAdminSettings() {
+        window.updateOrderStatus = async function(orderId) {
+            const newStatus = prompt('Enter status (pending, processing, shipped, delivered, cancelled):');
+            const valid = ['pending', 'processing', 'shipped', 'delivered', 'cancelled'];
+            
+            if (!newStatus || !valid.includes(newStatus)) {
+                alert('Invalid status');
+                return;
+            }
+
+            try {
+                await updateDoc(doc(db, 'orders', orderId), { status: newStatus });
+                const order = window.appState.orders.find(o => o.id === orderId);
+                if (order) order.status = newStatus;
+                renderAdminOrders();
+                showNotification('Status updated', 'success');
+            } catch (error) {
+                alert('Error: ' + error.message);
+            }
+        };
+
+        function renderAdminBanners() {
             document.getElementById('adminContent').innerHTML = `
-                <h1 class="text-3xl font-bold mb-8">Settings</h1>
+                <div class="flex justify-between items-center mb-8">
+                    <h1 class="text-3xl font-bold">Manage Banners</h1>
+                    <button onclick="showAddBanner()" class="bg-yellow-400 text-black px-6 py-3 rounded-lg font-bold hover:bg-yellow-500">Add Banner</button>
+                </div>
+                
+                <div class="bg-yellow-50 border-2 border-yellow-200 rounded-xl p-6 mb-8">
+                    <p class="text-yellow-900"><strong>Note:</strong> Edit <code class="bg-yellow-100 px-2 py-1 rounded">window.HARDCODED_BANNERS</code> or add new ones. Banners rotate daily.</p>
+                </div>
+
+                <div class="grid gap-6">
+                    ${window.appState.banners.map((banner, index) => `
+                        <div class="bg-white rounded-xl shadow-lg overflow-hidden">
+                            <div class="grid md:grid-cols-2 gap-6 p-6">
+                                <img src="${banner.image}" alt="${banner.title}" class="w-full h-48 object-cover rounded-lg" />
+                                <div>
+                                    <h3 class="text-2xl font-bold mb-2">${banner.title}</h3>
+                                    <p class="text-gray-600 mb-4">${banner.subtitle}</p>
+                                    <div class="space-y-2 text-sm">
+                                        <p><strong>Rotation Day:</strong> ${index}</p>
+                                        <p><strong>Link:</strong> ${banner.link}</p>
+                                        <p><strong>Colors:</strong> <code class="bg-gray-100 px-2 py-1 rounded">${banner.bg_color}</code></p>
+                                    </div>
+                                    <button onclick="editBanner(${index})" class="mt-4 bg-blue-500 text-white px-4 py-2 rounded-lg hover:bg-blue-600 font-semibold">Edit</button>
+                                </div>
+                            </div>
+                        </div>
+                    `).join('')}
+                </div>
+            `;
+        }
+
+        window.showAddBanner = function() {
+            document.getElementById('adminContent').innerHTML = `
                 <div class="max-w-2xl">
-                    <form id="settingsForm" class="bg-white rounded-2xl shadow-lg p-8 space-y-6">
-                        <div>
-                            <label class="block text-sm font-medium mb-2">Store WhatsApp Number</label>
-                            <input name="whatsapp" value="+27 81 809 6159" class="w-full px-4 py-3 border rounded-lg" placeholder="+27 XX XXX XXXX" />
-                        </div>
-
-                        <div>
-                            <label class="block text-sm font-medium mb-2">Store Tagline</label>
-                            <input name="tagline" value="Beauty & Gadgets for Everyday Greatness" class="w-full px-4 py-3 border rounded-lg" />
-                        </div>
-
-                        <div>
-                            <label class="block text-sm font-medium mb-2">Admin Password</label>
-                            <input type="password" name="password" value="VNAXXTTM" class="w-full px-4 py-3 border rounded-lg" />
-                        </div>
-
-                        <button type="submit" class="w-full bg-yellow-400 text-black px-6 py-3 rounded-lg font-bold hover:bg-yellow-500">
-                            Save Settings
+                    <div class="flex items-center gap-4 mb-8">
+                        <button onclick="showAdminPage('banners')" class="p-2 hover:bg-gray-100 rounded-lg">
+                            <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"/>
+                            </svg>
                         </button>
+                        <h1 class="text-3xl font-bold">Add Banner</h1>
+                    </div>
+
+                    <form id="bannerForm" class="bg-white rounded-2xl shadow-lg p-8 space-y-6">
+                        <div>
+                            <label class="block text-sm font-medium mb-2">Banner Image</label>
+                            <div class="upload-zone" onclick="document.getElementById('bannerImageInput').click()">
+                                <svg class="w-16 h-16 mx-auto text-blue-400 mb-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z"/>
+                                </svg>
+                                <p class="font-bold">Upload Banner Image</p>
+                                <input type="file" id="bannerImageInput" accept="image/*" class="hidden" onchange="uploadBannerImage(this.files[0])" />
+                            </div>
+                            <div id="bannerImagePreview" class="mt-4 hidden">
+                                <img id="bannerImagePreviewImg" class="w-full h-48 object-cover rounded-lg" />
+                            </div>
+                            <p id="bannerUploadProgress" class="hidden text-blue-600 mt-2">Uploading...</p>
+                        </div>
+
+                        <div>
+                            <label class="block text-sm font-medium mb-2">Title *</label>
+                            <input required name="title" class="w-full px-4 py-3 border rounded-lg" placeholder="SUMMER SALE" />
+                        </div>
+
+                        <div>
+                            <label class="block text-sm font-medium mb-2">Subtitle *</label>
+                            <input required name="subtitle" class="w-full px-4 py-3 border rounded-lg" placeholder="Up to 50% OFF" />
+                        </div>
+
+                        <div>
+                            <label class="block text-sm font-medium mb-2">Gradient Colors *</label>
+                            <input required name="bg_color" value="from-purple-500 to-pink-500" class="w-full px-4 py-3 border rounded-lg" placeholder="from-purple-500 to-pink-500" />
+                        </div>
+
+                        <div>
+                            <label class="block text-sm font-medium mb-2">Link To *</label>
+                            <select required name="link" class="w-full px-4 py-3 border rounded-lg">
+                                <option value="products">Products Page</option>
+                                <option value="home">Home Page</option>
+                            </select>
+                        </div>
+
+                        <div class="flex gap-4">
+                            <button type="button" onclick="showAdminPage('banners')" class="flex-1 border px-6 py-3 rounded-lg font-bold hover:bg-gray-100">Cancel</button>
+                            <button type="submit" class="flex-1 bg-yellow-400 text-black px-6 py-3 rounded-lg font-bold hover:bg-yellow-500">Save Banner</button>
+                        </div>
                     </form>
+
+                    <div id="bannerCodeSection" class="hidden mt-8 bg-white rounded-2xl shadow-lg p-8">
+                        <h2 class="text-2xl font-bold mb-4 text-green-600">✓ Banner Saved!</h2>
+                        <p class="text-gray-700 mb-4">Copy & paste into <code class="bg-gray-100 px-2 py-1 rounded">window.HARDCODED_BANNERS</code>:</p>
+                        <div class="code-block">
+                            <button onclick="copyBannerCode()" class="copy-code-btn">Copy</button>
+                            <pre id="bannerCode"></pre>
+                        </div>
+                    </div>
                 </div>
             `;
 
-            document.getElementById('settingsForm').onsubmit = function(e) {
+            window.bannerImageUrl = null;
+
+            window.uploadBannerImage = async function(file) {
+                if (!file) return;
+                document.getElementById('bannerUploadProgress').classList.remove('hidden');
+                try {
+                    window.bannerImageUrl = await uploadImageToStorage(file);
+                    document.getElementById('bannerImagePreviewImg').src = window.bannerImageUrl;
+                    document.getElementById('bannerImagePreview').classList.remove('hidden');
+                    document.getElementById('bannerUploadProgress').classList.add('hidden');
+                } catch (error) {
+                    alert('Upload failed');
+                    document.getElementById('bannerUploadProgress').classList.add('hidden');
+                }
+            };
+
+            document.getElementById('bannerForm').onsubmit = async function(e) {
                 e.preventDefault();
-                alert('Settings saved successfully!');
+                const formData = new FormData(e.target);
+                const bannerData = {
+                    id: 'banner_' + Date.now(),
+                    title: formData.get('title'),
+                    subtitle: formData.get('subtitle'),
+                    image: window.bannerImageUrl || '',
+                    bg_color: formData.get('bg_color'),
+                    link: formData.get('link')
+                };
+
+                try {
+                    await addDoc(collection(db, 'banners'), bannerData);
+                    const code = `{
+    id: '${bannerData.id}',
+    title: '${bannerData.title}',
+    subtitle: '${bannerData.subtitle}',
+    image: '${bannerData.image}',
+    bg_color: '${bannerData.bg_color}',
+    link: '${bannerData.link}'
+},`;
+                    document.getElementById('bannerCode').textContent = code;
+                    document.getElementById('bannerForm').classList.add('hidden');
+                    document.getElementById('bannerCodeSection').classList.remove('hidden');
+                    showNotification('Banner saved!', 'success');
+                } catch (error) {
+                    alert('Error: ' + error.message);
+                }
+            };
+
+            window.copyBannerCode = function() {
+                navigator.clipboard.writeText(document.getElementById('bannerCode').textContent);
+                showNotification('Code copied!', 'success');
             };
         }
 
-        // Handle vendor form submission
-        document.getElementById('vendorForm')?.addEventListener('submit', async function(e) {
-            e.preventDefault();
-            const formData = new FormData(e.target);
-            const vendorData = {
-                business_name: formData.get('business_name'),
-                contact_person: formData.get('contact_person'),
-                phone: formData.get('phone'),
-                whatsapp: formData.get('whatsapp'),
-                email: formData.get('email'),
-                description: formData.get('description'),
-                status: 'pending',
-                createdAt: new Date().toISOString()
-            };
-
-            try {
-                await addDoc(collection(db, 'vendors'), vendorData);
-                alert('Application submitted successfully! We\'ll contact you within 2-3 business days.');
-                e.target.reset();
-            } catch (error) {
-                console.error('Error submitting vendor application:', error);
-                alert('Error submitting application: ' + error.message);
-            }
-        });
-
-        // Initialize app
-        loadAllData();
+        initializeApp();
     </script>
 </body>
 </html>
